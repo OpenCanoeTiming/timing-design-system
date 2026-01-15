@@ -73,7 +73,7 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Tables demo
 
 ### 3.2 Dokumentace
-- [ ] README s příklady použití
+- [x] README s příklady použití
 - [ ] Inline komentáře v CSS
 
 ---
@@ -126,3 +126,5 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidána light.html showcase stránka (výsledková tabule, stupně vítězů, barevná paleta, ovládací prvky, status indikátory)
 - Přidána forms.html demo stránka (všechny input typy, select, textarea, checkbox/radio, switch, praktické formuláře, validace)
 - Přidána tables.html demo stránka (základní, striped, hover, bordered, compact varianty, responzivní tabulka, praktické příklady - výsledky, startovní listina, admin panel)
+- Přidán README.md s dokumentací a příklady použití všech komponent
+- Přidána readme-test.html pro vizuální testování příkladů z README
