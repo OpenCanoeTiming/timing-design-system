@@ -132,12 +132,12 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Playbook: src/playbooks/header.html
 
 ### 6.3 Log komponenta
-- [ ] CSS: src/css/log.css
+- [x] CSS: src/css/log.css
   - log-container, log-entry
   - barevné level badges (debug/info/warn/error)
   - component highlighting
-- [ ] React: src/react/Log.tsx
-- [ ] Playbook: src/playbooks/log.html
+- [x] React: src/react/Log.tsx
+- [x] Playbook: src/playbooks/log.html
 
 ### 6.4 DropZone komponenta
 - [ ] CSS: src/css/dropzone.css
