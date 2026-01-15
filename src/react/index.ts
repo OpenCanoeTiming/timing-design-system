@@ -19,3 +19,4 @@ export {
 export { Input, type InputProps } from './Input';
 export { Select, type SelectProps } from './Select';
 export { Checkbox, Radio, type CheckboxProps, type RadioProps } from './Checkbox';
+export { Badge, type BadgeProps, type BadgeVariant } from './Badge';
