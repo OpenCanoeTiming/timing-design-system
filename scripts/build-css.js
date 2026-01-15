@@ -21,6 +21,7 @@ const FILES = [
   'src/tokens/colors.css',
   'src/tokens/typography.css',
   'src/tokens/spacing.css',
+  'src/tokens/canoe.css',
   // CSS components (base first)
   'src/css/base.css',
   'src/css/buttons.css',
@@ -32,6 +33,9 @@ const FILES = [
   'src/css/modal.css',
   'src/css/toast.css',
   'src/css/tabs.css',
+  'src/css/header.css',
+  'src/css/log.css',
+  'src/css/dropzone.css',
 ];
 
 function readCssFile(relativePath) {

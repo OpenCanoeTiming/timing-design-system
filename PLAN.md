@@ -1,6 +1,6 @@
 # Canoe Timing Design System - Plán implementace
 
-## Status: 🟡 Fáze 6 - Canoe branding + nové komponenty (probíhá)
+## Status: 🟢 Fáze 6 - Canoe branding + nové komponenty (dokončeno)
 
 ---
 
@@ -153,9 +153,9 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] modal.css: backdrop-filter blur
 
 ### 6.6 Finalizace
-- [ ] Aktualizovat build script pro nové CSS
-- [ ] Aktualizovat React exporty
-- [ ] Rebuild dist/
+- [x] Aktualizovat build script pro nové CSS
+- [x] Aktualizovat React exporty
+- [x] Rebuild dist/
 
 ---
 
