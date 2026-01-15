@@ -87,7 +87,7 @@ Design systém pro vodáckou časomíru s podporou:
 ### 4.2 Komponenty
 - [x] Button
 - [x] Card
-- [ ] Input, Select, Checkbox
+- [x] Input, Select, Checkbox, Radio
 - [ ] Badge
 - [ ] Table
 - [ ] Modal
@@ -131,3 +131,4 @@ Design systém pro vodáckou časomíru s podporou:
 - TypeScript konfigurace pro React komponenty (tsconfig.json)
 - První React komponenta: Button (variant, size, icon props)
 - React komponenta: Card (Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle)
+- React komponenty pro formuláře: Input, Select, Checkbox, Radio
