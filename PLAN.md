@@ -148,9 +148,9 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Playbook: src/playbooks/dropzone.html
 
 ### 6.5 Rozšíření existujících komponent
-- [ ] cards.css: card-canoe (wavy border), card-status-*
-- [ ] status.css: status-dot-glow
-- [ ] modal.css: backdrop-filter blur
+- [x] cards.css: card-canoe (wavy border), card-status-*
+- [x] status.css: status-dot-glow
+- [x] modal.css: backdrop-filter blur
 
 ### 6.6 Finalizace
 - [ ] Aktualizovat build script pro nové CSS
