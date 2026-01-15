@@ -59,7 +59,7 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Tables (striped, hover)
 - [x] Modals
 - [x] Toasts/Notifications
-- [ ] Tabs
+- [x] Tabs
 
 ---
 
@@ -121,3 +121,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidány self-hosted fonty Inter (400-700) a JetBrains Mono (400, 500, 700)
 - Přidána Modal komponenta (backdrop, velikosti, confirmation variant, a11y)
 - Přidána Toast/Notification komponenta (všechny varianty, 6 pozic, progress bar, animace, a11y)
+- Přidána Tabs komponenta (základní, pills, bordered varianty, velikosti sm/lg, full-width, badge, a11y)

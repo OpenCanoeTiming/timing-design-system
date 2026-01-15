@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="../css/toast.css">
+  <link rel="stylesheet" href="../css/tabs.css">
 
   <style>
     /* Playbook-specific styles */
@@ -449,6 +450,108 @@
       </div>
     </section>
 
+    <!-- Tabs Section -->
+    <section class="playbook-section" id="tabs-section">
+      <h2 class="section-title">Tabs</h2>
+
+      <div class="component-label">Základní tabs</div>
+      <div class="tabs" style="max-width: 600px;">
+        <div class="tab-list" role="tablist" aria-label="Demo tabs">
+          <button class="tab active" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" onclick="switchTab(event, 'basic', 1)">Přehled</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" onclick="switchTab(event, 'basic', 2)">Nastavení</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" onclick="switchTab(event, 'basic', 3)">Historie</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" disabled>Disabled</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel active" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+            <div class="card">
+              <div class="card-body">
+                <h4>Přehled</h4>
+                <p class="text-secondary mt-2">Obsah prvního tabu. Zde se zobrazuje přehled informací.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" aria-hidden="true">
+            <div class="card">
+              <div class="card-body">
+                <h4>Nastavení</h4>
+                <p class="text-secondary mt-2">Obsah druhého tabu s nastavením aplikace.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" aria-hidden="true">
+            <div class="card">
+              <div class="card-body">
+                <h4>Historie</h4>
+                <p class="text-secondary mt-2">Obsah třetího tabu s historií změn.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">S badge/počítadlem</div>
+      <div class="tabs" style="max-width: 600px;">
+        <div class="tab-list" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true">
+            Závodníci
+            <span class="tab-badge">24</span>
+          </button>
+          <button class="tab" role="tab" aria-selected="false">
+            Na startu
+            <span class="tab-badge">3</span>
+          </button>
+          <button class="tab" role="tab" aria-selected="false">
+            V cíli
+            <span class="tab-badge">18</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Velikosti</div>
+      <div class="flex flex-col gap-4">
+        <div class="tabs tabs-sm" style="max-width: 500px;">
+          <div class="tab-list" role="tablist">
+            <button class="tab active" role="tab">Small</button>
+            <button class="tab" role="tab">Tab 2</button>
+            <button class="tab" role="tab">Tab 3</button>
+          </div>
+        </div>
+        <div class="tabs" style="max-width: 500px;">
+          <div class="tab-list" role="tablist">
+            <button class="tab active" role="tab">Default</button>
+            <button class="tab" role="tab">Tab 2</button>
+            <button class="tab" role="tab">Tab 3</button>
+          </div>
+        </div>
+        <div class="tabs tabs-lg" style="max-width: 500px;">
+          <div class="tab-list" role="tablist">
+            <button class="tab active" role="tab">Large</button>
+            <button class="tab" role="tab">Tab 2</button>
+            <button class="tab" role="tab">Tab 3</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Pills varianta</div>
+      <div class="tabs tabs-pills" style="max-width: 500px;">
+        <div class="tab-list" role="tablist">
+          <button class="tab active" role="tab">Všechno</button>
+          <button class="tab" role="tab">Aktivní</button>
+          <button class="tab" role="tab">Dokončené</button>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Full-width tabs</div>
+      <div class="tabs tabs-full tabs-pills" style="max-width: 500px;">
+        <div class="tab-list" role="tablist">
+          <button class="tab active" role="tab">Jízda 1</button>
+          <button class="tab" role="tab">Jízda 2</button>
+          <button class="tab" role="tab">Celkem</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Typography Section -->
     <section class="playbook-section" id="typography">
       <h2 class="section-title">Typography</h2>
@@ -714,6 +817,28 @@
     function setToastPosition(position) {
       const container = document.getElementById('toast-container');
       container.className = `toast-container toast-container-${position}`;
+    }
+
+    // Tab functions
+    function switchTab(event, group, index) {
+      const tabList = event.target.closest('.tab-list');
+      const tabs = tabList.querySelectorAll('.tab');
+      const tabsContainer = tabList.closest('.tabs');
+      const panels = tabsContainer.querySelectorAll('.tab-panel');
+
+      // Update tab states
+      tabs.forEach((tab, i) => {
+        const isSelected = i === index - 1;
+        tab.classList.toggle('active', isSelected);
+        tab.setAttribute('aria-selected', isSelected);
+      });
+
+      // Update panel states
+      panels.forEach((panel, i) => {
+        const isActive = i === index - 1;
+        panel.classList.toggle('active', isActive);
+        panel.setAttribute('aria-hidden', !isActive);
+      });
     }
   </script>
 </body>
