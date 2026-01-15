@@ -33,7 +33,7 @@
   height: var(--pattern-wave-height, 4px);
   background:
     /* Rovná čára (vlevo, většina šířky) */
-    linear-gradient(var(--color-border), var(--color-border)) 0 50% / calc(100% - 40px) 1px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) 0 50% / calc(100% - 40px) 2px no-repeat,
     /* Vlnka (vpravo) */
     var(--pattern-wave) right center / 40px var(--pattern-wave-height) no-repeat;
 }
