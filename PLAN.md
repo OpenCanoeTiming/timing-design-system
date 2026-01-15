@@ -70,7 +70,7 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Dark theme showcase
 - [x] Light theme showcase
 - [x] Forms demo
-- [ ] Tables demo
+- [x] Tables demo
 
 ### 3.2 Dokumentace
 - [ ] README s příklady použití
@@ -125,3 +125,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidána dark.html showcase stránka (barevná paleta, admin panel demo, timing display, ovládací prvky, status indikátory)
 - Přidána light.html showcase stránka (výsledková tabule, stupně vítězů, barevná paleta, ovládací prvky, status indikátory)
 - Přidána forms.html demo stránka (všechny input typy, select, textarea, checkbox/radio, switch, praktické formuláře, validace)
+- Přidána tables.html demo stránka (základní, striped, hover, bordered, compact varianty, responzivní tabulka, praktické příklady - výsledky, startovní listina, admin panel)

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables Demo - Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/status.css">
+
+  <style>
+    /* Playbook-specific styles */
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+      font-weight: var(--font-medium);
+    }
+
+    .demo-box {
+      padding: var(--space-4);
+      background-color: var(--color-bg-elevated);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-6);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Tables Demo</h1>
+      <p class="text-secondary mt-2">Ukázky tabulkových komponent pro timing systém</p>
+
+      <nav class="playbook-nav">
+        <a href="index.html" class="btn btn-ghost">Zpět na index</a>
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+        <button class="btn btn-ghost" onclick="setTheme('auto')">Auto</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Basic Table Section -->
+    <section class="playbook-section" id="basic-table">
+      <h2 class="section-title">Základní tabulka</h2>
+
+      <div class="component-label">Jednoduchá tabulka s hlavičkou</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Pořadí</th>
+            <th>Číslo</th>
+            <th>Závodník</th>
+            <th>Klub</th>
+            <th class="cell-numeric">Čas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="font-mono">042</td>
+            <td>Jan Novák</td>
+            <td>USK Praha</td>
+            <td class="cell-numeric">94.32</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="font-mono">017</td>
+            <td>Petr Svoboda</td>
+            <td>Dukla Praha</td>
+            <td class="cell-numeric">95.18</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="font-mono">089</td>
+            <td>Martin Černý</td>
+            <td>Bohemians</td>
+            <td class="cell-numeric">96.45</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="font-mono">023</td>
+            <td>Tomáš Dvořák</td>
+            <td>Slavia</td>
+            <td class="cell-numeric">97.02</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="font-mono">056</td>
+            <td>Jakub Veselý</td>
+            <td>Sparta</td>
+            <td class="cell-numeric">98.77</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Striped Table Section -->
+    <section class="playbook-section" id="striped-table">
+      <h2 class="section-title">Pruhovaná tabulka</h2>
+
+      <div class="component-label">.table-striped - sudé řádky mají pozadí</div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Pořadí</th>
+            <th>Číslo</th>
+            <th>Závodník</th>
+            <th>Klub</th>
+            <th class="cell-numeric">Jízda 1</th>
+            <th class="cell-numeric">Jízda 2</th>
+            <th class="cell-numeric">Celkem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="font-mono">042</td>
+            <td>Jan Novák</td>
+            <td>USK Praha</td>
+            <td class="cell-numeric">94.32</td>
+            <td class="cell-numeric">93.18</td>
+            <td class="cell-numeric font-bold">187.50</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="font-mono">017</td>
+            <td>Petr Svoboda</td>
+            <td>Dukla Praha</td>
+            <td class="cell-numeric">95.18</td>
+            <td class="cell-numeric">94.02</td>
+            <td class="cell-numeric font-bold">189.20</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="font-mono">089</td>
+            <td>Martin Černý</td>
+            <td>Bohemians</td>
+            <td class="cell-numeric">96.45</td>
+            <td class="cell-numeric">94.89</td>
+            <td class="cell-numeric font-bold">191.34</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="font-mono">023</td>
+            <td>Tomáš Dvořák</td>
+            <td>Slavia</td>
+            <td class="cell-numeric">97.02</td>
+            <td class="cell-numeric">95.32</td>
+            <td class="cell-numeric font-bold">192.34</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="font-mono">056</td>
+            <td>Jakub Veselý</td>
+            <td>Sparta</td>
+            <td class="cell-numeric">98.77</td>
+            <td class="cell-numeric">95.81</td>
+            <td class="cell-numeric font-bold">194.58</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td class="font-mono">078</td>
+            <td>Filip Procházka</td>
+            <td>Lokomotiva</td>
+            <td class="cell-numeric">99.12</td>
+            <td class="cell-numeric">96.45</td>
+            <td class="cell-numeric font-bold">195.57</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Hover Table Section -->
+    <section class="playbook-section" id="hover-table">
+      <h2 class="section-title">Hover efekt</h2>
+
+      <div class="component-label">.table-hover - zvýraznění řádku při najetí myší</div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Pořadí</th>
+            <th>Číslo</th>
+            <th>Závodník</th>
+            <th>Kategorie</th>
+            <th class="cell-numeric">Čas</th>
+            <th class="cell-status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="font-mono">042</td>
+            <td>Jan Novák</td>
+            <td>K1M</td>
+            <td class="cell-numeric">94.32</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="font-mono">017</td>
+            <td>Petr Svoboda</td>
+            <td>K1M</td>
+            <td class="cell-numeric">95.18</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="font-mono">089</td>
+            <td>Martin Černý</td>
+            <td>K1M</td>
+            <td class="cell-numeric">96.45</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>-</td>
+            <td class="font-mono">023</td>
+            <td>Tomáš Dvořák</td>
+            <td>K1M</td>
+            <td class="cell-numeric">-</td>
+            <td class="cell-status"><span class="badge badge-warning">DNS</span></td>
+          </tr>
+          <tr>
+            <td>-</td>
+            <td class="font-mono">056</td>
+            <td>Jakub Veselý</td>
+            <td>K1M</td>
+            <td class="cell-numeric">102.33</td>
+            <td class="cell-status"><span class="badge badge-error">DSQ</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Bordered Table Section -->
+    <section class="playbook-section" id="bordered-table">
+      <h2 class="section-title">Orámovaná tabulka</h2>
+
+      <div class="component-label">.table-bordered - všechny buňky s ohraničením</div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Branka</th>
+            <th class="cell-numeric">Mezičas</th>
+            <th class="cell-numeric">Rozdíl</th>
+            <th>Penalizace</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Start</td>
+            <td class="cell-numeric">0.00</td>
+            <td class="cell-numeric">-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Branka 1</td>
+            <td class="cell-numeric">12.45</td>
+            <td class="cell-numeric">+0.23</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Branka 2</td>
+            <td class="cell-numeric">24.89</td>
+            <td class="cell-numeric">-0.12</td>
+            <td><span class="badge badge-warning">2s dotyk</span></td>
+          </tr>
+          <tr>
+            <td>Branka 3</td>
+            <td class="cell-numeric">38.12</td>
+            <td class="cell-numeric">+0.45</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Branka 4</td>
+            <td class="cell-numeric">52.67</td>
+            <td class="cell-numeric">-0.08</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Cíl</td>
+            <td class="cell-numeric">94.32</td>
+            <td class="cell-numeric">+0.18</td>
+            <td><span class="badge badge-info">Celkem: +2s</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Compact Table Section -->
+    <section class="playbook-section" id="compact-table">
+      <h2 class="section-title">Kompaktní tabulka</h2>
+
+      <div class="component-label">.table-compact - menší padding pro více dat</div>
+      <table class="table table-striped table-compact">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Závodník</th>
+            <th>Klub</th>
+            <th class="cell-numeric">J1</th>
+            <th class="cell-numeric">P1</th>
+            <th class="cell-numeric">J2</th>
+            <th class="cell-numeric">P2</th>
+            <th class="cell-numeric">Celkem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono">042</td>
+            <td>Jan Novák</td>
+            <td>USK</td>
+            <td class="cell-numeric">92.32</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric">91.18</td>
+            <td class="cell-numeric">+0</td>
+            <td class="cell-numeric font-bold">185.50</td>
+          </tr>
+          <tr>
+            <td class="font-mono">017</td>
+            <td>Petr Svoboda</td>
+            <td>Dukla</td>
+            <td class="cell-numeric">93.18</td>
+            <td class="cell-numeric">+0</td>
+            <td class="cell-numeric">92.02</td>
+            <td class="cell-numeric">+4</td>
+            <td class="cell-numeric font-bold">189.20</td>
+          </tr>
+          <tr>
+            <td class="font-mono">089</td>
+            <td>Martin Černý</td>
+            <td>Bohem.</td>
+            <td class="cell-numeric">94.45</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric">92.89</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric font-bold">191.34</td>
+          </tr>
+          <tr>
+            <td class="font-mono">023</td>
+            <td>Tomáš Dvořák</td>
+            <td>Slavia</td>
+            <td class="cell-numeric">95.02</td>
+            <td class="cell-numeric">+0</td>
+            <td class="cell-numeric">93.32</td>
+            <td class="cell-numeric">+4</td>
+            <td class="cell-numeric font-bold">192.34</td>
+          </tr>
+          <tr>
+            <td class="font-mono">056</td>
+            <td>Jakub Veselý</td>
+            <td>Sparta</td>
+            <td class="cell-numeric">96.77</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric">93.81</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric font-bold">194.58</td>
+          </tr>
+          <tr>
+            <td class="font-mono">078</td>
+            <td>Filip Procházka</td>
+            <td>Loko.</td>
+            <td class="cell-numeric">97.12</td>
+            <td class="cell-numeric">+0</td>
+            <td class="cell-numeric">94.45</td>
+            <td class="cell-numeric">+4</td>
+            <td class="cell-numeric font-bold">195.57</td>
+          </tr>
+          <tr>
+            <td class="font-mono">034</td>
+            <td>Ondřej Malý</td>
+            <td>Hradec</td>
+            <td class="cell-numeric">98.34</td>
+            <td class="cell-numeric">+4</td>
+            <td class="cell-numeric">95.12</td>
+            <td class="cell-numeric">+0</td>
+            <td class="cell-numeric font-bold">197.46</td>
+          </tr>
+          <tr>
+            <td class="font-mono">091</td>
+            <td>David Horák</td>
+            <td>Brno</td>
+            <td class="cell-numeric">99.56</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric">95.89</td>
+            <td class="cell-numeric">+2</td>
+            <td class="cell-numeric font-bold">199.45</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Combined Variants Section -->
+    <section class="playbook-section" id="combined-variants">
+      <h2 class="section-title">Kombinace variant</h2>
+
+      <div class="component-label">.table-striped .table-hover .table-bordered - všechny varianty najednou</div>
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Pořadí</th>
+            <th>Číslo</th>
+            <th>Závodník</th>
+            <th>Klub</th>
+            <th class="cell-numeric">Čas</th>
+            <th class="cell-status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="font-mono">042</td>
+            <td>Jan Novák</td>
+            <td>USK Praha</td>
+            <td class="cell-numeric">94.32</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="font-mono">017</td>
+            <td>Petr Svoboda</td>
+            <td>Dukla Praha</td>
+            <td class="cell-numeric">95.18</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="font-mono">089</td>
+            <td>Martin Černý</td>
+            <td>Bohemians</td>
+            <td class="cell-numeric">96.45</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="font-mono">023</td>
+            <td>Tomáš Dvořák</td>
+            <td>Slavia</td>
+            <td class="cell-numeric">97.02</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="font-mono">056</td>
+            <td>Jakub Veselý</td>
+            <td>Sparta</td>
+            <td class="cell-numeric">98.77</td>
+            <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Responsive Table Section -->
+    <section class="playbook-section" id="responsive-table">
+      <h2 class="section-title">Responzivní tabulka</h2>
+
+      <div class="component-label">.table-responsive - horizontální scroll na malých obrazovkách</div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Pořadí</th>
+              <th>Číslo</th>
+              <th>Závodník</th>
+              <th>Klub</th>
+              <th>Kategorie</th>
+              <th>Ročník</th>
+              <th class="cell-numeric">Jízda 1</th>
+              <th class="cell-numeric">Pen 1</th>
+              <th class="cell-numeric">Jízda 2</th>
+              <th class="cell-numeric">Pen 2</th>
+              <th class="cell-numeric">Celkem</th>
+              <th class="cell-status">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="font-mono">042</td>
+              <td>Jan Novák</td>
+              <td>USK Praha</td>
+              <td>K1M</td>
+              <td>1998</td>
+              <td class="cell-numeric">92.32</td>
+              <td class="cell-numeric">+2</td>
+              <td class="cell-numeric">91.18</td>
+              <td class="cell-numeric">+0</td>
+              <td class="cell-numeric font-bold">185.50</td>
+              <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="font-mono">017</td>
+              <td>Petr Svoboda</td>
+              <td>Dukla Praha</td>
+              <td>K1M</td>
+              <td>1995</td>
+              <td class="cell-numeric">93.18</td>
+              <td class="cell-numeric">+0</td>
+              <td class="cell-numeric">92.02</td>
+              <td class="cell-numeric">+4</td>
+              <td class="cell-numeric font-bold">189.20</td>
+              <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="font-mono">089</td>
+              <td>Martin Černý</td>
+              <td>Bohemians Praha</td>
+              <td>K1M</td>
+              <td>2001</td>
+              <td class="cell-numeric">94.45</td>
+              <td class="cell-numeric">+2</td>
+              <td class="cell-numeric">92.89</td>
+              <td class="cell-numeric">+2</td>
+              <td class="cell-numeric font-bold">191.34</td>
+              <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="font-mono">023</td>
+              <td>Tomáš Dvořák</td>
+              <td>Slavia Praha</td>
+              <td>K1M</td>
+              <td>1999</td>
+              <td class="cell-numeric">95.02</td>
+              <td class="cell-numeric">+0</td>
+              <td class="cell-numeric">93.32</td>
+              <td class="cell-numeric">+4</td>
+              <td class="cell-numeric font-bold">192.34</td>
+              <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Practical Examples Section -->
+    <section class="playbook-section" id="practical-examples">
+      <h2 class="section-title">Praktické příklady</h2>
+
+      <!-- Results Table -->
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="card-title">Výsledky K1 Muži - 1. jízda</h3>
+          <p class="card-subtitle">Mistrovství ČR ve vodním slalomu 2026</p>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">Poř.</th>
+                  <th style="width: 60px;">St.č.</th>
+                  <th>Závodník</th>
+                  <th>Klub</th>
+                  <th class="cell-numeric" style="width: 100px;">Čas</th>
+                  <th class="cell-numeric" style="width: 60px;">Pen.</th>
+                  <th class="cell-numeric" style="width: 100px;">Celkem</th>
+                  <th class="cell-numeric" style="width: 80px;">Ztráta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background-color: rgba(255, 215, 0, 0.1);">
+                  <td class="font-bold">1</td>
+                  <td class="font-mono">042</td>
+                  <td class="font-bold">Jan Novák</td>
+                  <td>USK Praha</td>
+                  <td class="cell-numeric">92.32</td>
+                  <td class="cell-numeric">+2</td>
+                  <td class="cell-numeric font-bold">94.32</td>
+                  <td class="cell-numeric">-</td>
+                </tr>
+                <tr style="background-color: rgba(192, 192, 192, 0.1);">
+                  <td class="font-bold">2</td>
+                  <td class="font-mono">017</td>
+                  <td class="font-bold">Petr Svoboda</td>
+                  <td>Dukla Praha</td>
+                  <td class="cell-numeric">93.18</td>
+                  <td class="cell-numeric">+2</td>
+                  <td class="cell-numeric font-bold">95.18</td>
+                  <td class="cell-numeric text-secondary">+0.86</td>
+                </tr>
+                <tr style="background-color: rgba(205, 127, 50, 0.1);">
+                  <td class="font-bold">3</td>
+                  <td class="font-mono">089</td>
+                  <td class="font-bold">Martin Černý</td>
+                  <td>Bohemians</td>
+                  <td class="cell-numeric">92.45</td>
+                  <td class="cell-numeric">+4</td>
+                  <td class="cell-numeric font-bold">96.45</td>
+                  <td class="cell-numeric text-secondary">+2.13</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td class="font-mono">023</td>
+                  <td>Tomáš Dvořák</td>
+                  <td>Slavia</td>
+                  <td class="cell-numeric">93.02</td>
+                  <td class="cell-numeric">+4</td>
+                  <td class="cell-numeric font-bold">97.02</td>
+                  <td class="cell-numeric text-secondary">+2.70</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td class="font-mono">056</td>
+                  <td>Jakub Veselý</td>
+                  <td>Sparta</td>
+                  <td class="cell-numeric">94.77</td>
+                  <td class="cell-numeric">+4</td>
+                  <td class="cell-numeric font-bold">98.77</td>
+                  <td class="cell-numeric text-secondary">+4.45</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start List Table -->
+      <div class="card mb-6">
+        <div class="card-header flex justify-between items-center">
+          <div>
+            <h3 class="card-title">Startovní listina - K1 Ženy</h3>
+            <p class="card-subtitle">2. jízda</p>
+          </div>
+          <span class="badge badge-info">12 závodnic</span>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style="width: 80px;">Start</th>
+                <th style="width: 60px;">St.č.</th>
+                <th>Závodnice</th>
+                <th>Klub</th>
+                <th class="cell-numeric">Čas J1</th>
+                <th class="cell-status">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-mono">10:00</td>
+                <td class="font-mono">101</td>
+                <td>Anna Nováková</td>
+                <td>USK Praha</td>
+                <td class="cell-numeric">98.45</td>
+                <td class="cell-status"><span class="badge">Čeká</span></td>
+              </tr>
+              <tr>
+                <td class="font-mono">10:02</td>
+                <td class="font-mono">108</td>
+                <td>Eva Svobodová</td>
+                <td>Dukla Praha</td>
+                <td class="cell-numeric">99.12</td>
+                <td class="cell-status"><span class="badge">Čeká</span></td>
+              </tr>
+              <tr>
+                <td class="font-mono">10:04</td>
+                <td class="font-mono">115</td>
+                <td>Marie Černá</td>
+                <td>Bohemians</td>
+                <td class="cell-numeric">100.34</td>
+                <td class="cell-status"><span class="badge badge-warning">Připravena</span></td>
+              </tr>
+              <tr>
+                <td class="font-mono">10:06</td>
+                <td class="font-mono">122</td>
+                <td>Tereza Dvořáková</td>
+                <td>Slavia</td>
+                <td class="cell-numeric">101.56</td>
+                <td class="cell-status"><span class="badge badge-info">Na trati</span></td>
+              </tr>
+              <tr>
+                <td class="font-mono">10:08</td>
+                <td class="font-mono">103</td>
+                <td>Lucie Veselá</td>
+                <td>Sparta</td>
+                <td class="cell-numeric">102.78</td>
+                <td class="cell-status"><span class="badge badge-success">FIN</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Admin Table with Actions -->
+      <div class="card">
+        <div class="card-header flex justify-between items-center">
+          <div>
+            <h3 class="card-title">Správa závodníků</h3>
+            <p class="card-subtitle">Admin panel</p>
+          </div>
+          <button class="btn btn-primary btn-sm">+ Přidat závodníka</button>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width: 60px;">ID</th>
+                <th>Závodník</th>
+                <th>Klub</th>
+                <th>Kategorie</th>
+                <th class="cell-status">Status</th>
+                <th style="width: 150px;">Akce</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-mono">042</td>
+                <td>Jan Novák</td>
+                <td>USK Praha</td>
+                <td>K1M</td>
+                <td class="cell-status"><span class="badge badge-success">Aktivní</span></td>
+                <td>
+                  <div class="flex gap-1">
+                    <button class="btn btn-ghost btn-sm">Upravit</button>
+                    <button class="btn btn-ghost btn-sm" style="color: var(--color-error);">Smazat</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-mono">017</td>
+                <td>Petr Svoboda</td>
+                <td>Dukla Praha</td>
+                <td>K1M</td>
+                <td class="cell-status"><span class="badge badge-success">Aktivní</span></td>
+                <td>
+                  <div class="flex gap-1">
+                    <button class="btn btn-ghost btn-sm">Upravit</button>
+                    <button class="btn btn-ghost btn-sm" style="color: var(--color-error);">Smazat</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-mono">089</td>
+                <td>Martin Černý</td>
+                <td>Bohemians</td>
+                <td>K1M</td>
+                <td class="cell-status"><span class="badge badge-warning">Neověřen</span></td>
+                <td>
+                  <div class="flex gap-1">
+                    <button class="btn btn-ghost btn-sm">Upravit</button>
+                    <button class="btn btn-ghost btn-sm" style="color: var(--color-error);">Smazat</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-mono">023</td>
+                <td>Tomáš Dvořák</td>
+                <td>Slavia</td>
+                <td>C1M</td>
+                <td class="cell-status"><span class="badge badge-error">Zablokován</span></td>
+                <td>
+                  <div class="flex gap-1">
+                    <button class="btn btn-ghost btn-sm">Upravit</button>
+                    <button class="btn btn-ghost btn-sm" style="color: var(--color-error);">Smazat</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empty State Section -->
+    <section class="playbook-section" id="empty-state">
+      <h2 class="section-title">Prázdný stav</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Výsledky C2 Muži</h3>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Pořadí</th>
+                <th>Číslo</th>
+                <th>Závodník</th>
+                <th>Klub</th>
+                <th class="cell-numeric">Čas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" style="text-align: center; padding: var(--space-8); color: var(--color-text-secondary);">
+                  Zatím žádné výsledky. Závod ještě nezačal.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+
+      if (theme === 'light') {
+        html.classList.add('theme-light');
+      } else if (theme === 'dark') {
+        html.classList.add('theme-dark');
+      }
+    }
+
+    // Check URL params for initial theme
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get('theme');
+    if (theme) setTheme(theme);
+  </script>
+</body>
+</html>
