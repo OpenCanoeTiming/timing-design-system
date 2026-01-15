@@ -57,7 +57,7 @@ Design systém pro vodáckou časomíru s podporou:
 
 ### 2.3 Komplexní komponenty
 - [x] Tables (striped, hover)
-- [ ] Modals
+- [x] Modals
 - [ ] Toasts/Notifications
 - [ ] Tabs
 
@@ -119,3 +119,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Vytvořen playbook index.html s ukázkami všech komponent
 - Implementován dual-theme systém (light/dark)
 - Přidány self-hosted fonty Inter (400-700) a JetBrains Mono (400, 500, 700)
+- Přidána Modal komponenta (backdrop, velikosti, confirmation variant, a11y)

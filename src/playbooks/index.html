@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="../css/tables.css">
   <link rel="stylesheet" href="../css/status.css">
   <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/modal.css">
 
   <style>
     /* Playbook-specific styles */
@@ -315,6 +316,26 @@
       </div>
     </section>
 
+    <!-- Modals Section -->
+    <section class="playbook-section" id="modals">
+      <h2 class="section-title">Modals</h2>
+
+      <div class="component-label">Spustit modal</div>
+      <div class="component-row">
+        <button class="btn btn-primary" onclick="openModal('demo-modal')">Basic Modal</button>
+        <button class="btn btn-secondary" onclick="openModal('confirm-modal')">Confirmation</button>
+        <button class="btn btn-ghost" onclick="openModal('large-modal')">Large Modal</button>
+      </div>
+
+      <div class="component-label mt-4">Velikosti</div>
+      <div class="component-row">
+        <button class="btn btn-ghost btn-sm" onclick="openModal('small-modal')">Small</button>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('demo-modal')">Default</button>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('large-modal')">Large</button>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('xl-modal')">XL</button>
+      </div>
+    </section>
+
     <!-- Typography Section -->
     <section class="playbook-section" id="typography">
       <h2 class="section-title">Typography</h2>
@@ -333,6 +354,137 @@
     </section>
   </main>
 
+  <!-- Modal: Basic Demo -->
+  <div class="modal-backdrop" id="demo-modal" onclick="closeModalOnBackdrop(event, 'demo-modal')">
+    <div class="modal" role="dialog" aria-labelledby="demo-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="demo-modal-title">Basic Modal</h3>
+        <button class="modal-close" onclick="closeModal('demo-modal')" aria-label="Zavřít">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Toto je základní modal s headerem, body a footerem.</p>
+        <p class="text-secondary mt-2">Můžete ho zavřít tlačítkem X, tlačítkem "Zavřít", klávesou Escape, nebo kliknutím na pozadí.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('demo-modal')">Zavřít</button>
+        <button class="btn btn-primary" onclick="closeModal('demo-modal')">Potvrdit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Confirmation -->
+  <div class="modal-backdrop" id="confirm-modal" onclick="closeModalOnBackdrop(event, 'confirm-modal')">
+    <div class="modal modal-sm modal-confirm" role="alertdialog" aria-labelledby="confirm-modal-title" aria-modal="true">
+      <div class="modal-body">
+        <div class="modal-icon modal-icon-warning">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-modal-title">Smazat záznam?</h3>
+        <p class="text-secondary mt-2">Tato akce je nevratná. Záznam bude trvale odstraněn.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">Zrušit</button>
+        <button class="btn btn-danger" onclick="closeModal('confirm-modal')">Smazat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Small -->
+  <div class="modal-backdrop" id="small-modal" onclick="closeModalOnBackdrop(event, 'small-modal')">
+    <div class="modal modal-sm" role="dialog" aria-labelledby="small-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="small-modal-title">Small Modal</h3>
+        <button class="modal-close" onclick="closeModal('small-modal')" aria-label="Zavřít">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Malý modal (max-width: 400px) pro jednoduché dialogy.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" onclick="closeModal('small-modal')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Large -->
+  <div class="modal-backdrop" id="large-modal" onclick="closeModalOnBackdrop(event, 'large-modal')">
+    <div class="modal modal-lg" role="dialog" aria-labelledby="large-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="large-modal-title">Large Modal</h3>
+        <button class="modal-close" onclick="closeModal('large-modal')" aria-label="Zavřít">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Velký modal (max-width: 700px) pro komplexnější obsah.</p>
+        <div class="form-group mt-4">
+          <label class="form-label">Jméno závodníka</label>
+          <input type="text" class="input" placeholder="Jan Novák">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Klub</label>
+          <select class="input select">
+            <option>USK Praha</option>
+            <option>Dukla Praha</option>
+            <option>Bohemians</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer modal-footer-between">
+        <button class="btn btn-ghost" onclick="closeModal('large-modal')">Zrušit</button>
+        <button class="btn btn-primary" onclick="closeModal('large-modal')">Uložit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: XL -->
+  <div class="modal-backdrop" id="xl-modal" onclick="closeModalOnBackdrop(event, 'xl-modal')">
+    <div class="modal modal-xl" role="dialog" aria-labelledby="xl-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="xl-modal-title">Extra Large Modal</h3>
+        <button class="modal-close" onclick="closeModal('xl-modal')" aria-label="Zavřít">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Extra velký modal (max-width: 900px) pro tabulky a rozsáhlý obsah.</p>
+        <div class="table-responsive mt-4">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Závodník</th>
+                <th>Klub</th>
+                <th class="cell-numeric">Čas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Jan Novák</td><td>USK Praha</td><td class="cell-numeric">94.32</td></tr>
+              <tr><td>2</td><td>Petr Svoboda</td><td>Dukla</td><td class="cell-numeric">95.18</td></tr>
+              <tr><td>3</td><td>Martin Dvořák</td><td>Bohemians</td><td class="cell-numeric">96.44</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('xl-modal')">Zavřít</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     function setTheme(theme) {
       const html = document.documentElement;
@@ -350,6 +502,43 @@
     const params = new URLSearchParams(window.location.search);
     const theme = params.get('theme');
     if (theme) setTheme(theme);
+
+    // Modal functions
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.add('open');
+        document.body.classList.add('modal-open');
+        // Focus first focusable element
+        const focusable = modal.querySelector('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable) focusable.focus();
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    function closeModalOnBackdrop(event, id) {
+      if (event.target === event.currentTarget) {
+        closeModal(id);
+      }
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const openModal = document.querySelector('.modal-backdrop.open');
+        if (openModal) {
+          openModal.classList.remove('open');
+          document.body.classList.remove('modal-open');
+        }
+      }
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,226 @@
+/**
+ * Modal Components
+ *
+ * Accessible modal dialogs with backdrop overlay.
+ */
+
+/* ==========================================================================
+   Modal Backdrop
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dark theme: darker backdrop */
+.theme-dark .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* ==========================================================================
+   Modal Container
+   ========================================================================== */
+
+.modal {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  max-width: 500px;
+  width: 100%;
+  max-height: calc(100vh - var(--space-8));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.95) translateY(-10px);
+  transition: transform var(--transition-normal);
+}
+
+.modal-backdrop.open .modal {
+  transform: scale(1) translateY(0);
+}
+
+/* ==========================================================================
+   Modal Sizes
+   ========================================================================== */
+
+.modal-sm {
+  max-width: 400px;
+}
+
+.modal-lg {
+  max-width: 700px;
+}
+
+.modal-xl {
+  max-width: 900px;
+}
+
+.modal-fullscreen {
+  max-width: calc(100vw - var(--space-8));
+  max-height: calc(100vh - var(--space-8));
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Modal Header
+   ========================================================================== */
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.modal-close:hover {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Modal Body
+   ========================================================================== */
+
+.modal-body {
+  padding: var(--space-4);
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   Modal Footer
+   ========================================================================== */
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.modal-footer-left {
+  justify-content: flex-start;
+}
+
+.modal-footer-center {
+  justify-content: center;
+}
+
+.modal-footer-between {
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Confirmation Modal Variant
+   ========================================================================== */
+
+.modal-confirm .modal-body {
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.modal-confirm .modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.modal-confirm .modal-icon-warning {
+  background-color: var(--color-warning-subtle);
+  color: var(--color-warning);
+}
+
+.modal-confirm .modal-icon-error {
+  background-color: var(--color-error-subtle);
+  color: var(--color-error);
+}
+
+.modal-confirm .modal-icon-success {
+  background-color: var(--color-success-subtle);
+  color: var(--color-success);
+}
+
+.modal-confirm .modal-icon-info {
+  background-color: var(--color-info-subtle);
+  color: var(--color-info);
+}
+
+.modal-confirm .modal-footer {
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop {
+    transition: none;
+  }
+
+  .modal {
+    transition: none;
+    transform: none;
+  }
+
+  .modal-backdrop.open .modal {
+    transform: none;
+  }
+}
