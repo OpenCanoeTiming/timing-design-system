@@ -98,8 +98,10 @@ Design systém pro vodáckou časomíru s podporou:
 ## Fáze 5: Integrace
 
 ### 5.1 Build
-- [ ] CSS concatenation script (cat → timing.css)
-- [ ] Minifikace (optional)
+- [x] CSS concatenation script (scripts/build-css.js)
+- [x] Minifikace (dist/timing.min.css)
+- [x] Kopírování fontů do dist/fonts/
+- [x] Bundle test playbook (bundle-test.html)
 
 ### 5.2 Testování - jeste nedelat!!
 - Integrace do c123-server (ověření kompatibility)
@@ -136,3 +138,6 @@ Design systém pro vodáckou časomíru s podporou:
 - React komponenta Table (Table, TableHead, TableBody, TableFoot, TableRow, TableCell, TableHeaderCell)
 - React komponenta Modal (Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter) s a11y, velikostmi a demo stránkou
 - React komponenta Toast (Toast, ToastContainer) s variantami, pozicemi, progress bar, auto-dismiss a demo stránkou toast.html
+- Build script (scripts/build-css.js) - concatenation, minifikace, kopírování fontů
+- dist/timing.css (50 KB) a dist/timing.min.css (28 KB, 44% menší)
+- bundle-test.html playbook pro testování standalone CSS bundle
