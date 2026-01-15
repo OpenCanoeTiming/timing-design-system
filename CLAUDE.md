@@ -3,7 +3,7 @@
 ## Kontext projektu
 
 Canoe Timing Design System je knihovna UI komponent a stylů pro vodáckou časomíru (canoe slalom timing).
-Inspirováno "BMW M Line" stylem z c123-server admin dashboardu - profesionální, elegantní vzhled s vodáckým šmrncem.
+Inspirováno stylem z c123-server admin dashboardu - profesionální, elegantní vzhled s vodáckým šmrncem.
 
 Určeno pro použití v:
 - c123-server (admin dashboard)
@@ -13,7 +13,7 @@ Určeno pro použití v:
 ## Vizuální identita
 
 - **Vodácký šmrnc:** Subtilní vlnkový pattern + červeno-zelené slalomové pruhy (LIVE badge)
-- **BMW M Line styl:** 4px barevný bar v headeru s glow efektem, elegantní animace
+- **Header styl:** 4px barevný bar v headeru s glow efektem, elegantní animace
 - **Glow efekty:** Na status indikátorech, hover stavech
 
 ## Jazyky

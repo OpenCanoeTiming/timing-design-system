@@ -110,7 +110,7 @@ Design systém pro vodáckou časomíru s podporou:
 
 ---
 
-## Fáze 6: Canoe branding + BMW M Line styl
+## Fáze 6: Canoe branding + nové komponenty
 
 ### 6.0 Oprava navigace
 - [x] Přidat chybějící odkazy na modal.html a toast.html v playbook index
@@ -123,7 +123,7 @@ Design systém pro vodáckou časomíru s podporou:
   - glow efekty
   - wave pattern SVG
 
-### 6.2 Header komponenta (BMW M Line styl)
+### 6.2 Header komponenta
 - [x] CSS: src/css/header.css
   - app-header s 4px barevným barem vlevo + glow
   - status indikátory (connected/connecting/disconnected)

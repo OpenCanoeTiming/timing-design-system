@@ -3,7 +3,7 @@
  *
  * Vodacke specificke design tokeny:
  * - Slalom gate colors (cervena/zelena branka)
- * - Glow effects (BMW M Line style)
+ * - Glow effects
  * - Wave pattern pro vodacky smrnc
  */
 
@@ -22,7 +22,7 @@
   --pattern-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='4' viewBox='0 0 40 4'%3E%3Cpath d='M0 2 Q5 0.5, 10 2 Q15 3.5, 20 2 Q25 0.5, 30 2 Q35 3.5, 40 2' stroke='%230088ff' stroke-width='1.5' fill='none' opacity='0.8'/%3E%3C/svg%3E");
   --pattern-wave-height: 4px;
 
-  /* Header bar (BMW M Line style) */
+  /* Header bar */
   --header-bar-width: 4px;
   --header-bar-glow: 0 0 20px rgba(0, 136, 255, 0.4);
 }

@@ -1,7 +1,7 @@
 /**
  * Canoe Timing Design System - Header Component
  *
- * App header s BMW M Line stylem:
+ * App header s charakteristickým stylem:
  * - 4px barevny bar vlevo s glow efektem
  * - Status indikatory (TCP/UDP/XML)
  * - LIVE badge se slalomovymi pruhy
@@ -23,7 +23,7 @@
   min-height: 56px;
 }
 
-/* BMW M Line - barevny bar vlevo */
+/* Barevny bar vlevo */
 .app-header::before {
   content: '';
   position: absolute;
