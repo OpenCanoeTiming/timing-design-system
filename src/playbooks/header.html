@@ -121,11 +121,17 @@
     <!-- LIVE Badge Demo -->
     <section class="demo-section">
       <h2 class="demo-title">LIVE Badge</h2>
-      <p class="demo-description">Badge se slalomovymi cerveno-zelenymi pruhy (vodacky smrnc)</p>
+      <p class="demo-description">Badge se slalomovou brankou (dve tycky)</p>
 
-      <div class="flex gap-4 items-center">
-        <span class="badge-live">LIVE</span>
-        <span class="text-secondary text-sm">Slalomove pruhy symbolizuji branku</span>
+      <div class="flex gap-6 items-center flex-wrap">
+        <div class="flex flex-col gap-2 items-center">
+          <span class="badge-live">LIVE</span>
+          <span class="text-muted text-xs">Downstream (zelena-cervena)</span>
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+          <span class="badge-live badge-live-upstream">LIVE</span>
+          <span class="text-muted text-xs">Upstream (bila-zelena)</span>
+        </div>
       </div>
     </section>
 
