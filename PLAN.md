@@ -68,8 +68,8 @@ Design systém pro vodáckou časomíru s podporou:
 ### 3.1 Demo stránky
 - [x] Index - katalog všech komponent (základní verze)
 - [x] Dark theme showcase
-- [ ] Light theme showcase
-- [ ] Forms demo
+- [x] Light theme showcase
+- [x] Forms demo
 - [ ] Tables demo
 
 ### 3.2 Dokumentace
@@ -123,3 +123,5 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidána Toast/Notification komponenta (všechny varianty, 6 pozic, progress bar, animace, a11y)
 - Přidána Tabs komponenta (základní, pills, bordered varianty, velikosti sm/lg, full-width, badge, a11y)
 - Přidána dark.html showcase stránka (barevná paleta, admin panel demo, timing display, ovládací prvky, status indikátory)
+- Přidána light.html showcase stránka (výsledková tabule, stupně vítězů, barevná paleta, ovládací prvky, status indikátory)
+- Přidána forms.html demo stránka (všechny input typy, select, textarea, checkbox/radio, switch, praktické formuláře, validace)

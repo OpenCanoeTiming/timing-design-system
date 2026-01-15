@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms Demo - Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/status.css">
+
+  <style>
+    /* Playbook-specific styles */
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+      font-weight: var(--font-medium);
+    }
+
+    .demo-box {
+      padding: var(--space-4);
+      background-color: var(--color-bg-elevated);
+      border-radius: var(--radius-md);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .form-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Forms Demo</h1>
+      <p class="text-secondary mt-2">Ukázky formulářových komponent pro timing systém</p>
+
+      <nav class="playbook-nav">
+        <a href="index.html" class="btn btn-ghost">Zpět na index</a>
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+        <button class="btn btn-ghost" onclick="setTheme('auto')">Auto</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Text Inputs Section -->
+    <section class="playbook-section" id="text-inputs">
+      <h2 class="section-title">Text Inputs</h2>
+
+      <div class="form-demo-grid">
+        <div class="form-group">
+          <label class="form-label">Základní input</label>
+          <input type="text" class="input" placeholder="Zadejte text...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">S nápovědou</label>
+          <input type="text" class="input" placeholder="example@email.cz">
+          <span class="form-hint">Zadejte platnou emailovou adresu</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">S hodnotou</label>
+          <input type="text" class="input" value="Jan Novák">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Disabled</label>
+          <input type="text" class="input" value="Nelze editovat" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">S chybou</label>
+          <input type="text" class="input input-error" value="neplatny-format">
+          <span class="form-hint" style="color: var(--color-error);">Neplatný formát</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Číslo (monospace)</label>
+          <input type="text" class="input font-mono" value="94.32" style="text-align: right;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Input Types Section -->
+    <section class="playbook-section" id="input-types">
+      <h2 class="section-title">Typy inputů</h2>
+
+      <div class="form-demo-grid">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="input" placeholder="vas@email.cz">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="input" value="tajneheslo">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Number</label>
+          <input type="number" class="input" value="42" min="0" max="100" step="1">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input type="date" class="input" value="2026-01-15">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <input type="time" class="input" value="14:30">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Search</label>
+          <input type="search" class="input" placeholder="Hledat závodníka...">
+        </div>
+      </div>
+    </section>
+
+    <!-- Select Section -->
+    <section class="playbook-section" id="selects">
+      <h2 class="section-title">Select</h2>
+
+      <div class="form-demo-grid">
+        <div class="form-group">
+          <label class="form-label">Základní select</label>
+          <select class="input select">
+            <option value="">Vyberte možnost...</option>
+            <option value="1">Možnost 1</option>
+            <option value="2">Možnost 2</option>
+            <option value="3">Možnost 3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">S vybranou hodnotou</label>
+          <select class="input select">
+            <option value="k1m">K1 Muži</option>
+            <option value="k1w" selected>K1 Ženy</option>
+            <option value="c1m">C1 Muži</option>
+            <option value="c1w">C1 Ženy</option>
+            <option value="c2m">C2 Muži</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Klub</label>
+          <select class="input select">
+            <option value="">Vyberte klub...</option>
+            <option value="usk">USK Praha</option>
+            <option value="dukla">Dukla Praha</option>
+            <option value="bohemians">Bohemians</option>
+            <option value="slavia">Slavia</option>
+            <option value="sparta">Sparta</option>
+          </select>
+          <span class="form-hint">Klub závodníka</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Disabled select</label>
+          <select class="input select" disabled>
+            <option>Nelze změnit</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Textarea Section -->
+    <section class="playbook-section" id="textarea">
+      <h2 class="section-title">Textarea</h2>
+
+      <div class="form-demo-grid">
+        <div class="form-group">
+          <label class="form-label">Poznámka</label>
+          <textarea class="input" rows="4" placeholder="Zadejte poznámku..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Popis závodu</label>
+          <textarea class="input" rows="4">Mezinárodní závod ve vodním slalomu. Kategorie K1, C1, C2.</textarea>
+          <span class="form-hint">Maximálně 500 znaků</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkbox & Radio Section -->
+    <section class="playbook-section" id="checkbox-radio">
+      <h2 class="section-title">Checkbox & Radio</h2>
+
+      <div class="grid grid-cols-2" style="gap: var(--space-8);">
+        <div>
+          <div class="component-label">Checkboxy</div>
+          <div class="flex flex-col gap-3 mt-2">
+            <label class="checkbox">
+              <input type="checkbox" checked>
+              <span>Zobrazit časy jízd</span>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" checked>
+              <span>Zobrazit penalizace</span>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox">
+              <span>Zobrazit mezičasy</span>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" disabled>
+              <span>Disabled checkbox</span>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" checked disabled>
+              <span>Disabled checked</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="component-label">Radio buttons</div>
+          <div class="flex flex-col gap-3 mt-2">
+            <label class="radio">
+              <input type="radio" name="run" value="1" checked>
+              <span>Jízda 1</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="run" value="2">
+              <span>Jízda 2</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="run" value="total">
+              <span>Celkový výsledek</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="run" value="disabled" disabled>
+              <span>Disabled radio</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <div class="component-label">Inline checkboxy</div>
+        <div class="flex gap-6 flex-wrap mt-2">
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span>K1M</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span>K1W</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span>C1M</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span>C1W</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span>C2M</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <div class="component-label">Inline radio</div>
+        <div class="flex gap-6 flex-wrap mt-2">
+          <label class="radio">
+            <input type="radio" name="sort" value="time" checked>
+            <span>Dle času</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="sort" value="bib">
+            <span>Dle čísla</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="sort" value="name">
+            <span>Dle jména</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Switch Section -->
+    <section class="playbook-section" id="switches">
+      <h2 class="section-title">Switch / Toggle</h2>
+
+      <div class="flex flex-col gap-4">
+        <label class="switch">
+          <input type="checkbox" class="switch-input" checked>
+          <span class="switch-slider"></span>
+          <span>Automatická aktualizace</span>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" class="switch-input">
+          <span class="switch-slider"></span>
+          <span>Zvukové upozornění</span>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" class="switch-input" checked>
+          <span class="switch-slider"></span>
+          <span>Zobrazit penalizace</span>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" class="switch-input" disabled>
+          <span class="switch-slider"></span>
+          <span>Disabled switch</span>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" class="switch-input" checked disabled>
+          <span class="switch-slider"></span>
+          <span>Disabled checked</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Practical Forms Section -->
+    <section class="playbook-section" id="practical-forms">
+      <h2 class="section-title">Praktické formuláře</h2>
+
+      <div class="grid grid-cols-2" style="gap: var(--space-8);">
+        <!-- Registration Form -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Registrace závodníka</h3>
+          </div>
+          <div class="card-body">
+            <form onsubmit="event.preventDefault(); alert('Formulář odeslán!');">
+              <div class="form-group">
+                <label class="form-label">Startovní číslo *</label>
+                <input type="number" class="input font-mono" placeholder="001" min="1" max="999" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Jméno závodníka *</label>
+                <input type="text" class="input" placeholder="Jan Novák" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Klub *</label>
+                <select class="input select" required>
+                  <option value="">Vyberte klub...</option>
+                  <option value="usk">USK Praha</option>
+                  <option value="dukla">Dukla Praha</option>
+                  <option value="bohemians">Bohemians</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Kategorie *</label>
+                <select class="input select" required>
+                  <option value="k1m">K1 Muži</option>
+                  <option value="k1w">K1 Ženy</option>
+                  <option value="c1m">C1 Muži</option>
+                  <option value="c1w">C1 Ženy</option>
+                  <option value="c2m">C2 Muži</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Poznámka</label>
+                <textarea class="input" rows="2" placeholder="Volitelná poznámka..."></textarea>
+              </div>
+
+              <div class="flex gap-2 mt-6">
+                <button type="submit" class="btn btn-primary">Registrovat</button>
+                <button type="reset" class="btn btn-ghost">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Settings Form -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Nastavení zobrazení</h3>
+          </div>
+          <div class="card-body">
+            <form onsubmit="event.preventDefault(); alert('Nastavení uloženo!');">
+              <div class="form-group">
+                <label class="form-label">Interval aktualizace</label>
+                <select class="input select">
+                  <option value="1">1 sekunda</option>
+                  <option value="2" selected>2 sekundy</option>
+                  <option value="5">5 sekund</option>
+                  <option value="10">10 sekund</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Počet zobrazených závodníků</label>
+                <input type="number" class="input" value="20" min="5" max="100" step="5">
+              </div>
+
+              <div class="form-group">
+                <div class="component-label">Zobrazit sloupce</div>
+                <div class="flex flex-col gap-2 mt-2">
+                  <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span>Pořadí</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span>Jméno</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span>Klub</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span>Čas</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    <span>Penalizace</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    <span>Mezičasy</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="switch">
+                  <input type="checkbox" class="switch-input" checked>
+                  <span class="switch-slider"></span>
+                  <span>Automatická aktualizace</span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label class="switch">
+                  <input type="checkbox" class="switch-input">
+                  <span class="switch-slider"></span>
+                  <span>Zvukové upozornění</span>
+                </label>
+              </div>
+
+              <div class="flex gap-2 mt-6">
+                <button type="submit" class="btn btn-primary">Uložit</button>
+                <button type="button" class="btn btn-ghost">Výchozí hodnoty</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <div class="mt-8" style="max-width: 400px;">
+        <div class="card card-elevated">
+          <div class="card-header" style="text-align: center;">
+            <h3 class="card-title">Přihlášení</h3>
+            <p class="card-subtitle">Admin panel časomíry</p>
+          </div>
+          <div class="card-body">
+            <form onsubmit="event.preventDefault(); alert('Přihlášení...');">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="input" placeholder="admin@timing.cz" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Heslo</label>
+                <input type="password" class="input" placeholder="••••••••" required>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox">
+                  <input type="checkbox">
+                  <span>Zapamatovat přihlášení</span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Přihlásit se</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Time Entry Form -->
+    <section class="playbook-section" id="time-entry">
+      <h2 class="section-title">Zadání času</h2>
+
+      <div class="card" style="max-width: 500px;">
+        <div class="card-header">
+          <h3 class="card-title">Manuální zadání času</h3>
+          <p class="card-subtitle">Pro závodníka #42 - Jan Novák</p>
+        </div>
+        <div class="card-body">
+          <form onsubmit="event.preventDefault(); alert('Čas uložen!');">
+            <div class="grid grid-cols-2" style="gap: var(--space-4);">
+              <div class="form-group">
+                <label class="form-label">Jízda</label>
+                <div class="flex gap-4">
+                  <label class="radio">
+                    <input type="radio" name="time-run" value="1" checked>
+                    <span>1. jízda</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="time-run" value="2">
+                    <span>2. jízda</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Status</label>
+                <select class="input select">
+                  <option value="fin">Cíl (FIN)</option>
+                  <option value="dns">Nestartoval (DNS)</option>
+                  <option value="dnf">Nedokončil (DNF)</option>
+                  <option value="dsq">Diskvalifikován (DSQ)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Čas (mm:ss.hh)</label>
+              <input type="text" class="input font-mono" style="font-size: var(--text-2xl); text-align: center;" placeholder="00:00.00" pattern="[0-9]{2}:[0-9]{2}\.[0-9]{2}">
+              <span class="form-hint">Formát: minuty:sekundy.setiny (např. 01:34.56)</span>
+            </div>
+
+            <div class="grid grid-cols-2" style="gap: var(--space-4);">
+              <div class="form-group">
+                <label class="form-label">Dotyky (2s)</label>
+                <input type="number" class="input font-mono" value="0" min="0" max="99" style="text-align: center;">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Vynechané branky (50s)</label>
+                <input type="number" class="input font-mono" value="0" min="0" max="30" style="text-align: center;">
+              </div>
+            </div>
+
+            <div class="demo-box mt-4" style="text-align: center;">
+              <div class="text-secondary text-sm">Celkový čas s penalizací</div>
+              <div class="font-mono" style="font-size: var(--text-3xl); font-weight: var(--font-bold);">00:00.00</div>
+              <div class="text-secondary text-sm mt-1">+ 0s penalizace</div>
+            </div>
+
+            <div class="flex gap-2 mt-6">
+              <button type="submit" class="btn btn-primary">Uložit čas</button>
+              <button type="button" class="btn btn-danger">Smazat záznam</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form States Section -->
+    <section class="playbook-section" id="form-states">
+      <h2 class="section-title">Stavy formulářů</h2>
+
+      <div class="form-demo-grid">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Validace</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Platný vstup</label>
+              <input type="text" class="input" value="jan.novak@email.cz" style="border-color: var(--color-success);">
+              <span class="form-hint" style="color: var(--color-success);">Email je platný</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Neplatný vstup</label>
+              <input type="text" class="input input-error" value="neplatny-email">
+              <span class="form-hint" style="color: var(--color-error);">Zadejte platnou emailovou adresu</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Varování</label>
+              <input type="text" class="input" value="admin" style="border-color: var(--color-warning);">
+              <span class="form-hint" style="color: var(--color-warning);">Heslo je příliš slabé</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Loading stav</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Vyhledávání</label>
+              <input type="text" class="input" value="Novák" disabled style="opacity: 0.7;">
+              <span class="form-hint">Hledám závodníky...</span>
+            </div>
+
+            <button class="btn btn-primary" disabled style="opacity: 0.7;">
+              Ukládání...
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+
+      if (theme === 'light') {
+        html.classList.add('theme-light');
+      } else if (theme === 'dark') {
+        html.classList.add('theme-dark');
+      }
+    }
+
+    // Check URL params for initial theme
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get('theme');
+    if (theme) setTheme(theme);
+  </script>
+</body>
+</html>
