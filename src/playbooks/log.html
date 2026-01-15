@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="cs" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log - Canoe Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../tokens/canoe.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/log.css">
+
+  <style>
+    .demo-section {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    .demo-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+      color: var(--color-text-primary);
+    }
+
+    .demo-description {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    /* Log wrapper for demo */
+    .log-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+
+    .log-wrapper .log-container {
+      border: none;
+      border-radius: 0;
+    }
+
+    .log-wrapper .log-header {
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-8">
+    <h1 class="text-3xl font-bold mb-2">Log Component</h1>
+    <p class="text-secondary mb-6">Log viewer komponenta pro zobrazeni aplikacnich logu</p>
+
+    <nav class="flex gap-2 mb-8">
+      <a href="index.html" class="btn btn-ghost">Back to Index</a>
+      <button class="btn btn-secondary" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+
+    <!-- Basic Log -->
+    <section class="demo-section">
+      <h2 class="demo-title">Basic Log</h2>
+      <p class="demo-description">Zakladni log s timestamp, level a message</p>
+
+      <div class="log-container log-md">
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:45.123</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Server started on port 5000</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:45.456</span>
+          <span class="log-level log-level-debug">debug</span>
+          <span class="log-component">[UDP]</span>
+          <span class="log-message">Listening for broadcasts on 255.255.255.255:5001</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:46.789</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Client connected from 192.168.1.100</span>
+        </div>
+        <div class="log-entry log-entry-warn">
+          <span class="log-timestamp">14:23:47.012</span>
+          <span class="log-level log-level-warn">warn</span>
+          <span class="log-component">[XML]</span>
+          <span class="log-message">Invalid XML received, skipping entry</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:48.345</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[Timer]</span>
+          <span class="log-message">Race timer started: Heat #1</span>
+        </div>
+        <div class="log-entry log-entry-error">
+          <span class="log-timestamp">14:23:49.678</span>
+          <span class="log-level log-level-error">error</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Connection lost to client 192.168.1.100</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:50.901</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Attempting to reconnect...</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:52.234</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Client reconnected successfully</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log with Header and Filters -->
+    <section class="demo-section">
+      <h2 class="demo-title">Log with Header and Filters</h2>
+      <p class="demo-description">Log s toolbarem, filtry a LIVE indikatorem</p>
+
+      <div class="log-wrapper">
+        <div class="log-header">
+          <div class="log-header-title">
+            Application Logs
+            <span class="log-live-indicator" style="margin-left: 8px;">LIVE</span>
+          </div>
+          <div class="log-header-actions">
+            <button class="log-filter active">
+              <span>all</span>
+              <span class="log-filter-count">12</span>
+            </button>
+            <button class="log-filter">
+              <span>error</span>
+              <span class="log-filter-count">2</span>
+            </button>
+            <button class="log-filter">
+              <span>warn</span>
+              <span class="log-filter-count">1</span>
+            </button>
+            <button class="log-filter">
+              <span>info</span>
+              <span class="log-filter-count">7</span>
+            </button>
+            <button class="log-filter">
+              <span>debug</span>
+              <span class="log-filter-count">2</span>
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="clearLog()">Clear</button>
+          </div>
+        </div>
+        <div class="log-container log-md" id="filteredLog">
+          <div class="log-entry">
+            <span class="log-timestamp">14:30:00.000</span>
+            <span class="log-level log-level-info">info</span>
+            <span class="log-component">[System]</span>
+            <span class="log-message">Application initialized</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-timestamp">14:30:01.123</span>
+            <span class="log-level log-level-debug">debug</span>
+            <span class="log-component">[Config]</span>
+            <span class="log-message">Loading configuration from /etc/c123/config.json</span>
+          </div>
+          <div class="log-entry log-entry-error">
+            <span class="log-timestamp">14:30:02.456</span>
+            <span class="log-level log-level-error">error</span>
+            <span class="log-component">[Config]</span>
+            <span class="log-message">Failed to load configuration: ENOENT</span>
+          </div>
+          <div class="log-entry log-entry-warn">
+            <span class="log-timestamp">14:30:02.789</span>
+            <span class="log-level log-level-warn">warn</span>
+            <span class="log-component">[Config]</span>
+            <span class="log-message">Using default configuration</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-timestamp">14:30:03.012</span>
+            <span class="log-level log-level-info">info</span>
+            <span class="log-component">[TCP]</span>
+            <span class="log-message">Server listening on 0.0.0.0:5000</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact Log -->
+    <section class="demo-section">
+      <h2 class="demo-title">Compact Log</h2>
+      <p class="demo-description">Kompaktnejsi verze pro vice zaznamu na obrazovce</p>
+
+      <div class="log-container log-compact log-sm">
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:45.123</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Server started</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:45.456</span>
+          <span class="log-level log-level-debug">debug</span>
+          <span class="log-component">[UDP]</span>
+          <span class="log-message">Broadcast listener ready</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:46.789</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Client connected</span>
+        </div>
+        <div class="log-entry log-entry-warn">
+          <span class="log-timestamp">14:23:47.012</span>
+          <span class="log-level log-level-warn">warn</span>
+          <span class="log-component">[XML]</span>
+          <span class="log-message">Invalid format</span>
+        </div>
+        <div class="log-entry log-entry-error">
+          <span class="log-timestamp">14:23:48.345</span>
+          <span class="log-level log-level-error">error</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Connection lost</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:49.678</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">[TCP]</span>
+          <span class="log-message">Reconnecting...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empty State -->
+    <section class="demo-section">
+      <h2 class="demo-title">Empty State</h2>
+      <p class="demo-description">Prazdny log bez zaznamu</p>
+
+      <div class="log-container log-sm">
+        <div class="log-empty">
+          <svg class="log-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12h6M12 9v6" />
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+          </svg>
+          <span class="log-empty-text">No log entries</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log Sizes -->
+    <section class="demo-section">
+      <h2 class="demo-title">Log Sizes</h2>
+      <p class="demo-description">Ruzne velikosti log kontejneru</p>
+
+      <div class="grid grid-cols-1 gap-6">
+        <div>
+          <h3 class="text-sm text-muted mb-2">Small (200px)</h3>
+          <div class="log-container log-sm" id="logSm"></div>
+        </div>
+        <div>
+          <h3 class="text-sm text-muted mb-2">Medium (400px)</h3>
+          <div class="log-container log-md" id="logMd"></div>
+        </div>
+        <div>
+          <h3 class="text-sm text-muted mb-2">Large (600px)</h3>
+          <div class="log-container log-lg" id="logLg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Level Badges -->
+    <section class="demo-section">
+      <h2 class="demo-title">Level Badges</h2>
+      <p class="demo-description">Vsechny varianty level badge</p>
+
+      <div class="flex gap-4 items-center">
+        <span class="log-level log-level-debug">debug</span>
+        <span class="log-level log-level-info">info</span>
+        <span class="log-level log-level-warn">warn</span>
+        <span class="log-level log-level-error">error</span>
+      </div>
+    </section>
+
+    <!-- Live Simulation -->
+    <section class="demo-section">
+      <h2 class="demo-title">Live Simulation</h2>
+      <p class="demo-description">Interaktivni demo s automatickym pridavanim logu</p>
+
+      <div class="flex gap-2 mb-4">
+        <button class="btn btn-primary btn-sm" onclick="startLiveLog()">Start Live</button>
+        <button class="btn btn-secondary btn-sm" onclick="stopLiveLog()">Stop</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearLiveLog()">Clear</button>
+      </div>
+
+      <div class="log-wrapper">
+        <div class="log-header">
+          <div class="log-header-title">
+            Live Log
+            <span class="log-live-indicator" id="liveIndicator" style="margin-left: 8px; display: none;">LIVE</span>
+          </div>
+        </div>
+        <div class="log-container log-md" id="liveLog"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('theme-dark');
+      document.documentElement.classList.toggle('theme-light');
+    }
+
+    function clearLog() {
+      document.getElementById('filteredLog').innerHTML = `
+        <div class="log-empty">
+          <svg class="log-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12h6M12 9v6" />
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+          </svg>
+          <span class="log-empty-text">No log entries</span>
+        </div>
+      `;
+    }
+
+    // Populate size demos
+    function generateEntries(count) {
+      const levels = ['debug', 'info', 'info', 'info', 'warn', 'error'];
+      const components = ['TCP', 'UDP', 'XML', 'Timer', 'System'];
+      const messages = [
+        'Client connected',
+        'Data received',
+        'Processing request',
+        'Timer updated',
+        'Configuration loaded',
+        'Connection established',
+        'Broadcast sent',
+        'Invalid data received',
+        'Connection lost',
+        'Reconnecting...'
+      ];
+
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        const level = levels[Math.floor(Math.random() * levels.length)];
+        const component = components[Math.floor(Math.random() * components.length)];
+        const message = messages[Math.floor(Math.random() * messages.length)];
+        const entryClass = level === 'error' ? 'log-entry-error' : level === 'warn' ? 'log-entry-warn' : '';
+
+        html += `
+          <div class="log-entry ${entryClass}">
+            <span class="log-timestamp">14:${String(Math.floor(i / 60) % 60).padStart(2, '0')}:${String(i % 60).padStart(2, '0')}.${String(Math.floor(Math.random() * 999)).padStart(3, '0')}</span>
+            <span class="log-level log-level-${level}">${level}</span>
+            <span class="log-component">[${component}]</span>
+            <span class="log-message">${message}</span>
+          </div>
+        `;
+      }
+      return html;
+    }
+
+    document.getElementById('logSm').innerHTML = generateEntries(10);
+    document.getElementById('logMd').innerHTML = generateEntries(20);
+    document.getElementById('logLg').innerHTML = generateEntries(30);
+
+    // Live log simulation
+    let liveInterval = null;
+
+    function startLiveLog() {
+      if (liveInterval) return;
+
+      document.getElementById('liveIndicator').style.display = 'inline-flex';
+      liveInterval = setInterval(addLiveEntry, 1500);
+      addLiveEntry();
+    }
+
+    function stopLiveLog() {
+      if (liveInterval) {
+        clearInterval(liveInterval);
+        liveInterval = null;
+      }
+      document.getElementById('liveIndicator').style.display = 'none';
+    }
+
+    function clearLiveLog() {
+      document.getElementById('liveLog').innerHTML = '';
+    }
+
+    function addLiveEntry() {
+      const log = document.getElementById('liveLog');
+      const levels = ['debug', 'info', 'info', 'info', 'warn', 'error'];
+      const components = ['TCP', 'UDP', 'XML', 'Timer'];
+      const messages = [
+        'Client connected from 192.168.1.100',
+        'Received timing data: 45.234s',
+        'Processing XML payload',
+        'Timer tick: +00:01.000',
+        'Broadcast sent to 255.255.255.255',
+        'Invalid packet received, discarding',
+        'Connection timeout, retrying...',
+        'Data synchronized successfully'
+      ];
+
+      const now = new Date();
+      const timestamp = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}.${String(now.getMilliseconds()).padStart(3, '0')}`;
+      const level = levels[Math.floor(Math.random() * levels.length)];
+      const component = components[Math.floor(Math.random() * components.length)];
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      const entryClass = level === 'error' ? 'log-entry-error' : level === 'warn' ? 'log-entry-warn' : '';
+
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${entryClass}`;
+      entry.innerHTML = `
+        <span class="log-timestamp">${timestamp}</span>
+        <span class="log-level log-level-${level}">${level}</span>
+        <span class="log-component">[${component}]</span>
+        <span class="log-message">${message}</span>
+      `;
+
+      log.appendChild(entry);
+      log.scrollTop = log.scrollHeight;
+
+      // Keep max 50 entries
+      while (log.children.length > 50) {
+        log.removeChild(log.firstChild);
+      }
+    }
+  </script>
+</body>
+</html>
