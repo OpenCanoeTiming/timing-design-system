@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast - Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/toast.css">
+
+  <style>
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .static-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 420px;
+    }
+
+    .static-demo .toast {
+      position: relative;
+      animation: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Toast Component</h1>
+      <p class="text-secondary mt-2">Non-blocking notifications for user feedback</p>
+
+      <nav class="playbook-nav">
+        <a href="index.html" class="btn btn-ghost">Back to Index</a>
+        <span style="border-left: 1px solid var(--color-border); margin: 0 var(--space-2);"></span>
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Interactive Demo -->
+    <section class="playbook-section">
+      <h2 class="section-title">Interactive Demo</h2>
+
+      <div class="component-label">Click to show toast</div>
+      <div class="component-row">
+        <button class="btn btn-primary" onclick="showToast('success')">Success Toast</button>
+        <button class="btn btn-secondary" onclick="showToast('warning')">Warning Toast</button>
+        <button class="btn btn-danger" onclick="showToast('error')">Error Toast</button>
+        <button class="btn btn-ghost" onclick="showToast('info')">Info Toast</button>
+      </div>
+
+      <div class="component-label">Position</div>
+      <div class="component-row">
+        <select class="input select" id="position-select" style="width: auto;">
+          <option value="top-right">Top Right</option>
+          <option value="top-left">Top Left</option>
+          <option value="top-center">Top Center</option>
+          <option value="bottom-right">Bottom Right</option>
+          <option value="bottom-left">Bottom Left</option>
+          <option value="bottom-center">Bottom Center</option>
+        </select>
+      </div>
+
+      <div class="component-label">Options</div>
+      <div class="component-row">
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox" id="dismissible-check" checked>
+          <span>Dismissible</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox" id="progress-check">
+          <span>Show Progress</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox" id="action-check">
+          <span>With Action</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Variants -->
+    <section class="playbook-section">
+      <h2 class="section-title">Variants (Static)</h2>
+
+      <div class="static-demo">
+        <div class="toast toast-success">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16.667 5L7.5 14.167 3.333 10"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Success</div>
+            <div class="toast-message">Your changes have been saved successfully.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+
+        <div class="toast toast-warning">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 7v4M10 14h.01"/>
+              <path d="M8.57 3.316L1.745 15.276a1.667 1.667 0 001.43 2.52h13.65a1.667 1.667 0 001.43-2.52L11.43 3.316a1.667 1.667 0 00-2.86 0z"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Warning</div>
+            <div class="toast-message">Connection is unstable. Some data may be delayed.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+
+        <div class="toast toast-error">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="10" r="8"/>
+              <path d="M12.5 7.5l-5 5M7.5 7.5l5 5"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Error</div>
+            <div class="toast-message">Failed to save changes. Please try again.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+
+        <div class="toast toast-info">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="10" r="8"/>
+              <path d="M10 14v-4M10 6h.01"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Info</div>
+            <div class="toast-message">New updates are available for the timing system.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- With Progress Bar -->
+    <section class="playbook-section">
+      <h2 class="section-title">With Progress Bar</h2>
+
+      <div class="static-demo">
+        <div class="toast toast-success" style="overflow: hidden;">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16.667 5L7.5 14.167 3.333 10"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Auto-dismiss</div>
+            <div class="toast-message">This toast will auto-dismiss after the progress bar completes.</div>
+          </div>
+          <div class="toast-progress">
+            <div class="toast-progress-bar" style="animation: none; width: 60%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- With Action -->
+    <section class="playbook-section">
+      <h2 class="section-title">With Action Button</h2>
+
+      <div class="static-demo">
+        <div class="toast toast-info">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/>
+              <path d="M10 14v-4M10 6h.01"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Update Available</div>
+            <div class="toast-message">A new version of the timing system is ready.</div>
+            <div class="toast-action">
+              <button class="btn btn-primary btn-sm">Update Now</button>
+            </div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+
+        <div class="toast toast-error">
+          <span class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="10" cy="10" r="8"/>
+              <path d="M12.5 7.5l-5 5M7.5 7.5l5 5"/>
+            </svg>
+          </span>
+          <div class="toast-content">
+            <div class="toast-title">Connection Lost</div>
+            <div class="toast-message">Unable to connect to the timing server.</div>
+            <div class="toast-action">
+              <button class="btn btn-secondary btn-sm">Retry</button>
+            </div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="playbook-section">
+      <h2 class="section-title">Accessibility</h2>
+
+      <div class="card" style="max-width: 600px;">
+        <div class="card-body">
+          <h4>Built-in A11y Features:</h4>
+          <ul class="mt-2" style="padding-left: var(--space-4);">
+            <li><code>role="alert"</code> for screen reader announcement</li>
+            <li><code>aria-live="polite"</code> on container for non-intrusive updates</li>
+            <li><code>aria-label</code> on dismiss button</li>
+            <li><code>aria-hidden</code> on decorative icons</li>
+            <li>Reduced motion support (no animations)</li>
+            <li>Focus visible styles on close button</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Containers for each position -->
+  <div class="toast-container toast-container-top-right" id="container-top-right"></div>
+  <div class="toast-container toast-container-top-left" id="container-top-left"></div>
+  <div class="toast-container toast-container-top-center" id="container-top-center"></div>
+  <div class="toast-container toast-container-bottom-right" id="container-bottom-right"></div>
+  <div class="toast-container toast-container-bottom-left" id="container-bottom-left"></div>
+  <div class="toast-container toast-container-bottom-center" id="container-bottom-center"></div>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+      if (theme === 'light') html.classList.add('theme-light');
+      else if (theme === 'dark') html.classList.add('theme-dark');
+    }
+
+    const toastData = {
+      success: {
+        title: 'Success',
+        message: 'Your changes have been saved successfully.',
+        icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.667 5L7.5 14.167 3.333 10"/></svg>'
+      },
+      warning: {
+        title: 'Warning',
+        message: 'Connection is unstable. Some data may be delayed.',
+        icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 7v4M10 14h.01"/><path d="M8.57 3.316L1.745 15.276a1.667 1.667 0 001.43 2.52h13.65a1.667 1.667 0 001.43-2.52L11.43 3.316a1.667 1.667 0 00-2.86 0z"/></svg>'
+      },
+      error: {
+        title: 'Error',
+        message: 'Failed to save changes. Please try again.',
+        icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M12.5 7.5l-5 5M7.5 7.5l5 5"/></svg>'
+      },
+      info: {
+        title: 'Info',
+        message: 'New updates are available for the timing system.',
+        icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 14v-4M10 6h.01"/></svg>'
+      }
+    };
+
+    function showToast(variant) {
+      const position = document.getElementById('position-select').value;
+      const dismissible = document.getElementById('dismissible-check').checked;
+      const showProgress = document.getElementById('progress-check').checked;
+      const withAction = document.getElementById('action-check').checked;
+
+      const container = document.getElementById(`container-${position}`);
+      const data = toastData[variant];
+
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${variant}`;
+      toast.setAttribute('role', 'alert');
+
+      let html = `
+        <span class="toast-icon">${data.icon}</span>
+        <div class="toast-content">
+          <div class="toast-title">${data.title}</div>
+          <div class="toast-message">${data.message}</div>
+          ${withAction ? '<div class="toast-action"><button class="btn btn-primary btn-sm">Action</button></div>' : ''}
+        </div>
+      `;
+
+      if (dismissible) {
+        html += `
+          <button class="toast-close" aria-label="Dismiss" onclick="dismissToast(this)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+          </button>
+        `;
+      }
+
+      if (showProgress) {
+        html += `
+          <div class="toast-progress">
+            <div class="toast-progress-bar"></div>
+          </div>
+        `;
+      }
+
+      toast.innerHTML = html;
+      container.appendChild(toast);
+
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.classList.add('toast-exiting');
+          setTimeout(() => toast.remove(), 200);
+        }
+      }, 5000);
+    }
+
+    function dismissToast(button) {
+      const toast = button.closest('.toast');
+      toast.classList.add('toast-exiting');
+      setTimeout(() => toast.remove(), 200);
+    }
+  </script>
+</body>
+</html>

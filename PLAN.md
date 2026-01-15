@@ -90,8 +90,8 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Input, Select, Checkbox, Radio
 - [x] Badge
 - [x] Table
-- [ ] Modal
-- [ ] Toast
+- [x] Modal
+- [x] Toast
 
 ---
 
@@ -101,10 +101,10 @@ Design systém pro vodáckou časomíru s podporou:
 - [ ] CSS concatenation script (cat → timing.css)
 - [ ] Minifikace (optional)
 
-### 5.2 Testování
-- [ ] Integrace do c123-server (ověření kompatibility)
-- [ ] Integrace do c123-xml-tools
-- [ ] Vizuální regresní testy (screenshot comparison)
+### 5.2 Testování - jeste nedelat!!
+- Integrace do c123-server (ověření kompatibility)
+- Integrace do c123-xml-tools
+- Vizuální regresní testy (screenshot comparison)
 
 ---
 
@@ -134,3 +134,5 @@ Design systém pro vodáckou časomíru s podporou:
 - React komponenty pro formuláře: Input, Select, Checkbox, Radio
 - React komponenta Badge (status indikátor)
 - React komponenta Table (Table, TableHead, TableBody, TableFoot, TableRow, TableCell, TableHeaderCell)
+- React komponenta Modal (Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter) s a11y, velikostmi a demo stránkou
+- React komponenta Toast (Toast, ToastContainer) s variantami, pozicemi, progress bar, auto-dismiss a demo stránkou toast.html
