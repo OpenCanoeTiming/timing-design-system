@@ -34,8 +34,8 @@
   background:
     /* Rovná čára (vlevo, většina šířky) */
     linear-gradient(var(--color-border), var(--color-border)) 0 50% / calc(100% - 40px) 2px no-repeat,
-    /* Vlnka (vpravo) */
-    var(--pattern-wave) right center / 40px var(--pattern-wave-height) no-repeat;
+    /* Vlnka (vpravo) - v barve borderu */
+    var(--pattern-wave-border) right center / 40px var(--pattern-wave-height) no-repeat;
 }
 
 /* Barevny bar vlevo */
