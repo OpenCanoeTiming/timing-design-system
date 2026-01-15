@@ -146,7 +146,82 @@
 }
 
 /* ==========================================================================
-   LIVE BADGE - Slalomova branka
+   SLALOM GATE POLE - pruhovaná tyčka jako indikátor
+   ========================================================================== */
+
+/*
+ * Slalomová branka = svislá tyčka s horizontálními pruhy (bílo-barevná)
+ * Použijeme jako alternativu k obyčejnému status dot
+ */
+
+.gate-pole {
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  border-radius: 2px;
+  /* Default: bílo-zelená (success) */
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-success) 2px,
+    var(--color-success) 4px
+  );
+  box-shadow: 0 0 4px rgba(0, 210, 106, 0.4);
+}
+
+.gate-pole-success {
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-success) 2px,
+    var(--color-success) 4px
+  );
+  box-shadow: 0 0 4px rgba(0, 210, 106, 0.4);
+}
+
+.gate-pole-warning {
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-warning) 2px,
+    var(--color-warning) 4px
+  );
+  box-shadow: 0 0 4px rgba(255, 149, 0, 0.4);
+  animation: pole-pulse 1.5s ease-in-out infinite;
+}
+
+.gate-pole-error {
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-error) 2px,
+    var(--color-error) 4px
+  );
+  box-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
+}
+
+.gate-pole-info {
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-accent) 2px,
+    var(--color-accent) 4px
+  );
+  box-shadow: 0 0 4px rgba(0, 136, 255, 0.4);
+}
+
+@keyframes pole-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ==========================================================================
+   LIVE BADGE - s pruhovanou tyčkou
    ========================================================================== */
 
 .badge-live {
@@ -159,41 +234,34 @@
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #ffffff;
+  color: var(--color-text-primary);
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Slalomova branka - dve tycky */
 .badge-live::before {
   content: '';
-  display: flex;
-  width: 12px;
-  height: 14px;
-  background:
-    /* Leva tycka - zelena */
-    linear-gradient(var(--color-gate-green, #00d26a), var(--color-gate-green, #00d26a)) 0 0 / 3px 100% no-repeat,
-    /* Prava tycka - cervena */
-    linear-gradient(var(--color-gate-red, #ff3b30), var(--color-gate-red, #ff3b30)) 9px 0 / 3px 100% no-repeat;
-  border-radius: 1px;
-  animation: gate-glow 2s ease-in-out infinite;
+  width: 4px;
+  height: 12px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    var(--color-success) 2px,
+    var(--color-success) 4px
+  );
+  box-shadow: 0 0 6px rgba(0, 210, 106, 0.5);
+  animation: live-glow 2s ease-in-out infinite;
 }
 
-@keyframes gate-glow {
+@keyframes live-glow {
   0%, 100% {
-    filter: drop-shadow(0 0 2px var(--color-gate-green)) drop-shadow(0 0 2px var(--color-gate-red));
+    box-shadow: 0 0 4px rgba(0, 210, 106, 0.4);
   }
   50% {
-    filter: drop-shadow(0 0 4px var(--color-gate-green)) drop-shadow(0 0 4px var(--color-gate-red));
+    box-shadow: 0 0 8px rgba(0, 210, 106, 0.6);
   }
-}
-
-/* Upstream gate varianta (bilo-zelena) */
-.badge-live.badge-live-upstream::before {
-  background:
-    linear-gradient(#ffffff, #ffffff) 0 0 / 3px 100% no-repeat,
-    linear-gradient(var(--color-gate-green, #00d26a), var(--color-gate-green, #00d26a)) 9px 0 / 3px 100% no-repeat;
 }
 
 /* ==========================================================================
