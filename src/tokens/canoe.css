@@ -41,42 +41,33 @@
    ========================================================================== */
 
 /*
- * Vlnka jako dekorativní podtržení
- * Použití: .wavy-underline nebo border-wavy na kontejneru
+ * Rovná čára s vlnkou na konci
+ * Použití: .line-wave na elementu
  */
 
-.wavy-underline {
+.line-wave {
   position: relative;
   border-bottom: none !important;
 }
 
-.wavy-underline::after {
+/* Rovná čára */
+.line-wave::before {
   content: '';
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 100%;
-  height: var(--pattern-wave-height);
-  background: var(--pattern-wave) repeat-x left center;
+  width: calc(100% - 40px);
+  height: 2px;
+  background: var(--color-accent);
 }
 
-/* Varianta: vlnka jen na části šířky */
-.wavy-underline-partial::after {
-  width: 120px;
-}
-
-/* Border varianta pro kontejnery */
-.border-wavy {
-  border-bottom: none !important;
-  position: relative;
-}
-
-.border-wavy::after {
+/* Vlnka na konci */
+.line-wave::after {
   content: '';
   position: absolute;
-  left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -1px;
+  width: 40px;
   height: var(--pattern-wave-height);
-  background: var(--pattern-wave) repeat-x left center;
+  background: var(--pattern-wave) no-repeat right center;
 }

@@ -52,14 +52,26 @@
       position: relative;
     }
 
-    .section-title::after {
+    /* Rovná čára */
+    .section-title::before {
       content: '';
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 100%;
+      width: calc(100% - 40px);
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    /* Vlnka na konci */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      width: 40px;
       height: var(--pattern-wave-height);
-      background: var(--pattern-wave) repeat-x left center;
+      background: var(--pattern-wave) no-repeat right center;
     }
 
     .component-row {
