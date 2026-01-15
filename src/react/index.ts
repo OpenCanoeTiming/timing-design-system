@@ -1,4 +1,4 @@
-// Timing Design System - React Components
+// Canoe Timing Design System - React Components
 export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from './Button';
 export {
   Card,
@@ -60,3 +60,21 @@ export {
   type ToastVariant,
   type ToastPosition,
 } from './Toast';
+export {
+  Header,
+  HeaderBrand,
+  HeaderTitle,
+  HeaderNav,
+  HeaderActions,
+  HeaderStatus,
+  StatusIndicator,
+  LiveBadge,
+  type HeaderProps,
+  type HeaderBrandProps,
+  type HeaderTitleProps,
+  type HeaderNavProps,
+  type HeaderActionsProps,
+  type HeaderStatusProps,
+  type StatusIndicatorProps,
+  type LiveBadgeProps,
+} from './Header';

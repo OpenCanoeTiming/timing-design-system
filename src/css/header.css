@@ -1,0 +1,267 @@
+/**
+ * Canoe Timing Design System - Header Component
+ *
+ * App header s BMW M Line stylem:
+ * - 4px barevny bar vlevo s glow efektem
+ * - Status indikatory (TCP/UDP/XML)
+ * - LIVE badge se slalomovymi pruhy
+ */
+
+/* ==========================================================================
+   APP HEADER
+   ========================================================================== */
+
+.app-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  padding-left: calc(var(--space-4) + var(--header-bar-width, 4px) + var(--space-3));
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+  min-height: 56px;
+}
+
+/* BMW M Line - barevny bar vlevo */
+.app-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--header-bar-width, 4px);
+  background: var(--color-accent);
+  box-shadow: var(--header-bar-glow, 0 0 20px rgba(0, 136, 255, 0.4));
+}
+
+/* Header content areas */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.header-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.header-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   STATUS INDICATORS
+   ========================================================================== */
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+/* Connected state */
+.status-indicator.connected .status-indicator-dot {
+  background-color: var(--color-success);
+  box-shadow: var(--glow-success);
+}
+
+.status-indicator.connected {
+  border-color: var(--color-success);
+  color: var(--color-text-primary);
+}
+
+/* Connecting state - pulsing */
+.status-indicator.connecting .status-indicator-dot {
+  background-color: var(--color-warning);
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.status-indicator.connecting {
+  border-color: var(--color-warning);
+}
+
+/* Disconnected state */
+.status-indicator.disconnected .status-indicator-dot {
+  background-color: var(--color-error);
+}
+
+.status-indicator.disconnected {
+  border-color: var(--color-border);
+  opacity: 0.7;
+}
+
+/* Pulse animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 4px var(--color-warning);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 8px var(--color-warning);
+  }
+}
+
+/* ==========================================================================
+   LIVE BADGE - Slalomove pruhy
+   ========================================================================== */
+
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+  /* Slalomove cerveno-zelene pruhy */
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-gate-green, #00d26a) 0px,
+    var(--color-gate-green, #00d26a) 4px,
+    var(--color-gate-red, #ff3b30) 4px,
+    var(--color-gate-red, #ff3b30) 8px
+  );
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+.badge-live::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  box-shadow: 0 0 6px #ffffff;
+  animation: live-dot-pulse 1s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(0, 210, 106, 0.4), 0 2px 8px rgba(255, 59, 48, 0.4);
+  }
+}
+
+@keyframes live-dot-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ==========================================================================
+   HEADER VARIANTS
+   ========================================================================== */
+
+/* Compact header */
+.app-header.header-compact {
+  padding: var(--space-2) var(--space-3);
+  padding-left: calc(var(--space-3) + var(--header-bar-width, 4px) + var(--space-2));
+  min-height: 44px;
+}
+
+.app-header.header-compact .header-title {
+  font-size: var(--text-base);
+}
+
+/* Header bez baru (plain) */
+.app-header.header-plain::before {
+  display: none;
+}
+
+.app-header.header-plain {
+  padding-left: var(--space-4);
+}
+
+/* Header s elevated efektem */
+.app-header.header-elevated {
+  box-shadow: var(--shadow-md);
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .header-status {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .header-actions {
+    order: 2;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .status-indicator.connecting .status-indicator-dot,
+  .badge-live,
+  .badge-live::before {
+    animation: none;
+  }
+}

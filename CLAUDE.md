@@ -1,12 +1,20 @@
-# Timing Design System - CLAUDE.md
+# Canoe Timing Design System - CLAUDE.md
 
 ## Kontext projektu
 
-Timing Design System je knihovna UI komponent a stylů pro vodáckou časomíru (canoe slalom timing).
-Extrahováno z c123-server, určeno pro použití v:
+Canoe Timing Design System je knihovna UI komponent a stylů pro vodáckou časomíru (canoe slalom timing).
+Inspirováno "BMW M Line" stylem z c123-server admin dashboardu - profesionální, elegantní vzhled s vodáckým šmrncem.
+
+Určeno pro použití v:
 - c123-server (admin dashboard)
 - c123-xml-tools (one-shot utility nástroje)
 - Budoucí React aplikace (scoreboardy)
+
+## Vizuální identita
+
+- **Vodácký šmrnc:** Subtilní vlnkový pattern + červeno-zelené slalomové pruhy (LIVE badge)
+- **BMW M Line styl:** 4px barevný bar v headeru s glow efektem, elegantní animace
+- **Glow efekty:** Na status indikátorech, hover stavech
 
 ## Jazyky
 
@@ -22,28 +30,43 @@ src/
 │   ├── colors.css    # Barevná paleta (dark + light)
 │   ├── typography.css
 │   ├── spacing.css
+│   ├── canoe.css     # Vodácké tokeny (gate colors, glow, wave pattern)
 │   └── index.css     # Agregátor
 ├── css/              # Vanilla CSS komponenty
 │   ├── base.css      # Reset, základní styly
 │   ├── buttons.css
 │   ├── forms.css
-│   ├── cards.css
+│   ├── cards.css     # + canoe varianta s wavy border
 │   ├── tables.css
-│   ├── status.css    # Status indikátory, badges
+│   ├── status.css    # Status indikátory, badges, LIVE badge
 │   ├── layout.css    # Grid, flex helpers
+│   ├── modal.css     # Modální dialogy
+│   ├── toast.css     # Toast notifikace
+│   ├── tabs.css      # Tab navigace
+│   ├── header.css    # App header s barevným barem
+│   ├── log.css       # Log viewer komponenta
+│   ├── dropzone.css  # Drag & drop zóny
 │   └── index.css     # Agregátor
 ├── react/            # React komponenty
 │   ├── Button.tsx
 │   ├── Card.tsx
-│   ├── ...
+│   ├── Badge.tsx
+│   ├── Modal.tsx
+│   ├── Toast.tsx
+│   ├── Header.tsx    # App header
+│   ├── Log.tsx       # Log viewer
+│   ├── DropZone.tsx  # Drag & drop
 │   └── index.ts      # Exporty
 ├── dist/             # Buildnuté soubory
-│   ├── timing.css    # Konkatenované CSS (všechno v jednom)
+│   ├── timing.css    # Konkatenované CSS
 │   └── timing.min.css
 └── playbooks/        # Demo stránky
     ├── index.html    # Přehled všech komponent
     ├── dark.html     # Dark theme demo
-    └── light.html    # Light theme demo
+    ├── light.html    # Light theme demo
+    ├── header.html   # Header demo
+    ├── log.html      # Log viewer demo
+    └── dropzone.html # DropZone demo
 ```
 
 ## Workflow

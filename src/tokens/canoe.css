@@ -1,0 +1,37 @@
+/**
+ * Canoe Timing Design System - Canoe-specific tokens
+ *
+ * Vodacke specificke design tokeny:
+ * - Slalom gate colors (cervena/zelena branka)
+ * - Glow effects (BMW M Line style)
+ * - Wave pattern pro vodacky smrnc
+ */
+
+:root {
+  /* Slalom gate colors */
+  --color-gate-green: #00d26a;
+  --color-gate-red: #ff3b30;
+
+  /* Glow effects */
+  --glow-accent: 0 0 10px rgba(0, 136, 255, 0.4);
+  --glow-success: 0 0 8px rgba(0, 210, 106, 0.4);
+  --glow-error: 0 0 8px rgba(255, 59, 48, 0.4);
+  --glow-warning: 0 0 8px rgba(255, 149, 0, 0.4);
+
+  /* Wave pattern - subtle wavy line for canoe branding */
+  --pattern-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='4' viewBox='0 0 40 4'%3E%3Cpath d='M0 2 Q5 0.5, 10 2 Q15 3.5, 20 2 Q25 0.5, 30 2 Q35 3.5, 40 2' stroke='%230088ff' stroke-width='1.5' fill='none' opacity='0.8'/%3E%3C/svg%3E");
+  --pattern-wave-height: 4px;
+
+  /* Header bar (BMW M Line style) */
+  --header-bar-width: 4px;
+  --header-bar-glow: 0 0 20px rgba(0, 136, 255, 0.4);
+}
+
+/* Light theme adjustments */
+.theme-light {
+  --pattern-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='4' viewBox='0 0 40 4'%3E%3Cpath d='M0 2 Q5 0.5, 10 2 Q15 3.5, 20 2 Q25 0.5, 30 2 Q35 3.5, 40 2' stroke='%230066cc' stroke-width='1.5' fill='none' opacity='0.8'/%3E%3C/svg%3E");
+  --glow-accent: 0 0 10px rgba(0, 102, 204, 0.3);
+  --glow-success: 0 0 8px rgba(5, 150, 105, 0.3);
+  --glow-error: 0 0 8px rgba(220, 38, 38, 0.3);
+  --glow-warning: 0 0 8px rgba(217, 119, 6, 0.3);
+}

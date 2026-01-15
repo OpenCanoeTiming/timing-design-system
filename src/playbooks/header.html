@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="cs" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header - Canoe Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../tokens/canoe.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/header.css">
+
+  <style>
+    .demo-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    .demo-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-4);
+      color: var(--color-text-secondary);
+    }
+
+    .demo-description {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .demo-header-wrapper {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+
+    /* Override header position for demo */
+    .demo-header-wrapper .app-header {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-8">
+    <h1 class="text-3xl font-bold mb-2">Header Component</h1>
+    <p class="text-secondary mb-6">App header s BMW M Line stylem - 4px barevny bar vlevo s glow efektem</p>
+
+    <nav class="flex gap-2 mb-8">
+      <a href="index.html" class="btn btn-ghost">Back to Index</a>
+      <button class="btn btn-secondary" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+
+    <!-- Basic Header -->
+    <section class="demo-section">
+      <h2 class="demo-title">Basic Header</h2>
+      <p class="demo-description">Zakladni header s brandem a akcemi</p>
+
+      <div class="demo-header-wrapper">
+        <header class="app-header">
+          <div class="header-brand">
+            <div>
+              <h1 class="header-title">C123 Admin</h1>
+              <p class="header-subtitle">Timing System</p>
+            </div>
+          </div>
+          <nav class="header-nav">
+            <button class="btn btn-ghost btn-sm">Dashboard</button>
+            <button class="btn btn-ghost btn-sm">Clients</button>
+            <button class="btn btn-ghost btn-sm">Settings</button>
+          </nav>
+          <div class="header-actions">
+            <button class="btn btn-primary btn-sm">Connect</button>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <!-- Header with Status Indicators -->
+    <section class="demo-section">
+      <h2 class="demo-title">Header with Status Indicators</h2>
+      <p class="demo-description">Status indikatory pro TCP/UDP/XML spojeni</p>
+
+      <div class="demo-header-wrapper">
+        <header class="app-header">
+          <div class="header-brand">
+            <h1 class="header-title">C123 Server</h1>
+          </div>
+          <div class="header-status">
+            <div class="status-indicator connected">
+              <span class="status-indicator-dot"></span>
+              <span>TCP</span>
+            </div>
+            <div class="status-indicator connecting">
+              <span class="status-indicator-dot"></span>
+              <span>UDP</span>
+            </div>
+            <div class="status-indicator disconnected">
+              <span class="status-indicator-dot"></span>
+              <span>XML</span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <span class="badge-live">LIVE</span>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <!-- LIVE Badge Demo -->
+    <section class="demo-section">
+      <h2 class="demo-title">LIVE Badge</h2>
+      <p class="demo-description">Badge se slalomovymi cerveno-zelenymi pruhy (vodacky smrnc)</p>
+
+      <div class="flex gap-4 items-center">
+        <span class="badge-live">LIVE</span>
+        <span class="text-secondary text-sm">Slalomove pruhy symbolizuji branku</span>
+      </div>
+    </section>
+
+    <!-- Status Indicators Demo -->
+    <section class="demo-section">
+      <h2 class="demo-title">Status Indicators</h2>
+      <p class="demo-description">Vsechny stavy status indikatoru</p>
+
+      <div class="flex gap-4 flex-wrap">
+        <div class="status-indicator connected">
+          <span class="status-indicator-dot"></span>
+          <span>Connected</span>
+        </div>
+        <div class="status-indicator connecting">
+          <span class="status-indicator-dot"></span>
+          <span>Connecting</span>
+        </div>
+        <div class="status-indicator disconnected">
+          <span class="status-indicator-dot"></span>
+          <span>Disconnected</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact Header -->
+    <section class="demo-section">
+      <h2 class="demo-title">Compact Header</h2>
+      <p class="demo-description">Mensi varianta headeru</p>
+
+      <div class="demo-header-wrapper">
+        <header class="app-header header-compact">
+          <div class="header-brand">
+            <h1 class="header-title">Compact Mode</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-ghost btn-sm">Action</button>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <!-- Plain Header (no bar) -->
+    <section class="demo-section">
+      <h2 class="demo-title">Plain Header (bez baru)</h2>
+      <p class="demo-description">Header bez BMW M Line baru</p>
+
+      <div class="demo-header-wrapper">
+        <header class="app-header header-plain">
+          <div class="header-brand">
+            <h1 class="header-title">Plain Header</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary btn-sm">Action</button>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <!-- Elevated Header -->
+    <section class="demo-section">
+      <h2 class="demo-title">Elevated Header</h2>
+      <p class="demo-description">Header se stinem</p>
+
+      <div class="demo-header-wrapper" style="border: none;">
+        <header class="app-header header-elevated">
+          <div class="header-brand">
+            <h1 class="header-title">Elevated Header</h1>
+          </div>
+          <div class="header-status">
+            <div class="status-indicator connected">
+              <span class="status-indicator-dot"></span>
+              <span>Online</span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <span class="badge-live">LIVE</span>
+          </div>
+        </header>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('theme-dark');
+      document.documentElement.classList.toggle('theme-light');
+    }
+  </script>
+</body>
+</html>

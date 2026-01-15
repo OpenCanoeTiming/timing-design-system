@@ -1,7 +1,7 @@
 {
-  "name": "timing-design-system",
-  "version": "0.1.0",
-  "description": "Design system for canoe slalom timing tools",
+  "name": "canoe-timing-design-system",
+  "version": "0.2.0",
+  "description": "Canoe Timing Design System - UI komponenty pro vodáckou časomíru",
   "author": "CSB Team",
   "license": "MIT",
   "type": "module",

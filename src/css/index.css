@@ -1,5 +1,5 @@
 /**
- * Timing Design System - CSS Components
+ * Canoe Timing Design System - CSS Components
  *
  * Tento soubor agreguje všechny CSS komponenty.
  * Pro kompletní design systém importujte také tokens/index.css.
@@ -15,3 +15,4 @@
 @import './modal.css';
 @import './toast.css';
 @import './tabs.css';
+@import './header.css';

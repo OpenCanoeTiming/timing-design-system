@@ -1,6 +1,6 @@
-# Timing Design System - Plán implementace
+# Canoe Timing Design System - Plán implementace
 
-## Status: 🟢 Fáze 3 - Playbooks a dokumentace (kompletní)
+## Status: 🟡 Fáze 6 - Canoe branding + nové komponenty (probíhá)
 
 ---
 
@@ -107,6 +107,55 @@ Design systém pro vodáckou časomíru s podporou:
 - Integrace do c123-server (ověření kompatibility)
 - Integrace do c123-xml-tools
 - Vizuální regresní testy (screenshot comparison)
+
+---
+
+## Fáze 6: Canoe branding + BMW M Line styl
+
+### 6.0 Oprava navigace
+- [x] Přidat chybějící odkazy na modal.html a toast.html v playbook index
+
+### 6.1 Rebranding
+- [x] Přejmenovat na "Canoe Timing Design System" (package.json, README, CLAUDE.md)
+- [x] Aktualizovat titulky ve všech playbook stránkách
+- [x] Vytvořit vodácké tokeny (src/tokens/canoe.css)
+  - gate-green/gate-red (slalomové barvy)
+  - glow efekty
+  - wave pattern SVG
+
+### 6.2 Header komponenta (BMW M Line styl)
+- [x] CSS: src/css/header.css
+  - app-header s 4px barevným barem vlevo + glow
+  - status indikátory (connected/connecting/disconnected)
+  - badge-live se slalomovými pruhy
+- [x] React: src/react/Header.tsx
+- [x] Playbook: src/playbooks/header.html
+
+### 6.3 Log komponenta
+- [ ] CSS: src/css/log.css
+  - log-container, log-entry
+  - barevné level badges (debug/info/warn/error)
+  - component highlighting
+- [ ] React: src/react/Log.tsx
+- [ ] Playbook: src/playbooks/log.html
+
+### 6.4 DropZone komponenta
+- [ ] CSS: src/css/dropzone.css
+  - dashed border, hover glow
+  - drag-over animované pruhy
+  - has-file state
+- [ ] React: src/react/DropZone.tsx
+- [ ] Playbook: src/playbooks/dropzone.html
+
+### 6.5 Rozšíření existujících komponent
+- [ ] cards.css: card-canoe (wavy border), card-status-*
+- [ ] status.css: status-dot-glow
+- [ ] modal.css: backdrop-filter blur
+
+### 6.6 Finalizace
+- [ ] Aktualizovat build script pro nové CSS
+- [ ] Aktualizovat React exporty
+- [ ] Rebuild dist/
 
 ---
 
