@@ -242,7 +242,7 @@
 .badge-live::before {
   content: '';
   width: 4px;
-  height: 12px;
+  height: 16px;
   border-radius: 2px;
   background: repeating-linear-gradient(
     180deg,
@@ -253,6 +253,9 @@
   );
   box-shadow: 0 0 6px rgba(0, 210, 106, 0.5);
   animation: live-glow 2s ease-in-out infinite;
+  /* Tyčka visí shora - přesahuje horní okraj */
+  margin-top: -6px;
+  align-self: flex-start;
 }
 
 @keyframes live-glow {
