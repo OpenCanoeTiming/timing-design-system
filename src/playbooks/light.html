@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="cs" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Theme Showcase - Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/modal.css">
+  <link rel="stylesheet" href="../css/toast.css">
+  <link rel="stylesheet" href="../css/tabs.css">
+
+  <style>
+    /* Light theme showcase specific styles */
+    .showcase-header {
+      padding: var(--space-8) var(--space-4);
+      background: linear-gradient(180deg, var(--color-bg-surface) 0%, var(--color-bg-body) 100%);
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .showcase-header h1 {
+      font-size: var(--text-3xl);
+      background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .showcase-header p {
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: var(--space-4) auto 0;
+    }
+
+    .showcase-nav {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+
+    .showcase-section {
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .showcase-section:nth-child(even) {
+      background-color: var(--color-bg-surface);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .section-header h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-2);
+    }
+
+    .section-header p {
+      color: var(--color-text-secondary);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .showcase-item {
+      background-color: var(--color-bg-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .showcase-item-title {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-4);
+    }
+
+    .color-swatch {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .results-panel {
+      background-color: var(--color-bg-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .results-panel-header {
+      padding: var(--space-4);
+      background-color: var(--color-bg-body);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .results-panel-body {
+      padding: var(--space-4);
+    }
+
+    .timing-display {
+      font-family: var(--font-mono);
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      text-align: center;
+      padding: var(--space-6);
+      background: linear-gradient(135deg, var(--color-bg-surface) 0%, var(--color-bg-body) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    .timing-display .time {
+      color: var(--color-accent);
+    }
+
+    .timing-display .penalty {
+      color: var(--color-warning);
+      font-size: var(--text-xl);
+    }
+
+    .timing-display .total {
+      color: var(--color-success);
+      margin-top: var(--space-2);
+    }
+
+    .light-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-4);
+      background-color: var(--color-bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .light-feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background-color: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .light-feature-icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
+    .result-card {
+      background-color: var(--color-bg-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-card-rank {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      font-family: var(--font-mono);
+    }
+
+    .result-card-name {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-top: var(--space-2);
+    }
+
+    .result-card-time {
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      color: var(--color-text-secondary);
+      margin-top: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <header class="showcase-header">
+    <div class="container">
+      <h1>Light Theme</h1>
+      <p>Privetive rozhrani pro uzivatele a vysledkove tabule. Optimalizovano pro citelnost na slunci a venkovni pouziti.</p>
+      <nav class="showcase-nav">
+        <a href="index.html" class="btn btn-ghost">Zpet na Playbook</a>
+        <a href="dark.html" class="btn btn-secondary">Dark Theme</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Color Palette -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Barevna paleta</h2>
+        <p>Svetle pozadi s tlumenymi barvami pro prirozeny vzhled</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-item-title">Pozadi</div>
+          <div class="color-swatch">
+            <div class="swatch" style="background: #f5f5f5;">#f5f5f5</div>
+            <div class="swatch" style="background: #ffffff;">#ffffff</div>
+            <div class="swatch" style="background: #fafafa;">#fafafa</div>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Text</div>
+          <div class="color-swatch">
+            <div class="swatch" style="background: #1a1a1a; color: #fff;">#1a1a1a</div>
+            <div class="swatch" style="background: #666666; color: #fff;">#666666</div>
+            <div class="swatch" style="background: #999999;">#999999</div>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Akcent & Status</div>
+          <div class="color-swatch">
+            <div class="swatch" style="background: #0066cc; color: #fff;">#0066cc</div>
+            <div class="swatch" style="background: #059669; color: #fff;">#059669</div>
+            <div class="swatch" style="background: #d97706; color: #fff;">#d97706</div>
+            <div class="swatch" style="background: #dc2626; color: #fff;">#dc2626</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Display Demo -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Vysledkova tabule</h2>
+        <p>Typicky vzhled pro zobrazeni vysledku zavodniku</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="results-panel">
+          <div class="results-panel-header">
+            <div>
+              <strong>K1 Muzi - 1. kolo</strong>
+              <span class="text-secondary text-sm ml-2">Vysledky</span>
+            </div>
+            <span class="connection-status connected">
+              <span class="status-dot status-dot-success status-dot-pulse"></span>
+              Live
+            </span>
+          </div>
+          <div class="results-panel-body">
+            <div class="timing-display">
+              <div class="time">1:34.52</div>
+              <div class="penalty">+4s (2x dotyk)</div>
+              <div class="total">= 1:38.52</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-panel">
+          <div class="results-panel-header">
+            <strong>Prubezne poradi</strong>
+            <button class="btn btn-primary btn-sm">Aktualizovat</button>
+          </div>
+          <div class="results-panel-body" style="padding: 0;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Zavodnik</th>
+                  <th class="cell-mono">Cas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-mono"><strong>1</strong></td>
+                  <td>Jan Novak</td>
+                  <td class="font-mono">1:32.18</td>
+                </tr>
+                <tr>
+                  <td class="font-mono"><strong>2</strong></td>
+                  <td>Petr Svoboda</td>
+                  <td class="font-mono">1:34.92</td>
+                </tr>
+                <tr>
+                  <td class="font-mono"><strong>3</strong></td>
+                  <td>Martin Dvorak</td>
+                  <td class="font-mono">1:38.52</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Podium Cards -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Stupne vitezu</h2>
+        <p>Karty pro zobrazeni nejlepsich zavodniku</p>
+      </div>
+
+      <div class="showcase-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 900px;">
+        <div class="result-card" style="text-align: center; order: 2;">
+          <div class="result-card-rank" style="color: #d97706;">2.</div>
+          <div class="result-card-name">Petr Svoboda</div>
+          <div class="result-card-time">1:34.92</div>
+          <span class="badge badge-neutral mt-3">CZE</span>
+        </div>
+        <div class="result-card" style="text-align: center; order: 1; transform: scale(1.05); box-shadow: var(--shadow-lg);">
+          <div class="result-card-rank" style="color: #d97706;">1.</div>
+          <div class="result-card-name">Jan Novak</div>
+          <div class="result-card-time">1:32.18</div>
+          <span class="badge badge-success mt-3">CZE</span>
+        </div>
+        <div class="result-card" style="text-align: center; order: 3;">
+          <div class="result-card-rank" style="color: #d97706;">3.</div>
+          <div class="result-card-name">Martin Dvorak</div>
+          <div class="result-card-time">1:38.52</div>
+          <span class="badge badge-neutral mt-3">CZE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buttons & Controls -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ovladaci prvky</h2>
+        <p>Tlacitka a formulare optimalizovane pro light theme</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-item-title">Tlacitka</div>
+          <div class="flex flex-wrap gap-3">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-danger">Danger</button>
+          </div>
+          <div class="flex flex-wrap gap-3 mt-4">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Formulare</div>
+          <div class="form-group">
+            <label class="form-label">Hledat zavodnika</label>
+            <input type="text" class="input" placeholder="Jmeno nebo cislo...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kategorie</label>
+            <select class="input select">
+              <option>Vsechny kategorie</option>
+              <option>K1 Muzi</option>
+              <option>C1 Muzi</option>
+              <option>K1 Zeny</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Prepinace</div>
+          <div class="flex flex-col gap-4">
+            <label class="switch">
+              <input type="checkbox" class="switch-input" checked>
+              <span class="switch-slider"></span>
+              <span>Automaticka aktualizace</span>
+            </label>
+            <label class="switch">
+              <input type="checkbox" class="switch-input" checked>
+              <span class="switch-slider"></span>
+              <span>Zobrazit penalizace</span>
+            </label>
+            <label class="switch">
+              <input type="checkbox" class="switch-input">
+              <span class="switch-slider"></span>
+              <span>Jen dokoncene jizdy</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Status Indicators -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Stavove indikatory</h2>
+        <p>Badges, alerty a notifikace v light theme</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-item-title">Badges</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-success">V cili</span>
+            <span class="badge badge-warning">Na startu</span>
+            <span class="badge badge-error">DNS</span>
+            <span class="badge badge-info">Na trati</span>
+            <span class="badge badge-neutral">Ceka</span>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Connection Status</div>
+          <div class="flex flex-col gap-3">
+            <span class="connection-status connected">
+              <span class="status-dot status-dot-success status-dot-pulse"></span>
+              Pripojeno k serveru
+            </span>
+            <span class="connection-status connecting">
+              <span class="status-dot status-dot-warning"></span>
+              Pripojovani...
+            </span>
+            <span class="connection-status disconnected">
+              <span class="status-dot status-dot-error"></span>
+              Odpojeno
+            </span>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Alerty</div>
+          <div class="flex flex-col gap-3">
+            <div class="alert alert-success">
+              <div class="alert-content">Vysledky aktualizovany</div>
+            </div>
+            <div class="alert alert-warning">
+              <div class="alert-content">Zavodnik ma nedokonceny prvni pokus</div>
+            </div>
+            <div class="alert alert-error">
+              <div class="alert-content">Ztrata spojeni se serverem</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards & Containers -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Karty a kontejnery</h2>
+        <p>Ruzne urovne elevace pro hierarchii obsahu</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Zakladni karta</h3>
+            <p class="card-subtitle">Standardni povrch</p>
+          </div>
+          <div class="card-body">
+            <p>Pouziva <code>--color-bg-surface</code> pro zakladni pozadi karty.</p>
+          </div>
+        </div>
+
+        <div class="card card-elevated">
+          <div class="card-header">
+            <h3 class="card-title">Elevated karta</h3>
+            <p class="card-subtitle">S efektem stinu</p>
+          </div>
+          <div class="card-body">
+            <p>Vyssi uroven v hierarchii s jemnym stinem.</p>
+          </div>
+        </div>
+
+        <div class="card card-interactive">
+          <div class="card-body">
+            <h3 class="card-title">Interaktivni karta</h3>
+            <p class="text-secondary mt-2">Najed na me mysi...</p>
+            <button class="btn btn-primary btn-sm mt-4">Akce</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs Demo -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tabs</h2>
+        <p>Navigace mezi sekcemi</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-item-title">Zakladni tabs</div>
+          <div class="tabs">
+            <div class="tab-list" role="tablist">
+              <button class="tab active" role="tab">Jizda 1</button>
+              <button class="tab" role="tab">Jizda 2</button>
+              <button class="tab" role="tab">Celkem</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">Pills varianta</div>
+          <div class="tabs tabs-pills">
+            <div class="tab-list" role="tablist">
+              <button class="tab active" role="tab">Vsechno</button>
+              <button class="tab" role="tab">Muzi</button>
+              <button class="tab" role="tab">Zeny</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-item">
+          <div class="showcase-item-title">S pocitadlem</div>
+          <div class="tabs">
+            <div class="tab-list" role="tablist">
+              <button class="tab active" role="tab">
+                Zavodnici
+                <span class="tab-badge">48</span>
+              </button>
+              <button class="tab" role="tab">
+                V cili
+                <span class="tab-badge">32</span>
+              </button>
+              <button class="tab" role="tab">
+                DNS
+                <span class="tab-badge">3</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Light Theme -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Proc light theme?</h2>
+        <p>Vyhody pro uzivatelske rozhrani</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="light-feature">
+          <div class="light-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Citelnost na slunci</strong>
+            <p class="text-secondary text-sm mt-1">Svetle pozadi je lepe viditelne ve venkovnich podminkach.</p>
+          </div>
+        </div>
+
+        <div class="light-feature">
+          <div class="light-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Privetive pro uzivatele</strong>
+            <p class="text-secondary text-sm mt-1">Tradicni vzhled, ktery uzivatele znaji a ocekavaji.</p>
+          </div>
+        </div>
+
+        <div class="light-feature">
+          <div class="light-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <path d="M8 21h8m-4-4v4"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Vysledkove tabule</strong>
+            <p class="text-secondary text-sm mt-1">Idealni pro zobrazeni na projektorech a verejnych displejich.</p>
+          </div>
+        </div>
+
+        <div class="light-feature">
+          <div class="light-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Tisk vysledku</strong>
+            <p class="text-secondary text-sm mt-1">Svetle pozadi spora inkoust pri tisku startovnich listin.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="showcase-section" style="text-align: center;">
+    <div class="container">
+      <p class="text-secondary">Timing Design System &copy; 2026</p>
+      <p class="text-muted text-sm mt-2">Light theme pro c123-xml-tools a uzivatelske nastroje</p>
+    </div>
+  </footer>
+</body>
+</html>
