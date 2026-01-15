@@ -14,7 +14,7 @@
     "src/react/"
   ],
   "scripts": {
-    "dev": "npx serve . -p 3000",
+    "dev": "npx serve . -p 3000 --cors",
     "build": "npm run build:css",
     "build:css": "node scripts/build-css.js",
     "typecheck": "tsc --noEmit",
