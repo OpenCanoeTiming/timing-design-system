@@ -2,12 +2,19 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 export type CardVariant = 'default' | 'elevated' | 'interactive';
 export type CardPadding = 'default' | 'compact' | 'spacious';
+export type CardStatus = 'success' | 'warning' | 'error' | 'info';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Card visual style */
   variant?: CardVariant;
   /** Card padding size */
   padding?: CardPadding;
+  /** Whether to use canoe variant with wavy border */
+  canoe?: boolean;
+  /** Card status (left border color) */
+  status?: CardStatus;
+  /** Whether to show glow effect (requires status) */
+  glow?: boolean;
   /** Card content */
   children: ReactNode;
 }
@@ -46,13 +53,28 @@ export interface CardSubtitleProps extends HTMLAttributes<HTMLParagraphElement> 
  *   <CardBody>Content here</CardBody>
  *   <CardFooter>Footer actions</CardFooter>
  * </Card>
+ *
+ * @example
+ * // Canoe variant with wavy border
+ * <Card canoe>
+ *   <CardBody>Canoe themed card</CardBody>
+ * </Card>
+ *
+ * @example
+ * // Status card with glow
+ * <Card status="success" glow>
+ *   <CardBody>Success message</CardBody>
+ * </Card>
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ variant = 'default', padding = 'default', className = '', children, ...props }, ref) => {
+  ({ variant = 'default', padding = 'default', canoe, status, glow, className = '', children, ...props }, ref) => {
     const variantClass = variant !== 'default' ? `card-${variant}` : '';
     const paddingClass = padding !== 'default' ? `card-${padding}` : '';
+    const canoeClass = canoe ? 'card-canoe' : '';
+    const statusClass = status ? `card-status-${status}` : '';
+    const glowClass = glow && status ? 'card-glow' : '';
 
-    const classes = ['card', variantClass, paddingClass, className]
+    const classes = ['card', variantClass, paddingClass, canoeClass, statusClass, glowClass, className]
       .filter(Boolean)
       .join(' ');
 

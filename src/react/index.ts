@@ -15,11 +15,12 @@ export {
   type CardSubtitleProps,
   type CardVariant,
   type CardPadding,
+  type CardStatus,
 } from './Card';
 export { Input, type InputProps } from './Input';
 export { Select, type SelectProps } from './Select';
 export { Checkbox, Radio, type CheckboxProps, type RadioProps } from './Checkbox';
-export { Badge, type BadgeProps, type BadgeVariant } from './Badge';
+export { Badge, StatusDot, type BadgeProps, type BadgeVariant, type StatusDotProps, type StatusDotVariant } from './Badge';
 export {
   Table,
   TableHead,

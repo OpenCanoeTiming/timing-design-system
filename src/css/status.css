@@ -84,6 +84,23 @@
   }
 }
 
+/* Glow effect for status dots */
+.status-dot-glow.status-dot-success {
+  box-shadow: var(--glow-success);
+}
+
+.status-dot-glow.status-dot-warning {
+  box-shadow: var(--glow-warning);
+}
+
+.status-dot-glow.status-dot-error {
+  box-shadow: var(--glow-error);
+}
+
+.status-dot-glow.status-dot-info {
+  box-shadow: var(--glow-accent);
+}
+
 /* ==========================================================================
    Alert
    ========================================================================== */

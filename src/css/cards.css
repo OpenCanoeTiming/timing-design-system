@@ -83,3 +83,62 @@
 .card-spacious .card-footer {
   padding: var(--space-6);
 }
+
+/* ==========================================================================
+   Canoe Card Variant (wavy border)
+   ========================================================================== */
+
+.card-canoe {
+  position: relative;
+  border-top: none;
+  padding-top: var(--pattern-wave-height);
+}
+
+.card-canoe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--pattern-wave-height);
+  background-image: var(--pattern-wave);
+  background-repeat: repeat-x;
+  background-size: 40px var(--pattern-wave-height);
+}
+
+/* ==========================================================================
+   Status Card Variants
+   ========================================================================== */
+
+.card-status-success {
+  border-left: 4px solid var(--color-success);
+}
+
+.card-status-warning {
+  border-left: 4px solid var(--color-warning);
+}
+
+.card-status-error {
+  border-left: 4px solid var(--color-error);
+}
+
+.card-status-info {
+  border-left: 4px solid var(--color-info);
+}
+
+/* Status cards with glow effect */
+.card-status-success.card-glow {
+  box-shadow: var(--glow-success);
+}
+
+.card-status-warning.card-glow {
+  box-shadow: var(--glow-warning);
+}
+
+.card-status-error.card-glow {
+  box-shadow: var(--glow-error);
+}
+
+.card-status-info.card-glow {
+  box-shadow: var(--glow-accent);
+}

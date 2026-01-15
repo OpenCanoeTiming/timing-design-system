@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../tokens/colors.css">
   <link rel="stylesheet" href="../tokens/typography.css">
   <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../tokens/canoe.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/buttons.css">
   <link rel="stylesheet" href="../css/forms.css">
@@ -186,6 +187,7 @@
     <section class="playbook-section" id="cards">
       <h2 class="section-title">Cards</h2>
 
+      <div class="component-label">Základní varianty</div>
       <div class="grid grid-cols-3" style="max-width: 900px;">
         <div class="card">
           <div class="card-header">
@@ -211,6 +213,92 @@
           </div>
         </div>
       </div>
+
+      <div class="component-label mt-6">Canoe Card (wavy border)</div>
+      <div class="grid grid-cols-3" style="max-width: 900px;">
+        <div class="card card-canoe">
+          <div class="card-body">
+            <h3 class="card-title">Canoe Card</h3>
+            <p class="text-secondary mt-2">Vodácký vlnkový pattern na horním okraji</p>
+          </div>
+        </div>
+
+        <div class="card card-canoe card-elevated">
+          <div class="card-body">
+            <h3 class="card-title">Canoe + Elevated</h3>
+            <p class="text-secondary mt-2">Kombinace variant</p>
+          </div>
+        </div>
+
+        <div class="card card-canoe card-interactive">
+          <div class="card-body">
+            <h3 class="card-title">Canoe + Interactive</h3>
+            <p class="text-secondary mt-2">Hover efekt</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Status Cards</div>
+      <div class="grid grid-cols-4" style="max-width: 900px;">
+        <div class="card card-status-success">
+          <div class="card-body">
+            <h4 class="card-title">Success</h4>
+            <p class="text-secondary mt-1">Závodník v cíli</p>
+          </div>
+        </div>
+
+        <div class="card card-status-warning">
+          <div class="card-body">
+            <h4 class="card-title">Warning</h4>
+            <p class="text-secondary mt-1">Na trati</p>
+          </div>
+        </div>
+
+        <div class="card card-status-error">
+          <div class="card-body">
+            <h4 class="card-title">Error</h4>
+            <p class="text-secondary mt-1">DNS/DNF</p>
+          </div>
+        </div>
+
+        <div class="card card-status-info">
+          <div class="card-body">
+            <h4 class="card-title">Info</h4>
+            <p class="text-secondary mt-1">Čeká na start</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Status Cards s Glow efektem</div>
+      <div class="grid grid-cols-4" style="max-width: 900px;">
+        <div class="card card-status-success card-glow">
+          <div class="card-body">
+            <h4 class="card-title">Success Glow</h4>
+            <p class="text-secondary mt-1">S glow efektem</p>
+          </div>
+        </div>
+
+        <div class="card card-status-warning card-glow">
+          <div class="card-body">
+            <h4 class="card-title">Warning Glow</h4>
+            <p class="text-secondary mt-1">S glow efektem</p>
+          </div>
+        </div>
+
+        <div class="card card-status-error card-glow">
+          <div class="card-body">
+            <h4 class="card-title">Error Glow</h4>
+            <p class="text-secondary mt-1">S glow efektem</p>
+          </div>
+        </div>
+
+        <div class="card card-status-info card-glow">
+          <div class="card-body">
+            <h4 class="card-title">Info Glow</h4>
+            <p class="text-secondary mt-1">S glow efektem</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Status Section -->
@@ -231,8 +319,19 @@
         <span class="status-dot status-dot-success"></span>
         <span class="status-dot status-dot-warning"></span>
         <span class="status-dot status-dot-error"></span>
+        <span class="status-dot status-dot-info"></span>
         <span class="status-dot status-dot-success status-dot-pulse"></span>
         <span class="text-sm text-secondary">← Pulsující</span>
+      </div>
+
+      <div class="component-label mt-4">Status Dots s Glow efektem</div>
+      <div class="component-row items-center">
+        <span class="status-dot status-dot-success status-dot-glow"></span>
+        <span class="status-dot status-dot-warning status-dot-glow"></span>
+        <span class="status-dot status-dot-error status-dot-glow"></span>
+        <span class="status-dot status-dot-info status-dot-glow"></span>
+        <span class="status-dot status-dot-success status-dot-glow status-dot-pulse"></span>
+        <span class="text-sm text-secondary">← Glow + Pulse</span>
       </div>
 
       <div class="component-label">Connection Status</div>
