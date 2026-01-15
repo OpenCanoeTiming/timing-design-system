@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="../css/toast.css">
   <link rel="stylesheet" href="../css/tabs.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/log.css">
+  <link rel="stylesheet" href="../css/dropzone.css">
 
   <style>
     /* Playbook-specific styles */
@@ -100,21 +103,73 @@
       <h1 class="text-2xl font-bold">Canoe Timing Design System</h1>
       <p class="text-secondary mt-2">Komponenty pro vodáckou časomíru</p>
 
-      <nav class="playbook-nav">
-        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
-        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
-        <button class="btn btn-ghost" onclick="setTheme('auto')">Auto (System)</button>
-        <span style="border-left: 1px solid var(--color-border); margin: 0 var(--space-2);"></span>
-        <a href="dark.html" class="btn btn-ghost">Dark Demo</a>
-        <a href="light.html" class="btn btn-ghost">Light Demo</a>
-        <a href="forms.html" class="btn btn-ghost">Forms</a>
-        <a href="tables.html" class="btn btn-ghost">Tables</a>
-        <a href="modal.html" class="btn btn-ghost">Modal</a>
-        <a href="toast.html" class="btn btn-ghost">Toast</a>
-        <a href="header.html" class="btn btn-ghost">Header</a>
-        <a href="log.html" class="btn btn-ghost">Log</a>
-        <a href="dropzone.html" class="btn btn-ghost">DropZone</a>
-        <a href="bundle-test.html" class="btn btn-ghost">Bundle Test</a>
+      <!-- Theme Switcher -->
+      <div class="flex gap-2 mt-4">
+        <button class="btn btn-primary btn-sm" onclick="setTheme('light')">Light</button>
+        <button class="btn btn-secondary btn-sm" onclick="setTheme('dark')">Dark</button>
+        <button class="btn btn-ghost btn-sm" onclick="setTheme('auto')">Auto</button>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="mt-4" style="font-size: var(--text-sm);">
+        <div class="flex flex-wrap gap-4">
+          <!-- This Page Sections -->
+          <div>
+            <span class="text-muted">Na této stránce:</span>
+            <span class="flex gap-1 mt-1 flex-wrap">
+              <a href="#buttons" class="btn btn-ghost btn-sm">Buttons</a>
+              <a href="#forms" class="btn btn-ghost btn-sm">Forms</a>
+              <a href="#cards" class="btn btn-ghost btn-sm">Cards</a>
+              <a href="#status" class="btn btn-ghost btn-sm">Status</a>
+              <a href="#tables" class="btn btn-ghost btn-sm">Tables</a>
+              <a href="#modals" class="btn btn-ghost btn-sm">Modals</a>
+              <a href="#toasts" class="btn btn-ghost btn-sm">Toasts</a>
+              <a href="#tabs-section" class="btn btn-ghost btn-sm">Tabs</a>
+              <a href="#header" class="btn btn-ghost btn-sm">Header</a>
+              <a href="#log" class="btn btn-ghost btn-sm">Log</a>
+              <a href="#dropzone" class="btn btn-ghost btn-sm">DropZone</a>
+              <a href="#typography" class="btn btn-ghost btn-sm">Typography</a>
+            </span>
+          </div>
+
+          <!-- Detailed Pages -->
+          <div>
+            <span class="text-muted">Detailní ukázky:</span>
+            <span class="flex gap-1 mt-1">
+              <a href="forms.html" class="btn btn-ghost btn-sm">Forms</a>
+              <a href="tables.html" class="btn btn-ghost btn-sm">Tables</a>
+              <a href="modal.html" class="btn btn-ghost btn-sm">Modal</a>
+              <a href="toast.html" class="btn btn-ghost btn-sm">Toast</a>
+            </span>
+          </div>
+
+          <!-- Canoe Components -->
+          <div>
+            <span class="text-muted">Vodácké komponenty:</span>
+            <span class="flex gap-1 mt-1">
+              <a href="header.html" class="btn btn-ghost btn-sm">Header</a>
+              <a href="log.html" class="btn btn-ghost btn-sm">Log</a>
+              <a href="dropzone.html" class="btn btn-ghost btn-sm">DropZone</a>
+            </span>
+          </div>
+
+          <!-- Showcases -->
+          <div>
+            <span class="text-muted">Theme showcase:</span>
+            <span class="flex gap-1 mt-1">
+              <a href="dark.html" class="btn btn-ghost btn-sm">Dark</a>
+              <a href="light.html" class="btn btn-ghost btn-sm">Light</a>
+            </span>
+          </div>
+
+          <!-- Utility -->
+          <div>
+            <span class="text-muted">Utility:</span>
+            <span class="flex gap-1 mt-1">
+              <a href="bundle-test.html" class="btn btn-ghost btn-sm">Bundle Test</a>
+            </span>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -680,6 +735,115 @@
           <button class="tab active" role="tab">Jízda 1</button>
           <button class="tab" role="tab">Jízda 2</button>
           <button class="tab" role="tab">Celkem</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Header Section -->
+    <section class="playbook-section" id="header">
+      <h2 class="section-title">Header</h2>
+      <p class="text-secondary mb-4">App header s barevným barem, status indikátory a LIVE badge. <a href="header.html">Detailní ukázka →</a></p>
+
+      <div class="component-label">App Header</div>
+      <div style="border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border);">
+        <header class="app-header">
+          <div class="header-brand">
+            <h1 class="header-title">Canoe Timing</h1>
+          </div>
+          <div class="header-status">
+            <div class="status-indicator connected">
+              <span class="status-indicator-dot"></span>
+              <span>TCP</span>
+            </div>
+            <div class="status-indicator connecting">
+              <span class="status-indicator-dot"></span>
+              <span>UDP</span>
+            </div>
+            <div class="status-indicator disconnected">
+              <span class="status-indicator-dot"></span>
+              <span>XML</span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <span class="badge-live">LIVE</span>
+          </div>
+        </header>
+      </div>
+
+      <div class="component-label mt-6">Gate Pole Indikátory</div>
+      <div class="component-row items-end">
+        <div class="text-center">
+          <span class="gate-pole gate-pole-success"></span>
+          <div class="text-xs text-muted mt-1">Success</div>
+        </div>
+        <div class="text-center">
+          <span class="gate-pole gate-pole-warning"></span>
+          <div class="text-xs text-muted mt-1">Warning</div>
+        </div>
+        <div class="text-center">
+          <span class="gate-pole gate-pole-error"></span>
+          <div class="text-xs text-muted mt-1">Error</div>
+        </div>
+        <div class="text-center">
+          <span class="gate-pole gate-pole-info"></span>
+          <div class="text-xs text-muted mt-1">Info</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log Section -->
+    <section class="playbook-section" id="log">
+      <h2 class="section-title">Log</h2>
+      <p class="text-secondary mb-4">Log viewer komponenta. <a href="log.html">Detailní ukázka →</a></p>
+
+      <div class="log-container log-sm">
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:45.123</span>
+          <span class="log-level log-level-info">info</span>
+          <span class="log-component">TCP</span>
+          <span class="log-message">Server started on port 5000</span>
+        </div>
+        <div class="log-entry log-entry-warn">
+          <span class="log-timestamp">14:23:46.456</span>
+          <span class="log-level log-level-warn">warn</span>
+          <span class="log-component">XML</span>
+          <span class="log-message">Invalid data received</span>
+        </div>
+        <div class="log-entry log-entry-error">
+          <span class="log-timestamp">14:23:47.789</span>
+          <span class="log-level log-level-error">error</span>
+          <span class="log-component">UDP</span>
+          <span class="log-message">Connection timeout</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-timestamp">14:23:48.012</span>
+          <span class="log-level log-level-debug">debug</span>
+          <span class="log-component">Timer</span>
+          <span class="log-message">Tick +00:01.000</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DropZone Section -->
+    <section class="playbook-section" id="dropzone">
+      <h2 class="section-title">DropZone</h2>
+      <p class="text-secondary mb-4">Drag & drop zóna pro nahrávání souborů. <a href="dropzone.html">Detailní ukázka →</a></p>
+
+      <div class="grid grid-cols-2" style="max-width: 600px;">
+        <div class="dropzone">
+          <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 16V8m0 0l-3 3m3-3l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="dropzone-label">Přetáhněte soubor</span>
+          <span class="dropzone-hint">nebo klikněte pro výběr</span>
+        </div>
+
+        <div class="dropzone dropzone-success">
+          <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="dropzone-label">Soubor nahrán</span>
+          <span class="dropzone-hint">data.xml (2.4 KB)</span>
         </div>
       </div>
     </section>
