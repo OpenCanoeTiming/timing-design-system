@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="cs" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DropZone - Canoe Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../tokens/canoe.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/dropzone.css">
+
+  <style>
+    .demo-section {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    .demo-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+      color: var(--color-text-primary);
+    }
+
+    .demo-description {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .demo-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-8">
+    <h1 class="text-3xl font-bold mb-2">DropZone Component</h1>
+    <p class="text-secondary mb-6">Drag & drop komponenta pro upload souboru</p>
+
+    <nav class="flex gap-2 mb-8">
+      <a href="index.html" class="btn btn-ghost">Back to Index</a>
+      <button class="btn btn-secondary" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+
+    <!-- Basic DropZone -->
+    <section class="demo-section">
+      <h2 class="demo-title">Basic DropZone</h2>
+      <p class="demo-description">Zakladni drag & drop zona. Zkuste pretahnout soubor nebo kliknout.</p>
+
+      <div class="dropzone" id="basicDropzone" tabindex="0">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="dropzone-text">
+          <p class="dropzone-title">Drop file here</p>
+          <p class="dropzone-subtitle">or click to browse</p>
+        </div>
+        <input type="file" class="dropzone-input" id="basicInput">
+      </div>
+    </section>
+
+    <!-- DropZone with file type restriction -->
+    <section class="demo-section">
+      <h2 class="demo-title">File Type Restriction</h2>
+      <p class="demo-description">DropZona s omezenim na XML a JSON soubory</p>
+
+      <div class="dropzone" id="restrictedDropzone" tabindex="0">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="dropzone-text">
+          <p class="dropzone-title">Drop XML or JSON file</p>
+          <p class="dropzone-subtitle">or click to browse</p>
+          <p class="dropzone-hint">Supported: .xml, .json (max 10MB)</p>
+        </div>
+        <input type="file" class="dropzone-input" accept=".xml,.json">
+      </div>
+    </section>
+
+    <!-- Size Variants -->
+    <section class="demo-section">
+      <h2 class="demo-title">Size Variants</h2>
+      <p class="demo-description">Ruzne velikosti dropzony</p>
+
+      <div class="demo-grid">
+        <div>
+          <p class="demo-label">Small (dropzone-sm)</p>
+          <div class="dropzone dropzone-sm" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Drop file</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Medium (default)</p>
+          <div class="dropzone" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Drop file here</p>
+              <p class="dropzone-subtitle">or click to browse</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Large (dropzone-lg)</p>
+          <div class="dropzone dropzone-lg" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Drop file here</p>
+              <p class="dropzone-subtitle">or click to browse</p>
+              <p class="dropzone-hint">Upload your timing data</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- States -->
+    <section class="demo-section">
+      <h2 class="demo-title">States</h2>
+      <p class="demo-description">Ruzne stavy dropzony</p>
+
+      <div class="demo-grid">
+        <div>
+          <p class="demo-label">Default</p>
+          <div class="dropzone" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Drop file here</p>
+              <p class="dropzone-subtitle">or click to browse</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Drag Over (drag-over)</p>
+          <div class="dropzone drag-over" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Release to upload</p>
+              <p class="dropzone-subtitle">File detected</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Has File (has-file)</p>
+          <div class="dropzone has-file" tabindex="0">
+            <div class="dropzone-file">
+              <svg class="dropzone-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+              </svg>
+              <div class="dropzone-file-info">
+                <p class="dropzone-file-name">startlist_heat1.xml</p>
+                <p class="dropzone-file-size">24.5 KB</p>
+              </div>
+              <button class="dropzone-file-remove" type="button" aria-label="Remove file">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Error (has-error)</p>
+          <div class="dropzone has-error" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Drop file here</p>
+              <p class="dropzone-subtitle">or click to browse</p>
+            </div>
+            <p class="dropzone-error">Invalid file type. Please upload XML or JSON file.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="demo-label">Disabled</p>
+          <div class="dropzone disabled" tabindex="-1">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="dropzone-text">
+              <p class="dropzone-title">Upload disabled</p>
+              <p class="dropzone-subtitle">Please wait...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiple Files -->
+    <section class="demo-section">
+      <h2 class="demo-title">Multiple Files</h2>
+      <p class="demo-description">Dropzona s vice vybranymi soubory</p>
+
+      <div class="dropzone has-file" tabindex="0">
+        <div class="dropzone-files">
+          <div class="dropzone-file">
+            <svg class="dropzone-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+            <div class="dropzone-file-info">
+              <p class="dropzone-file-name">results_day1.xml</p>
+              <p class="dropzone-file-size">156.2 KB</p>
+            </div>
+            <button class="dropzone-file-remove" type="button" aria-label="Remove file">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dropzone-file">
+            <svg class="dropzone-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+            <div class="dropzone-file-info">
+              <p class="dropzone-file-name">results_day2.xml</p>
+              <p class="dropzone-file-size">142.8 KB</p>
+            </div>
+            <button class="dropzone-file-remove" type="button" aria-label="Remove file">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dropzone-file">
+            <svg class="dropzone-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+            <div class="dropzone-file-info">
+              <p class="dropzone-file-name">startlist_finals.json</p>
+              <p class="dropzone-file-size">8.4 KB</p>
+            </div>
+            <button class="dropzone-file-remove" type="button" aria-label="Remove file">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="demo-section">
+      <h2 class="demo-title">Interactive Demo</h2>
+      <p class="demo-description">Funkcni dropzona - zkuste pretahnout soubor</p>
+
+      <div class="dropzone" id="interactiveDropzone" tabindex="0">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 15V3m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="dropzone-text">
+          <p class="dropzone-title">Drop any file here</p>
+          <p class="dropzone-subtitle">or click to browse</p>
+          <p class="dropzone-hint">Try it out!</p>
+        </div>
+        <input type="file" class="dropzone-input" id="interactiveInput">
+      </div>
+
+      <div id="fileInfo" class="mt-4" style="display: none;">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="text-base font-medium mb-2">Selected file:</h3>
+            <p id="fileName" class="text-sm text-secondary"></p>
+            <p id="fileSize" class="text-xs text-muted"></p>
+            <button class="btn btn-ghost btn-sm mt-3" onclick="clearFile()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('theme-dark');
+      document.documentElement.classList.toggle('theme-light');
+    }
+
+    // Interactive demo functionality
+    const interactiveDropzone = document.getElementById('interactiveDropzone');
+    const interactiveInput = document.getElementById('interactiveInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function showFile(file) {
+      fileName.textContent = file.name;
+      fileSize.textContent = formatFileSize(file.size);
+      fileInfo.style.display = 'block';
+      interactiveDropzone.classList.add('has-file');
+    }
+
+    function clearFile() {
+      fileInfo.style.display = 'none';
+      interactiveDropzone.classList.remove('has-file');
+      interactiveInput.value = '';
+    }
+
+    // Drag events
+    interactiveDropzone.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      interactiveDropzone.classList.add('drag-over');
+    });
+
+    interactiveDropzone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      if (e.target === interactiveDropzone) {
+        interactiveDropzone.classList.remove('drag-over');
+      }
+    });
+
+    interactiveDropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      interactiveDropzone.classList.add('drag-over');
+    });
+
+    interactiveDropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      interactiveDropzone.classList.remove('drag-over');
+      if (e.dataTransfer.files.length > 0) {
+        showFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Click to browse
+    interactiveDropzone.addEventListener('click', () => {
+      interactiveInput.click();
+    });
+
+    interactiveInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        showFile(e.target.files[0]);
+      }
+    });
+
+    // Keyboard accessibility
+    interactiveDropzone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        interactiveInput.click();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -91,3 +91,11 @@ export {
   type LogLevel,
   type LogSize,
 } from './Log';
+export {
+  DropZone,
+  DropZoneFile,
+  type DropZoneProps,
+  type DropZoneFileProps,
+  type DropZoneSize,
+  type FileInfo,
+} from './DropZone';

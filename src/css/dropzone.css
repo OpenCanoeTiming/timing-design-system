@@ -1,0 +1,299 @@
+/**
+ * Canoe Timing Design System - DropZone Component
+ *
+ * Drag & drop komponenta:
+ * - Dashed border, hover glow
+ * - Drag-over animované pruhy
+ * - has-file state pro vybraný soubor
+ */
+
+/* ==========================================================================
+   DROPZONE BASE
+   ========================================================================== */
+
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 160px;
+  padding: var(--space-6);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-surface);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dropzone:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-elevated);
+}
+
+.dropzone:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   DROPZONE CONTENT
+   ========================================================================== */
+
+.dropzone-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.dropzone:hover .dropzone-icon {
+  color: var(--color-accent);
+}
+
+.dropzone-text {
+  text-align: center;
+}
+
+.dropzone-title {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.dropzone-subtitle {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.dropzone-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Hidden file input */
+.dropzone-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   DRAG-OVER STATE (animované pruhy)
+   ========================================================================== */
+
+.dropzone.drag-over {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--glow-accent);
+}
+
+/* Animovaný pruhovaný pattern jako "marching ants" */
+.dropzone.drag-over::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0px,
+    transparent 10px,
+    rgba(0, 136, 255, 0.1) 10px,
+    rgba(0, 136, 255, 0.1) 20px
+  );
+  background-size: 28px 28px;
+  animation: dropzone-march 0.5s linear infinite;
+}
+
+@keyframes dropzone-march {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 28px 0;
+  }
+}
+
+.dropzone.drag-over .dropzone-icon {
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   HAS-FILE STATE (soubor je vybraný)
+   ========================================================================== */
+
+.dropzone.has-file {
+  border-color: var(--color-success);
+  border-style: solid;
+  background-color: var(--color-bg-elevated);
+}
+
+.dropzone.has-file .dropzone-icon {
+  color: var(--color-success);
+}
+
+/* File info display */
+.dropzone-file {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 320px;
+}
+
+.dropzone-file-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.dropzone-file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropzone-file-name {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropzone-file-size {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.dropzone-file-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dropzone-file-remove:hover {
+  background-color: var(--color-error);
+  color: white;
+}
+
+/* ==========================================================================
+   ERROR STATE
+   ========================================================================== */
+
+.dropzone.has-error {
+  border-color: var(--color-error);
+}
+
+.dropzone.has-error .dropzone-icon {
+  color: var(--color-error);
+}
+
+.dropzone-error {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  text-align: center;
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.dropzone.disabled,
+.dropzone:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   SIZE VARIANTS
+   ========================================================================== */
+
+/* Compact */
+.dropzone.dropzone-sm {
+  min-height: 100px;
+  padding: var(--space-4);
+  gap: var(--space-2);
+}
+
+.dropzone.dropzone-sm .dropzone-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.dropzone.dropzone-sm .dropzone-title {
+  font-size: var(--text-sm);
+}
+
+/* Large */
+.dropzone.dropzone-lg {
+  min-height: 240px;
+  padding: var(--space-8);
+}
+
+.dropzone.dropzone-lg .dropzone-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.dropzone.dropzone-lg .dropzone-title {
+  font-size: var(--text-lg);
+}
+
+/* ==========================================================================
+   MULTIPLE FILES VARIANT
+   ========================================================================== */
+
+.dropzone-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 100%;
+}
+
+.dropzone-files .dropzone-file {
+  max-width: 280px;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone.drag-over::after {
+    animation: none;
+  }
+
+  .dropzone.drag-over .dropzone-icon {
+    transform: none;
+  }
+}
