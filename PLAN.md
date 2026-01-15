@@ -89,7 +89,7 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Card
 - [x] Input, Select, Checkbox, Radio
 - [x] Badge
-- [ ] Table
+- [x] Table
 - [ ] Modal
 - [ ] Toast
 
@@ -133,3 +133,4 @@ Design systém pro vodáckou časomíru s podporou:
 - React komponenta: Card (Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle)
 - React komponenty pro formuláře: Input, Select, Checkbox, Radio
 - React komponenta Badge (status indikátor)
+- React komponenta Table (Table, TableHead, TableBody, TableFoot, TableRow, TableCell, TableHeaderCell)

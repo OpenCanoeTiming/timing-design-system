@@ -20,3 +20,19 @@ export { Input, type InputProps } from './Input';
 export { Select, type SelectProps } from './Select';
 export { Checkbox, Radio, type CheckboxProps, type RadioProps } from './Checkbox';
 export { Badge, type BadgeProps, type BadgeVariant } from './Badge';
+export {
+  Table,
+  TableHead,
+  TableBody,
+  TableFoot,
+  TableRow,
+  TableCell,
+  TableHeaderCell,
+  type TableProps,
+  type TableHeadProps,
+  type TableBodyProps,
+  type TableFootProps,
+  type TableRowProps,
+  type TableCellProps,
+  type TableHeaderCellProps,
+} from './Table';
