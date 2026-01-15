@@ -1,0 +1,41 @@
+{
+  "name": "timing-design-system",
+  "version": "0.1.0",
+  "description": "Design system for canoe slalom timing tools",
+  "author": "CSB Team",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/timing.css",
+  "files": [
+    "dist/",
+    "src/tokens/",
+    "src/css/",
+    "src/fonts/"
+  ],
+  "scripts": {
+    "dev": "npx serve src/playbooks -p 3000",
+    "build": "npm run build:css",
+    "build:css": "cat src/tokens/index.css src/css/index.css > dist/timing.css",
+    "lint": "echo 'CSS linting not configured yet'"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "design-system",
+    "css",
+    "canoe",
+    "slalom",
+    "timing"
+  ]
+}

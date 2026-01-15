@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timing Design System - Playbook</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/layout.css">
+
+  <style>
+    /* Playbook-specific styles */
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .demo-box {
+      padding: var(--space-4);
+      background-color: var(--color-bg-elevated);
+      border-radius: var(--radius-md);
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Timing Design System</h1>
+      <p class="text-secondary mt-2">Komponenty pro vodáckou časomíru</p>
+
+      <nav class="playbook-nav">
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+        <button class="btn btn-ghost" onclick="setTheme('auto')">Auto (System)</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Buttons Section -->
+    <section class="playbook-section" id="buttons">
+      <h2 class="section-title">Buttons</h2>
+
+      <div class="component-label">Varianty</div>
+      <div class="component-row">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-danger">Danger</button>
+      </div>
+
+      <div class="component-label">Velikosti</div>
+      <div class="component-row">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+      </div>
+
+      <div class="component-label">Stavy</div>
+      <div class="component-row">
+        <button class="btn btn-primary">Normal</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <!-- Forms Section -->
+    <section class="playbook-section" id="forms">
+      <h2 class="section-title">Forms</h2>
+
+      <div class="grid grid-cols-2" style="max-width: 600px;">
+        <div class="form-group">
+          <label class="form-label">Text Input</label>
+          <input type="text" class="input" placeholder="Placeholder...">
+          <span class="form-hint">Nápověda pro uživatele</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Select</label>
+          <select class="input select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Input s chybou</label>
+          <input type="text" class="input input-error" value="Neplatná hodnota">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Disabled</label>
+          <input type="text" class="input" value="Readonly" disabled>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <div class="component-label">Checkbox & Radio</div>
+        <div class="flex gap-6 mt-2">
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span>Checkbox</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="demo" checked>
+            <span>Radio 1</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="demo">
+            <span>Radio 2</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <div class="component-label">Switch</div>
+        <label class="switch mt-2">
+          <input type="checkbox" class="switch-input" checked>
+          <span class="switch-slider"></span>
+          <span>Zapnuto</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="playbook-section" id="cards">
+      <h2 class="section-title">Cards</h2>
+
+      <div class="grid grid-cols-3" style="max-width: 900px;">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Basic Card</h3>
+            <p class="card-subtitle">S headerem</p>
+          </div>
+          <div class="card-body">
+            Obsah karty. Lorem ipsum dolor sit amet.
+          </div>
+        </div>
+
+        <div class="card card-elevated">
+          <div class="card-body">
+            <h3 class="card-title">Elevated</h3>
+            <p class="text-secondary mt-2">Karta se stínem</p>
+          </div>
+        </div>
+
+        <div class="card card-interactive">
+          <div class="card-body">
+            <h3 class="card-title">Interactive</h3>
+            <p class="text-secondary mt-2">Najetí myší → efekt</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Section -->
+    <section class="playbook-section" id="status">
+      <h2 class="section-title">Status & Badges</h2>
+
+      <div class="component-label">Badges</div>
+      <div class="component-row">
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-warning">Warning</span>
+        <span class="badge badge-error">Error</span>
+        <span class="badge badge-info">Info</span>
+        <span class="badge badge-neutral">Neutral</span>
+      </div>
+
+      <div class="component-label">Status Dots</div>
+      <div class="component-row items-center">
+        <span class="status-dot status-dot-success"></span>
+        <span class="status-dot status-dot-warning"></span>
+        <span class="status-dot status-dot-error"></span>
+        <span class="status-dot status-dot-success status-dot-pulse"></span>
+        <span class="text-sm text-secondary">← Pulsující</span>
+      </div>
+
+      <div class="component-label">Connection Status</div>
+      <div class="component-row">
+        <span class="connection-status connected">
+          <span class="status-dot status-dot-success"></span>
+          Connected
+        </span>
+        <span class="connection-status connecting">
+          <span class="status-dot status-dot-warning"></span>
+          Connecting
+        </span>
+        <span class="connection-status disconnected">
+          <span class="status-dot status-dot-error"></span>
+          Disconnected
+        </span>
+      </div>
+
+      <div class="component-label mt-6">Alerts</div>
+      <div class="flex flex-col gap-3" style="max-width: 500px;">
+        <div class="alert alert-success">
+          <div class="alert-content">
+            <div class="alert-title">Úspěch</div>
+            Operace proběhla úspěšně.
+          </div>
+        </div>
+        <div class="alert alert-warning">
+          <div class="alert-content">
+            <div class="alert-title">Varování</div>
+            Něco vyžaduje pozornost.
+          </div>
+        </div>
+        <div class="alert alert-error">
+          <div class="alert-content">
+            <div class="alert-title">Chyba</div>
+            Něco se pokazilo.
+          </div>
+        </div>
+        <div class="alert alert-info">
+          <div class="alert-content">
+            <div class="alert-title">Info</div>
+            Informační zpráva.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tables Section -->
+    <section class="playbook-section" id="tables">
+      <h2 class="section-title">Tables</h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Pořadí</th>
+              <th>Závodník</th>
+              <th>Klub</th>
+              <th class="cell-numeric">Čas</th>
+              <th class="cell-status">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cell-numeric">1</td>
+              <td>Jan Novák</td>
+              <td>USK Praha</td>
+              <td class="cell-numeric">94.32</td>
+              <td class="cell-status"><span class="badge badge-success">Cíl</span></td>
+            </tr>
+            <tr>
+              <td class="cell-numeric">2</td>
+              <td>Petr Svoboda</td>
+              <td>Dukla Praha</td>
+              <td class="cell-numeric">95.18</td>
+              <td class="cell-status"><span class="badge badge-success">Cíl</span></td>
+            </tr>
+            <tr>
+              <td class="cell-numeric">3</td>
+              <td>Martin Dvořák</td>
+              <td>Bohemians</td>
+              <td class="cell-numeric">96.44</td>
+              <td class="cell-status"><span class="badge badge-warning">Na trati</span></td>
+            </tr>
+            <tr>
+              <td class="cell-numeric">4</td>
+              <td>Tomáš Procházka</td>
+              <td>Slavia</td>
+              <td class="cell-numeric">—</td>
+              <td class="cell-status"><span class="badge badge-error">DNS</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section class="playbook-section" id="typography">
+      <h2 class="section-title">Typography</h2>
+
+      <div class="demo-box" style="max-width: 600px;">
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <p>Základní odstavec textu. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p class="text-secondary">Sekundární text pro méně důležité informace.</p>
+        <p class="text-muted">Utlumený text pro poznámky a hinty.</p>
+        <p><code>inline code</code> a <a href="#">odkaz</a></p>
+        <p class="font-mono">Monospace font pro čísla: 123.45</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+
+      if (theme === 'light') {
+        html.classList.add('theme-light');
+      } else if (theme === 'dark') {
+        html.classList.add('theme-dark');
+      }
+      // 'auto' = no class, uses prefers-color-scheme
+    }
+
+    // Check URL params for initial theme
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get('theme');
+    if (theme) setTheme(theme);
+  </script>
+</body>
+</html>

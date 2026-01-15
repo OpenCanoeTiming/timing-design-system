@@ -1,0 +1,120 @@
+/**
+ * Color Tokens
+ *
+ * Barevná paleta pro Timing Design System.
+ * Podpora dark a light theme pomocí CSS custom properties.
+ */
+
+/* ==========================================================================
+   Light Theme (default)
+   ========================================================================== */
+
+:root,
+.theme-light {
+  /* Backgrounds */
+  --color-bg-body: #f5f5f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-input: #ffffff;
+
+  /* Borders */
+  --color-border: #e0e0e0;
+  --color-border-focus: #999999;
+
+  /* Text */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+
+  /* Accent (primary brand color) */
+  --color-accent: #0066cc;
+  --color-accent-hover: #0052a3;
+  --color-accent-subtle: rgba(0, 102, 204, 0.1);
+  --color-accent-glow: rgba(0, 102, 204, 0.3);
+
+  /* Semantic colors */
+  --color-success: #059669;
+  --color-success-subtle: rgba(5, 150, 105, 0.1);
+  --color-warning: #d97706;
+  --color-warning-subtle: rgba(217, 119, 6, 0.1);
+  --color-error: #dc2626;
+  --color-error-subtle: rgba(220, 38, 38, 0.1);
+  --color-info: #0284c7;
+  --color-info-subtle: rgba(2, 132, 199, 0.1);
+}
+
+/* ==========================================================================
+   Dark Theme
+   ========================================================================== */
+
+.theme-dark {
+  /* Backgrounds - Anthracite palette */
+  --color-bg-body: #0a0a0a;
+  --color-bg-surface: #141414;
+  --color-bg-elevated: #1f1f1f;
+  --color-bg-input: #0d0d0d;
+
+  /* Borders */
+  --color-border: #2a2a2a;
+  --color-border-focus: #404040;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #999999;
+  --color-text-muted: #707070;
+
+  /* Accent (electric blue) */
+  --color-accent: #0088ff;
+  --color-accent-hover: #0066cc;
+  --color-accent-subtle: rgba(0, 136, 255, 0.12);
+  --color-accent-glow: rgba(0, 136, 255, 0.4);
+
+  /* Semantic colors */
+  --color-success: #00d26a;
+  --color-success-subtle: rgba(0, 210, 106, 0.15);
+  --color-warning: #ff9500;
+  --color-warning-subtle: rgba(255, 149, 0, 0.15);
+  --color-error: #ff3b30;
+  --color-error-subtle: rgba(255, 59, 48, 0.15);
+  --color-info: #0a84ff;
+  --color-info-subtle: rgba(10, 132, 255, 0.15);
+}
+
+/* ==========================================================================
+   Auto Theme (system preference)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    /* Backgrounds - Anthracite palette */
+    --color-bg-body: #0a0a0a;
+    --color-bg-surface: #141414;
+    --color-bg-elevated: #1f1f1f;
+    --color-bg-input: #0d0d0d;
+
+    /* Borders */
+    --color-border: #2a2a2a;
+    --color-border-focus: #404040;
+
+    /* Text */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #999999;
+    --color-text-muted: #707070;
+
+    /* Accent (electric blue) */
+    --color-accent: #0088ff;
+    --color-accent-hover: #0066cc;
+    --color-accent-subtle: rgba(0, 136, 255, 0.12);
+    --color-accent-glow: rgba(0, 136, 255, 0.4);
+
+    /* Semantic colors */
+    --color-success: #00d26a;
+    --color-success-subtle: rgba(0, 210, 106, 0.15);
+    --color-warning: #ff9500;
+    --color-warning-subtle: rgba(255, 149, 0, 0.15);
+    --color-error: #ff3b30;
+    --color-error-subtle: rgba(255, 59, 48, 0.15);
+    --color-info: #0a84ff;
+    --color-info-subtle: rgba(10, 132, 255, 0.15);
+  }
+}

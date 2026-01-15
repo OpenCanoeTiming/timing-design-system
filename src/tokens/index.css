@@ -1,0 +1,10 @@
+/**
+ * Timing Design System - Design Tokens
+ *
+ * Tento soubor agreguje všechny design tokeny (CSS custom properties).
+ * Importujte tento soubor pro přístup k barvám, typografii a spacing.
+ */
+
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';

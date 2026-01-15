@@ -1,0 +1,165 @@
+/**
+ * Status Components
+ *
+ * Badges, status indicators, and alerts.
+ */
+
+/* ==========================================================================
+   Badge
+   ========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  border-radius: var(--radius-full);
+}
+
+.badge-success {
+  color: var(--color-success);
+  background-color: var(--color-success-subtle);
+}
+
+.badge-warning {
+  color: var(--color-warning);
+  background-color: var(--color-warning-subtle);
+}
+
+.badge-error {
+  color: var(--color-error);
+  background-color: var(--color-error-subtle);
+}
+
+.badge-info {
+  color: var(--color-info);
+  background-color: var(--color-info-subtle);
+}
+
+.badge-neutral {
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-elevated);
+}
+
+/* ==========================================================================
+   Status Dot
+   ========================================================================== */
+
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.status-dot-success {
+  background-color: var(--color-success);
+}
+
+.status-dot-warning {
+  background-color: var(--color-warning);
+}
+
+.status-dot-error {
+  background-color: var(--color-error);
+}
+
+.status-dot-info {
+  background-color: var(--color-info);
+}
+
+/* Pulsing animation for live status */
+.status-dot-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Alert
+   ========================================================================== */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert-title {
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.alert-success {
+  color: var(--color-success);
+  background-color: var(--color-success-subtle);
+  border-color: var(--color-success);
+}
+
+.alert-warning {
+  color: var(--color-warning);
+  background-color: var(--color-warning-subtle);
+  border-color: var(--color-warning);
+}
+
+.alert-error {
+  color: var(--color-error);
+  background-color: var(--color-error-subtle);
+  border-color: var(--color-error);
+}
+
+.alert-info {
+  color: var(--color-info);
+  background-color: var(--color-info-subtle);
+  border-color: var(--color-info);
+}
+
+/* ==========================================================================
+   Connection Status
+   ========================================================================== */
+
+.connection-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-elevated);
+}
+
+.connection-status.connected {
+  color: var(--color-success);
+}
+
+.connection-status.connecting {
+  color: var(--color-warning);
+}
+
+.connection-status.disconnected {
+  color: var(--color-error);
+}
