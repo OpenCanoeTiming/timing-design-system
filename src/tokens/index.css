@@ -5,6 +5,7 @@
  * Importujte tento soubor pro přístup k barvám, typografii a spacing.
  */
 
+@import './fonts.css';
 @import './colors.css';
 @import './typography.css';
 @import './spacing.css';

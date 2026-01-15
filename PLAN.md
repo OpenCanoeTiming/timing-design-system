@@ -36,8 +36,8 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Theme switching logika (`prefers-color-scheme` + class override)
 
 ### 1.4 Fonty
-- [ ] Zkopírovat Inter + JetBrains Mono woff2 z c123-server
-- [ ] Font-face deklarace
+- [x] Stáhnout Inter + JetBrains Mono woff2 (latin subset, z Fontsource CDN)
+- [x] Font-face deklarace (src/tokens/fonts.css)
 
 ---
 
@@ -118,3 +118,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Vytvořeny základní CSS komponenty (buttons, forms, cards, tables, status, layout)
 - Vytvořen playbook index.html s ukázkami všech komponent
 - Implementován dual-theme systém (light/dark)
+- Přidány self-hosted fonty Inter (400-700) a JetBrains Mono (400, 500, 700)
