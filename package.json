@@ -10,15 +10,21 @@
     "dist/",
     "src/tokens/",
     "src/css/",
-    "src/fonts/"
+    "src/fonts/",
+    "src/react/"
   ],
   "scripts": {
     "dev": "npx serve src -p 3000",
     "build": "npm run build:css",
     "build:css": "cat src/tokens/index.css src/css/index.css > dist/timing.css",
+    "typecheck": "tsc --noEmit",
     "lint": "echo 'CSS linting not configured yet'"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"

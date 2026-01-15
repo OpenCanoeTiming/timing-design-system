@@ -81,11 +81,11 @@ Design systém pro vodáckou časomíru s podporou:
 ## Fáze 4: React komponenty
 
 ### 4.1 Setup
-- [ ] TypeScript konfigurace
-- [ ] React peer dependency
+- [x] TypeScript konfigurace
+- [x] React peer dependency (již bylo)
 
 ### 4.2 Komponenty
-- [ ] Button
+- [x] Button
 - [ ] Card
 - [ ] Input, Select, Checkbox
 - [ ] Badge
@@ -128,3 +128,5 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidána tables.html demo stránka (základní, striped, hover, bordered, compact varianty, responzivní tabulka, praktické příklady - výsledky, startovní listina, admin panel)
 - Přidán README.md s dokumentací a příklady použití všech komponent
 - Přidána readme-test.html pro vizuální testování příkladů z README
+- TypeScript konfigurace pro React komponenty (tsconfig.json)
+- První React komponenta: Button (variant, size, icon props)
