@@ -140,12 +140,12 @@ Design systém pro vodáckou časomíru s podporou:
 - [x] Playbook: src/playbooks/log.html
 
 ### 6.4 DropZone komponenta
-- [ ] CSS: src/css/dropzone.css
+- [x] CSS: src/css/dropzone.css
   - dashed border, hover glow
   - drag-over animované pruhy
   - has-file state
-- [ ] React: src/react/DropZone.tsx
-- [ ] Playbook: src/playbooks/dropzone.html
+- [x] React: src/react/DropZone.tsx
+- [x] Playbook: src/playbooks/dropzone.html
 
 ### 6.5 Rozšíření existujících komponent
 - [ ] cards.css: card-canoe (wavy border), card-status-*
