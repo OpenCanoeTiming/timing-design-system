@@ -54,6 +54,8 @@ src/
 4. **Commit po každém bloku** - anglické commit messages
 5. **DENIK.md** - zapsat co bylo uděláno (česky, stručně)
 
+!Vzdy udrzuj striktne synchronii vanilla js i react casti, zmeny promitej do obou  testuj oboje.
+
 ## Design principy
 
 ### Dual-theme systém

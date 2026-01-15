@@ -1,6 +1,6 @@
 # Timing Design System - Plán implementace
 
-## Status: 🟢 Fáze 2 - Komponenty (základní hotovy)
+## Status: 🟢 Fáze 3 - Playbooks a dokumentace (kompletní)
 
 ---
 
@@ -74,7 +74,7 @@ Design systém pro vodáckou časomíru s podporou:
 
 ### 3.2 Dokumentace
 - [x] README s příklady použití
-- [ ] Inline komentáře v CSS
+- [x] Inline komentáře v CSS
 
 ---
 
@@ -141,3 +141,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Build script (scripts/build-css.js) - concatenation, minifikace, kopírování fontů
 - dist/timing.css (50 KB) a dist/timing.min.css (28 KB, 44% menší)
 - bundle-test.html playbook pro testování standalone CSS bundle
+- Ověřeno, že všechny CSS soubory mají adekvátní inline komentáře (hlavičky, sekce, inline poznámky)
