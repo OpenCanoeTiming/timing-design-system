@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal - Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/status.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/modal.css">
+
+  <style>
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Modal Component</h1>
+      <p class="text-secondary mt-2">Accessible modal dialogs with backdrop overlay</p>
+
+      <nav class="playbook-nav">
+        <a href="index.html" class="btn btn-ghost">Back to Index</a>
+        <span style="border-left: 1px solid var(--color-border); margin: 0 var(--space-2);"></span>
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Basic Modal -->
+    <section class="playbook-section">
+      <h2 class="section-title">Basic Modal</h2>
+
+      <div class="component-label">Default Modal</div>
+      <div class="component-row">
+        <button class="btn btn-primary" onclick="openModal('basic-modal')">Open Basic Modal</button>
+      </div>
+
+      <div class="card" style="max-width: 600px;">
+        <div class="card-body">
+          <h4>Features:</h4>
+          <ul class="mt-2" style="padding-left: var(--space-4);">
+            <li>Header with title and close button</li>
+            <li>Scrollable body content</li>
+            <li>Footer with action buttons</li>
+            <li>Backdrop click to close</li>
+            <li>Escape key to close</li>
+            <li>Focus trap for accessibility</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Sizes -->
+    <section class="playbook-section">
+      <h2 class="section-title">Sizes</h2>
+
+      <div class="component-label">Available sizes (max-width)</div>
+      <div class="component-row">
+        <button class="btn btn-secondary" onclick="openModal('sm-modal')">Small (400px)</button>
+        <button class="btn btn-secondary" onclick="openModal('basic-modal')">Default (500px)</button>
+        <button class="btn btn-secondary" onclick="openModal('lg-modal')">Large (700px)</button>
+        <button class="btn btn-secondary" onclick="openModal('xl-modal')">XL (900px)</button>
+        <button class="btn btn-secondary" onclick="openModal('fullscreen-modal')">Fullscreen</button>
+      </div>
+    </section>
+
+    <!-- Confirmation Modal -->
+    <section class="playbook-section">
+      <h2 class="section-title">Confirmation Modal</h2>
+
+      <div class="component-label">Variants</div>
+      <div class="component-row">
+        <button class="btn btn-ghost" onclick="openModal('confirm-warning')">Warning</button>
+        <button class="btn btn-danger" onclick="openModal('confirm-error')">Error/Delete</button>
+        <button class="btn btn-primary" onclick="openModal('confirm-success')">Success</button>
+        <button class="btn btn-secondary" onclick="openModal('confirm-info')">Info</button>
+      </div>
+    </section>
+
+    <!-- Footer Alignment -->
+    <section class="playbook-section">
+      <h2 class="section-title">Footer Alignment</h2>
+
+      <div class="component-label">Options</div>
+      <div class="component-row">
+        <button class="btn btn-ghost" onclick="openModal('footer-right')">Right (default)</button>
+        <button class="btn btn-ghost" onclick="openModal('footer-left')">Left</button>
+        <button class="btn btn-ghost" onclick="openModal('footer-center')">Center</button>
+        <button class="btn btn-ghost" onclick="openModal('footer-between')">Space Between</button>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="playbook-section">
+      <h2 class="section-title">Accessibility</h2>
+
+      <div class="card" style="max-width: 600px;">
+        <div class="card-body">
+          <h4>Built-in A11y Features:</h4>
+          <ul class="mt-2" style="padding-left: var(--space-4);">
+            <li><code>role="dialog"</code> and <code>aria-modal="true"</code></li>
+            <li><code>aria-labelledby</code> pointing to modal title</li>
+            <li>Focus moves to modal on open</li>
+            <li>Body scroll lock when modal is open</li>
+            <li>Escape key closes modal</li>
+            <li>Reduced motion support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals -->
+
+  <!-- Basic Modal -->
+  <div class="modal-backdrop" id="basic-modal" onclick="closeOnBackdrop(event, 'basic-modal')">
+    <div class="modal" role="dialog" aria-labelledby="basic-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="basic-modal-title">Basic Modal</h3>
+        <button class="modal-close" onclick="closeModal('basic-modal')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>This is a basic modal dialog with header, body, and footer sections.</p>
+        <p class="text-secondary mt-2">You can close it by clicking the X button, the Cancel button, pressing Escape, or clicking the backdrop.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('basic-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('basic-modal')">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small Modal -->
+  <div class="modal-backdrop" id="sm-modal" onclick="closeOnBackdrop(event, 'sm-modal')">
+    <div class="modal modal-sm" role="dialog" aria-labelledby="sm-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="sm-modal-title">Small Modal</h3>
+        <button class="modal-close" onclick="closeModal('sm-modal')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Small modal for simple confirmations or short messages.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" onclick="closeModal('sm-modal')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Large Modal -->
+  <div class="modal-backdrop" id="lg-modal" onclick="closeOnBackdrop(event, 'lg-modal')">
+    <div class="modal modal-lg" role="dialog" aria-labelledby="lg-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="lg-modal-title">Large Modal</h3>
+        <button class="modal-close" onclick="closeModal('lg-modal')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Large modal for forms and more complex content.</p>
+        <div class="form-group mt-4">
+          <label class="form-label">Name</label>
+          <input type="text" class="input" placeholder="Enter name...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Club</label>
+          <select class="input select">
+            <option>USK Praha</option>
+            <option>Dukla Praha</option>
+            <option>Bohemians</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('lg-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('lg-modal')">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- XL Modal -->
+  <div class="modal-backdrop" id="xl-modal" onclick="closeOnBackdrop(event, 'xl-modal')">
+    <div class="modal modal-xl" role="dialog" aria-labelledby="xl-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="xl-modal-title">Extra Large Modal</h3>
+        <button class="modal-close" onclick="closeModal('xl-modal')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Extra large modal for tables and extensive content.</p>
+        <div class="table-responsive mt-4">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Competitor</th>
+                <th>Club</th>
+                <th class="cell-numeric">Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Jan Novak</td><td>USK Praha</td><td class="cell-numeric">94.32</td><td><span class="badge badge-success">Finished</span></td></tr>
+              <tr><td>2</td><td>Petr Svoboda</td><td>Dukla</td><td class="cell-numeric">95.18</td><td><span class="badge badge-success">Finished</span></td></tr>
+              <tr><td>3</td><td>Martin Dvorak</td><td>Bohemians</td><td class="cell-numeric">96.44</td><td><span class="badge badge-warning">On course</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('xl-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Modal -->
+  <div class="modal-backdrop" id="fullscreen-modal" onclick="closeOnBackdrop(event, 'fullscreen-modal')">
+    <div class="modal modal-fullscreen" role="dialog" aria-labelledby="fullscreen-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="fullscreen-modal-title">Fullscreen Modal</h3>
+        <button class="modal-close" onclick="closeModal('fullscreen-modal')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Fullscreen modal takes up the entire viewport (minus padding).</p>
+        <p class="text-secondary mt-2">Useful for complex interfaces, settings panels, or detailed views.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('fullscreen-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modals -->
+  <div class="modal-backdrop" id="confirm-warning" onclick="closeOnBackdrop(event, 'confirm-warning')">
+    <div class="modal modal-sm modal-confirm" role="alertdialog" aria-labelledby="confirm-warning-title" aria-modal="true">
+      <div class="modal-body">
+        <div class="modal-icon modal-icon-warning">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-warning-title">Unsaved Changes</h3>
+        <p class="text-secondary mt-2">You have unsaved changes. Are you sure you want to leave?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('confirm-warning')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('confirm-warning')">Leave</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirm-error" onclick="closeOnBackdrop(event, 'confirm-error')">
+    <div class="modal modal-sm modal-confirm" role="alertdialog" aria-labelledby="confirm-error-title" aria-modal="true">
+      <div class="modal-body">
+        <div class="modal-icon modal-icon-error">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-error-title">Delete Record?</h3>
+        <p class="text-secondary mt-2">This action cannot be undone. The record will be permanently deleted.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('confirm-error')">Cancel</button>
+        <button class="btn btn-danger" onclick="closeModal('confirm-error')">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirm-success" onclick="closeOnBackdrop(event, 'confirm-success')">
+    <div class="modal modal-sm modal-confirm" role="dialog" aria-labelledby="confirm-success-title" aria-modal="true">
+      <div class="modal-body">
+        <div class="modal-icon modal-icon-success">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-success-title">Success!</h3>
+        <p class="text-secondary mt-2">Your changes have been saved successfully.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeModal('confirm-success')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirm-info" onclick="closeOnBackdrop(event, 'confirm-info')">
+    <div class="modal modal-sm modal-confirm" role="dialog" aria-labelledby="confirm-info-title" aria-modal="true">
+      <div class="modal-body">
+        <div class="modal-icon modal-icon-info">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 16v-4m0-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirm-info-title">Information</h3>
+        <p class="text-secondary mt-2">New updates are available. Would you like to update now?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('confirm-info')">Later</button>
+        <button class="btn btn-primary" onclick="closeModal('confirm-info')">Update</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Alignment Modals -->
+  <div class="modal-backdrop" id="footer-right" onclick="closeOnBackdrop(event, 'footer-right')">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Footer Right</h3>
+        <button class="modal-close" onclick="closeModal('footer-right')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
+      </div>
+      <div class="modal-body"><p>Default alignment - buttons on right.</p></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('footer-right')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('footer-right')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="footer-left" onclick="closeOnBackdrop(event, 'footer-left')">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Footer Left</h3>
+        <button class="modal-close" onclick="closeModal('footer-left')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
+      </div>
+      <div class="modal-body"><p>Left-aligned footer buttons.</p></div>
+      <div class="modal-footer modal-footer-left">
+        <button class="btn btn-ghost" onclick="closeModal('footer-left')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('footer-left')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="footer-center" onclick="closeOnBackdrop(event, 'footer-center')">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Footer Center</h3>
+        <button class="modal-close" onclick="closeModal('footer-center')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
+      </div>
+      <div class="modal-body"><p>Center-aligned footer buttons.</p></div>
+      <div class="modal-footer modal-footer-center">
+        <button class="btn btn-ghost" onclick="closeModal('footer-center')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('footer-center')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="footer-between" onclick="closeOnBackdrop(event, 'footer-between')">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Footer Between</h3>
+        <button class="modal-close" onclick="closeModal('footer-between')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
+      </div>
+      <div class="modal-body"><p>Space-between aligned footer.</p></div>
+      <div class="modal-footer modal-footer-between">
+        <button class="btn btn-ghost" onclick="closeModal('footer-between')">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal('footer-between')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+      if (theme === 'light') html.classList.add('theme-light');
+      else if (theme === 'dark') html.classList.add('theme-dark');
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.add('open');
+        document.body.classList.add('modal-open');
+        const focusable = modal.querySelector('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable) focusable.focus();
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    function closeOnBackdrop(event, id) {
+      if (event.target === event.currentTarget) {
+        closeModal(id);
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const openModal = document.querySelector('.modal-backdrop.open');
+        if (openModal) {
+          openModal.classList.remove('open');
+          document.body.classList.remove('modal-open');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

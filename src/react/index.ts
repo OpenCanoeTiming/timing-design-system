@@ -36,3 +36,19 @@ export {
   type TableCellProps,
   type TableHeaderCellProps,
 } from './Table';
+export {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter,
+  type ModalProps,
+  type ModalHeaderProps,
+  type ModalTitleProps,
+  type ModalCloseProps,
+  type ModalBodyProps,
+  type ModalFooterProps,
+  type ModalSize,
+  type ModalFooterAlign,
+} from './Modal';
