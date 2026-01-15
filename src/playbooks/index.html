@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../css/status.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/modal.css">
+  <link rel="stylesheet" href="../css/toast.css">
 
   <style>
     /* Playbook-specific styles */
@@ -336,6 +337,118 @@
       </div>
     </section>
 
+    <!-- Toasts Section -->
+    <section class="playbook-section" id="toasts">
+      <h2 class="section-title">Toasts / Notifications</h2>
+
+      <div class="component-label">Spustit toast</div>
+      <div class="component-row">
+        <button class="btn btn-primary" onclick="showToast('success')">Success</button>
+        <button class="btn btn-secondary" onclick="showToast('warning')">Warning</button>
+        <button class="btn btn-danger" onclick="showToast('error')">Error</button>
+        <button class="btn btn-ghost" onclick="showToast('info')">Info</button>
+      </div>
+
+      <div class="component-label mt-4">Pozice</div>
+      <div class="component-row">
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('top-right')">Top Right</button>
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('top-left')">Top Left</button>
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('top-center')">Top Center</button>
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('bottom-right')">Bottom Right</button>
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('bottom-left')">Bottom Left</button>
+        <button class="btn btn-ghost btn-sm" onclick="setToastPosition('bottom-center')">Bottom Center</button>
+      </div>
+
+      <div class="component-label mt-4">Statické ukázky</div>
+      <div class="flex flex-col gap-3" style="max-width: 420px;">
+        <div class="toast toast-success" style="position: relative; animation: none;">
+          <div class="toast-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">Uloženo</div>
+            <div class="toast-message">Změny byly úspěšně uloženy.</div>
+          </div>
+          <button class="toast-close" aria-label="Zavřít">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 5l10 10M15 5L5 15"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="toast toast-warning" style="position: relative; animation: none;">
+          <div class="toast-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">Varování</div>
+            <div class="toast-message">Spojení je nestabilní.</div>
+          </div>
+          <button class="toast-close" aria-label="Zavřít">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 5l10 10M15 5L5 15"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="toast toast-error" style="position: relative; animation: none;">
+          <div class="toast-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">Chyba</div>
+            <div class="toast-message">Nepodařilo se uložit data.</div>
+          </div>
+          <button class="toast-close" aria-label="Zavřít">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 5l10 10M15 5L5 15"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="toast toast-info" style="position: relative; animation: none;">
+          <div class="toast-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">Informace</div>
+            <div class="toast-message">Nová verze je dostupná.</div>
+          </div>
+          <button class="toast-close" aria-label="Zavřít">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 5l10 10M15 5L5 15"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">S progress barem (auto-dismiss)</div>
+      <div style="max-width: 420px;">
+        <div class="toast toast-success" style="position: relative; animation: none;">
+          <div class="toast-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="toast-content">
+            <div class="toast-title">Auto-dismiss</div>
+            <div class="toast-message">Tento toast zmizí automaticky.</div>
+          </div>
+          <div class="toast-progress">
+            <div class="toast-progress-bar" style="animation: none; width: 60%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Typography Section -->
     <section class="playbook-section" id="typography">
       <h2 class="section-title">Typography</h2>
@@ -485,6 +598,9 @@
     </div>
   </div>
 
+  <!-- Toast Container -->
+  <div class="toast-container toast-container-top-right" id="toast-container"></div>
+
   <script>
     function setTheme(theme) {
       const html = document.documentElement;
@@ -539,6 +655,66 @@
         }
       }
     });
+
+    // Toast functions
+    const toastIcons = {
+      success: '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>',
+      warning: '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>',
+      error: '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>',
+      info: '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>'
+    };
+
+    const toastMessages = {
+      success: { title: 'Úspěch', message: 'Operace proběhla úspěšně.' },
+      warning: { title: 'Varování', message: 'Něco vyžaduje vaši pozornost.' },
+      error: { title: 'Chyba', message: 'Něco se pokazilo.' },
+      info: { title: 'Informace', message: 'Nová informace k dispozici.' }
+    };
+
+    let toastId = 0;
+
+    function showToast(type) {
+      const container = document.getElementById('toast-container');
+      const { title, message } = toastMessages[type];
+      const icon = toastIcons[type];
+
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.id = `toast-${++toastId}`;
+      toast.innerHTML = `
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-content">
+          <div class="toast-title">${title}</div>
+          <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="dismissToast('${toast.id}')" aria-label="Zavřít">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
+        </button>
+        <div class="toast-progress">
+          <div class="toast-progress-bar"></div>
+        </div>
+      `;
+
+      container.appendChild(toast);
+
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => dismissToast(toast.id), 5000);
+    }
+
+    function dismissToast(id) {
+      const toast = document.getElementById(id);
+      if (toast && !toast.classList.contains('toast-exiting')) {
+        toast.classList.add('toast-exiting');
+        setTimeout(() => toast.remove(), 200);
+      }
+    }
+
+    function setToastPosition(position) {
+      const container = document.getElementById('toast-container');
+      container.className = `toast-container toast-container-${position}`;
+    }
   </script>
 </body>
 </html>

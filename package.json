@@ -13,7 +13,7 @@
     "src/fonts/"
   ],
   "scripts": {
-    "dev": "npx serve src/playbooks -p 3000",
+    "dev": "npx serve src -p 3000",
     "build": "npm run build:css",
     "build:css": "cat src/tokens/index.css src/css/index.css > dist/timing.css",
     "lint": "echo 'CSS linting not configured yet'"

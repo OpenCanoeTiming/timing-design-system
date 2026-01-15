@@ -1,0 +1,366 @@
+/**
+ * Toast/Notification Components
+ *
+ * Non-blocking notifications that appear temporarily.
+ * Supports success, warning, error, and info variants.
+ */
+
+/* ==========================================================================
+   Toast Container
+   ========================================================================== */
+
+.toast-container {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  pointer-events: none;
+  max-width: 100%;
+}
+
+/* Position variants */
+.toast-container-top-right {
+  top: 0;
+  right: 0;
+}
+
+.toast-container-top-left {
+  top: 0;
+  left: 0;
+}
+
+.toast-container-top-center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-container-bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.toast-container-bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.toast-container-bottom-center {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   Toast
+   ========================================================================== */
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 300px;
+  max-width: 420px;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  animation: toast-slide-in 0.3s ease-out;
+}
+
+.toast.toast-exiting {
+  animation: toast-slide-out 0.2s ease-in forwards;
+}
+
+/* Animation keyframes */
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Left-side toasts slide from left */
+.toast-container-top-left .toast,
+.toast-container-bottom-left .toast {
+  animation-name: toast-slide-in-left;
+}
+
+.toast-container-top-left .toast.toast-exiting,
+.toast-container-bottom-left .toast.toast-exiting {
+  animation-name: toast-slide-out-left;
+}
+
+@keyframes toast-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Center toasts slide down/up */
+.toast-container-top-center .toast {
+  animation-name: toast-slide-in-top;
+}
+
+.toast-container-top-center .toast.toast-exiting {
+  animation-name: toast-slide-out-top;
+}
+
+.toast-container-bottom-center .toast {
+  animation-name: toast-slide-in-bottom;
+}
+
+.toast-container-bottom-center .toast.toast-exiting {
+  animation-name: toast-slide-out-bottom;
+}
+
+@keyframes toast-slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes toast-slide-out-top {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+  }
+}
+
+@keyframes toast-slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes toast-slide-out-bottom {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast.toast-exiting {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Toast Icon
+   ========================================================================== */
+
+.toast-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+}
+
+/* ==========================================================================
+   Toast Content
+   ========================================================================== */
+
+.toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+}
+
+.toast-message {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Toast Close Button
+   ========================================================================== */
+
+.toast-close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: -0.25rem -0.5rem -0.25rem 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.toast-close:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-hover);
+}
+
+.toast-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Toast Variants
+   ========================================================================== */
+
+.toast-success {
+  border-left: 3px solid var(--color-success);
+}
+
+.toast-success .toast-icon {
+  color: var(--color-success);
+}
+
+.toast-warning {
+  border-left: 3px solid var(--color-warning);
+}
+
+.toast-warning .toast-icon {
+  color: var(--color-warning);
+}
+
+.toast-error {
+  border-left: 3px solid var(--color-error);
+}
+
+.toast-error .toast-icon {
+  color: var(--color-error);
+}
+
+.toast-info {
+  border-left: 3px solid var(--color-info);
+}
+
+.toast-info .toast-icon {
+  color: var(--color-info);
+}
+
+/* ==========================================================================
+   Toast with Action
+   ========================================================================== */
+
+.toast-action {
+  margin-top: var(--space-2);
+}
+
+.toast-action .btn {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   Toast Progress Bar (optional auto-dismiss indicator)
+   ========================================================================== */
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--color-border);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  overflow: hidden;
+}
+
+.toast-progress-bar {
+  height: 100%;
+  background-color: var(--color-accent);
+  animation: toast-progress 5s linear forwards;
+}
+
+@keyframes toast-progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.toast-success .toast-progress-bar {
+  background-color: var(--color-success);
+}
+
+.toast-warning .toast-progress-bar {
+  background-color: var(--color-warning);
+}
+
+.toast-error .toast-progress-bar {
+  background-color: var(--color-error);
+}
+
+.toast-info .toast-progress-bar {
+  background-color: var(--color-info);
+}
+
+/* Toast needs relative positioning for progress bar */
+.toast {
+  position: relative;
+}
