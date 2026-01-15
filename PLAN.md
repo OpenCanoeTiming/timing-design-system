@@ -67,7 +67,7 @@ Design systém pro vodáckou časomíru s podporou:
 
 ### 3.1 Demo stránky
 - [x] Index - katalog všech komponent (základní verze)
-- [ ] Dark theme showcase
+- [x] Dark theme showcase
 - [ ] Light theme showcase
 - [ ] Forms demo
 - [ ] Tables demo
@@ -122,3 +122,4 @@ Design systém pro vodáckou časomíru s podporou:
 - Přidána Modal komponenta (backdrop, velikosti, confirmation variant, a11y)
 - Přidána Toast/Notification komponenta (všechny varianty, 6 pozic, progress bar, animace, a11y)
 - Přidána Tabs komponenta (základní, pills, bordered varianty, velikosti sm/lg, full-width, badge, a11y)
+- Přidána dark.html showcase stránka (barevná paleta, admin panel demo, timing display, ovládací prvky, status indikátory)
