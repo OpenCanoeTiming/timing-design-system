@@ -35,3 +35,48 @@
   --glow-error: 0 0 8px rgba(220, 38, 38, 0.3);
   --glow-warning: 0 0 8px rgba(217, 119, 6, 0.3);
 }
+
+/* ==========================================================================
+   WAVY UNDERLINE - vodácký motiv
+   ========================================================================== */
+
+/*
+ * Vlnka jako dekorativní podtržení
+ * Použití: .wavy-underline nebo border-wavy na kontejneru
+ */
+
+.wavy-underline {
+  position: relative;
+  border-bottom: none !important;
+}
+
+.wavy-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--pattern-wave-height);
+  background: var(--pattern-wave) repeat-x left center;
+}
+
+/* Varianta: vlnka jen na části šířky */
+.wavy-underline-partial::after {
+  width: 120px;
+}
+
+/* Border varianta pro kontejnery */
+.border-wavy {
+  border-bottom: none !important;
+  position: relative;
+}
+
+.border-wavy::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--pattern-wave-height);
+  background: var(--pattern-wave) repeat-x left center;
+}
