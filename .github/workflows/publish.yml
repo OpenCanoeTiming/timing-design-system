@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@opencanoe'
+          scope: '@opencanoetiming'
 
       - name: Install dependencies
         run: npm ci

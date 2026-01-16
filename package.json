@@ -1,6 +1,6 @@
 {
-  "name": "@opencanoe/timing-design-system",
-  "version": "0.2.0",
+  "name": "@opencanoetiming/timing-design-system",
+  "version": "0.2.1",
   "description": "Canoe Timing Design System - UI komponenty pro vodáckou časomíru",
   "author": "Open Canoe Timing Contributors",
   "license": "MIT",
