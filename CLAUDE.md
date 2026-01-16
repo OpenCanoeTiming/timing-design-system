@@ -5,10 +5,12 @@
 Canoe Timing Design System je knihovna UI komponent a stylů pro vodáckou časomíru (canoe slalom timing).
 Inspirováno stylem z c123-server admin dashboardu - profesionální, elegantní vzhled s vodáckým šmrncem.
 
+**GitHub:** OpenCanoeTiming/timing-design-system | **Licence:** MIT
+
 Určeno pro použití v:
-- c123-server (admin dashboard)
-- c123-xml-tools (one-shot utility nástroje)
-- Budoucí React aplikace (scoreboardy)
+- c123-server (admin dashboard) - `../c123-server/`
+- c123-xml-tools (utility nástroje) - `../c123-xml-tools/`
+- c123-scoreboard (React aplikace) - `../c123-scoreboard/`
 
 ## Vizuální identita
 
@@ -130,9 +132,10 @@ npm run lint
 
 ## Vztah k ostatním projektům
 
-- **c123-server:** Importuje CSS z tohoto systému (nebo používá dist/timing.css)
-- **c123-xml-tools:** Může použít standalone CSS bundle (dist/timing.css)
-- **Nové projekty:** NPM závislost nebo přímé kopírování CSS
+- **c123-server:** `../c123-server/` - Importuje CSS pro admin dashboard
+- **c123-scoreboard:** `../c123-scoreboard/` - Může použít React komponenty
+- **c123-xml-tools:** `../c123-xml-tools/` - Standalone CSS bundle (dist/timing.css)
+- **Nové projekty:** `npm install @opencanoe/timing-design-system`
 
 ## Barevná paleta (z c123-server)
 
