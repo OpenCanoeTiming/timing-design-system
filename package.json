@@ -1,9 +1,16 @@
 {
-  "name": "canoe-timing-design-system",
+  "name": "@opencanoe/timing-design-system",
   "version": "0.2.0",
   "description": "Canoe Timing Design System - UI komponenty pro vodáckou časomíru",
-  "author": "CSB Team",
+  "author": "Open Canoe Timing Contributors",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenCanoeTiming/timing-design-system.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "main": "dist/timing.css",
   "files": [
