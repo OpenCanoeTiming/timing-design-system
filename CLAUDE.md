@@ -135,7 +135,7 @@ npm run lint
 - **c123-server:** `../c123-server/` - Importuje CSS pro admin dashboard
 - **c123-scoreboard:** `../c123-scoreboard/` - Může použít React komponenty
 - **c123-xml-tools:** `../c123-xml-tools/` - Standalone CSS bundle (dist/timing.css)
-- **Nové projekty:** `npm install @opencanoe/timing-design-system`
+- **Nové projekty:** `npm install @opencanoetiming/timing-design-system`
 
 ## Barevná paleta (z c123-server)
 
