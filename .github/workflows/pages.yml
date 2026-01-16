@@ -1,0 +1,54 @@
+name: Deploy Playbooks to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        run: |
+          mkdir -p _site/playbooks
+          # Copy playbooks
+          cp src/playbooks/*.html _site/playbooks/
+          # Copy CSS and tokens (one level up from playbooks)
+          cp -r src/tokens _site/
+          cp -r src/css _site/
+          cp -r src/fonts _site/
+          # Copy dist for bundle-test
+          cp -r dist _site/
+          # Create redirect from root to playbooks/index.html
+          echo '<meta http-equiv="refresh" content="0;url=playbooks/">' > _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
