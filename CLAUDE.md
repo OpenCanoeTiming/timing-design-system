@@ -130,6 +130,52 @@ npm run build
 npm run lint
 ```
 
+## CI/CD a publikace
+
+### GitHub Actions workflows
+
+Projekt používá dva automatické workflows (`.github/workflows/`):
+
+1. **Deploy Playbooks** (`pages.yml`)
+   - Spouští se: na každý push do `main`
+   - Publikuje playbook demo na GitHub Pages
+   - URL: https://opencanoetiming.github.io/timing-design-system/playbooks/
+
+2. **Publish to GitHub Packages** (`publish.yml`)
+   - Spouští se: na push tagu `v*` (např. `v0.3.1`)
+   - Publikuje npm balíček na GitHub Packages
+   - Balíček: `@opencanoetiming/timing-design-system`
+
+### Postup vydání nové verze
+
+```bash
+# 1. Upravit verzi v package.json
+npm version patch  # nebo minor/major
+
+# 2. Commit a push
+git push
+
+# 3. Vytvořit a pushnout tag
+git tag -a v0.3.1 -m "Release v0.3.1 - popis změn"
+git push origin v0.3.1
+```
+
+Po pushnutí tagu GitHub Actions automaticky publikuje balíček.
+
+### Použití v jiných projektech
+
+**Lokální vývoj** (doporučeno pro projekty ve stejném workspace):
+```json
+"@opencanoetiming/timing-design-system": "file:../timing-design-system"
+```
+
+**Z GitHub Packages** (pro samostatné projekty):
+```json
+"@opencanoetiming/timing-design-system": "^0.3.1"
+```
+
+Vyžaduje `.npmrc` s konfigurací GitHub Packages registry.
+
 ## Vztah k ostatním projektům
 
 - **c123-server:** `../c123-server/` - Importuje CSS pro admin dashboard
