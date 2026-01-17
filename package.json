@@ -9,7 +9,7 @@
     "url": "https://github.com/OpenCanoeTiming/timing-design-system.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "type": "module",
   "main": "dist/timing.css",

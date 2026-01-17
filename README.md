@@ -15,11 +15,13 @@ Design system for canoe slalom timing applications. Professional, elegant UI com
 
 ## Installation
 
-### From GitHub Packages
+### From npm
 
 ```bash
-npm install @opencanoetiming/timing-design-system --registry=https://npm.pkg.github.com
+npm install @opencanoetiming/timing-design-system
 ```
+
+The package is automatically published to npmjs.com when changes are pushed to main.
 
 ### Direct Download
 
