@@ -137,3 +137,11 @@ export {
   type MenuPosition,
   type MenuItemVariant,
 } from './ContextMenu';
+export {
+  Spinner,
+  Dots,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerVariant,
+  type DotsProps,
+} from './Spinner';

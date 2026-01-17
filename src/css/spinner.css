@@ -1,0 +1,183 @@
+/**
+ * Spinner Components
+ *
+ * Loading indicators: circular spinner and pulsing dots.
+ */
+
+/* ==========================================================================
+   Spinner (circular)
+   ========================================================================== */
+
+.spinner {
+  display: inline-block;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  animation: spin 0.8s linear infinite;
+}
+
+/* Sizes */
+.spinner-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.spinner-md {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 2px;
+}
+
+.spinner-lg {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-width: 3px;
+}
+
+/* Color variants */
+.spinner-accent {
+  border-top-color: var(--color-accent);
+}
+
+.spinner-success {
+  border-top-color: var(--color-success);
+}
+
+.spinner-warning {
+  border-top-color: var(--color-warning);
+}
+
+.spinner-error {
+  border-top-color: var(--color-error);
+}
+
+.spinner-white {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Dots (pulsing)
+   ========================================================================== */
+
+.dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.dots-dot {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  animation: dots-pulse 1.4s ease-in-out infinite;
+}
+
+.dots-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dots-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dots-pulse {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Sizes */
+.dots-sm {
+  font-size: var(--text-xs);
+}
+
+.dots-md {
+  font-size: var(--text-sm);
+}
+
+.dots-lg {
+  font-size: var(--text-base);
+}
+
+/* Color variants - inherit from parent color by default */
+.dots-accent {
+  color: var(--color-accent);
+}
+
+.dots-muted {
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Loading Overlay
+   ========================================================================== */
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-surface);
+  opacity: 0.9;
+  z-index: 10;
+}
+
+.loading-overlay-blur {
+  backdrop-filter: blur(2px);
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   Loading State for Containers
+   ========================================================================== */
+
+.is-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.is-loading > *:not(.loading-overlay) {
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.5s;
+  }
+
+  .dots-dot {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .dots-dot:nth-child(2) {
+    opacity: 0.8;
+  }
+
+  .dots-dot:nth-child(3) {
+    opacity: 1;
+  }
+}

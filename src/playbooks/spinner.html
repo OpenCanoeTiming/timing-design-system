@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spinner - Canoe Timing Design System</title>
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="../tokens/fonts.css">
+  <link rel="stylesheet" href="../tokens/colors.css">
+  <link rel="stylesheet" href="../tokens/typography.css">
+  <link rel="stylesheet" href="../tokens/spacing.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/buttons.css">
+  <link rel="stylesheet" href="../css/cards.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/spinner.css">
+
+  <style>
+    .playbook-header {
+      padding: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-surface);
+    }
+
+    .playbook-nav {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .playbook-section {
+      padding: var(--space-8) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .playbook-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .component-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .component-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .demo-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+      min-height: 60px;
+      padding: var(--space-4);
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    .demo-box-dark {
+      background: var(--color-bg-elevated);
+    }
+
+    .demo-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .loading-demo-container {
+      position: relative;
+      width: 300px;
+      height: 150px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .loading-demo-content {
+      padding: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+  <header class="playbook-header">
+    <div class="container">
+      <h1 class="text-2xl font-bold">Spinner Components</h1>
+      <p class="text-secondary mt-2">Loading indicators: circular spinner and pulsing dots</p>
+
+      <nav class="playbook-nav">
+        <a href="./" class="btn btn-ghost">&larr; Back</a>
+        <span style="border-left: 1px solid var(--color-border); margin: 0 var(--space-2);"></span>
+        <button class="btn btn-primary" onclick="setTheme('light')">Light Theme</button>
+        <button class="btn btn-secondary" onclick="setTheme('dark')">Dark Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Spinner Sizes -->
+    <section class="playbook-section">
+      <h2 class="section-title">Spinner Sizes</h2>
+
+      <div class="component-label">Available sizes</div>
+      <div class="component-row">
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-sm spinner-accent"></span>
+          </div>
+          <code>sm (16px)</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-md spinner-accent"></span>
+          </div>
+          <code>md (24px)</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-lg spinner-accent"></span>
+          </div>
+          <code>lg (40px)</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spinner Colors -->
+    <section class="playbook-section">
+      <h2 class="section-title">Spinner Colors</h2>
+
+      <div class="component-label">Semantic variants</div>
+      <div class="component-row">
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-md spinner-accent"></span>
+          </div>
+          <code>accent</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-md spinner-success"></span>
+          </div>
+          <code>success</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-md spinner-warning"></span>
+          </div>
+          <code>warning</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="spinner spinner-md spinner-error"></span>
+          </div>
+          <code>error</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box demo-box-dark" style="background: var(--color-accent);">
+            <span class="spinner spinner-md spinner-white"></span>
+          </div>
+          <code>white</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dots -->
+    <section class="playbook-section">
+      <h2 class="section-title">Dots (Pulsing)</h2>
+
+      <div class="component-label">Sizes</div>
+      <div class="component-row">
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="dots dots-sm dots-accent">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>sm</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="dots dots-md dots-accent">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>md</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="dots dots-lg dots-accent">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>lg</code>
+        </div>
+      </div>
+
+      <div class="component-label mt-6">Color variants</div>
+      <div class="component-row">
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="dots dots-md dots-accent">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>accent</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box">
+            <span class="dots dots-md dots-muted">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>muted</code>
+        </div>
+        <div class="component-item">
+          <div class="demo-box" style="color: var(--color-success);">
+            <span class="dots dots-md">
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+              <span class="dots-dot"></span>
+            </span>
+          </div>
+          <code>inherit</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Button with Spinner -->
+    <section class="playbook-section">
+      <h2 class="section-title">Button with Spinner</h2>
+
+      <div class="component-label">Loading state in buttons</div>
+      <div class="component-row">
+        <button class="btn btn-primary" disabled>
+          <span class="spinner spinner-sm spinner-white"></span>
+          Loading...
+        </button>
+        <button class="btn btn-secondary" disabled>
+          <span class="spinner spinner-sm spinner-accent"></span>
+          Saving
+        </button>
+        <button class="btn btn-ghost" disabled>
+          <span class="spinner spinner-sm spinner-accent"></span>
+          Processing
+        </button>
+      </div>
+
+      <div class="component-label mt-6">With dots</div>
+      <div class="component-row">
+        <button class="btn btn-primary" disabled>
+          Loading
+          <span class="dots dots-sm" style="color: white;">
+            <span class="dots-dot"></span>
+            <span class="dots-dot"></span>
+            <span class="dots-dot"></span>
+          </span>
+        </button>
+        <button class="btn btn-secondary" disabled>
+          Saving
+          <span class="dots dots-sm dots-accent">
+            <span class="dots-dot"></span>
+            <span class="dots-dot"></span>
+            <span class="dots-dot"></span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Inline Usage -->
+    <section class="playbook-section">
+      <h2 class="section-title">Inline Usage</h2>
+
+      <div class="component-label">Dots work well inline with text</div>
+      <div class="component-row">
+        <div class="card" style="width: 300px;">
+          <div class="card-body">
+            <p>
+              Connecting to server
+              <span class="dots dots-sm">
+                <span class="dots-dot"></span>
+                <span class="dots-dot"></span>
+                <span class="dots-dot"></span>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="card" style="width: 300px;">
+          <div class="card-body">
+            <p>
+              <span class="demo-inline">
+                <span class="spinner spinner-sm spinner-accent"></span>
+                Loading results
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <section class="playbook-section">
+      <h2 class="section-title">Loading Overlay</h2>
+
+      <div class="component-label">Overlay on container</div>
+      <div class="component-row">
+        <div class="loading-demo-container is-loading">
+          <div class="loading-demo-content">
+            <h4>Card Title</h4>
+            <p class="text-secondary mt-2">This content is loading...</p>
+            <p class="mt-2">Lorem ipsum dolor sit amet consectetur.</p>
+          </div>
+          <div class="loading-overlay">
+            <span class="spinner spinner-lg spinner-accent"></span>
+          </div>
+        </div>
+
+        <div class="loading-demo-container is-loading">
+          <div class="loading-demo-content">
+            <h4>With Blur</h4>
+            <p class="text-secondary mt-2">Blurred background content.</p>
+            <p class="mt-2">Lorem ipsum dolor sit amet consectetur.</p>
+          </div>
+          <div class="loading-overlay loading-overlay-blur">
+            <span class="spinner spinner-lg spinner-accent"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="playbook-section">
+      <h2 class="section-title">Accessibility</h2>
+
+      <div class="card" style="max-width: 600px;">
+        <div class="card-body">
+          <h4>Built-in A11y Features:</h4>
+          <ul class="mt-2" style="padding-left: var(--space-4);">
+            <li><code>role="status"</code> for screen reader announcement</li>
+            <li><code>aria-label</code> with customizable text</li>
+            <li>Reduced motion support - slower/static animation</li>
+            <li>Dots use <code>aria-hidden</code> on individual dots</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section class="playbook-section">
+      <h2 class="section-title">Usage</h2>
+
+      <div class="card" style="max-width: 700px;">
+        <div class="card-body">
+          <h4>CSS Classes</h4>
+          <pre class="mt-2" style="background: var(--color-bg-elevated); padding: var(--space-3); border-radius: var(--radius-md); overflow-x: auto;"><code>&lt;!-- Spinner --&gt;
+&lt;span class="spinner spinner-md spinner-accent"&gt;&lt;/span&gt;
+
+&lt;!-- Dots --&gt;
+&lt;span class="dots dots-md dots-accent"&gt;
+  &lt;span class="dots-dot"&gt;&lt;/span&gt;
+  &lt;span class="dots-dot"&gt;&lt;/span&gt;
+  &lt;span class="dots-dot"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Loading overlay --&gt;
+&lt;div class="is-loading"&gt;
+  &lt;div&gt;Content...&lt;/div&gt;
+  &lt;div class="loading-overlay"&gt;
+    &lt;span class="spinner spinner-lg"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="card mt-4" style="max-width: 700px;">
+        <div class="card-body">
+          <h4>React Components</h4>
+          <pre class="mt-2" style="background: var(--color-bg-elevated); padding: var(--space-3); border-radius: var(--radius-md); overflow-x: auto;"><code>import { Spinner, Dots } from '@opencanoetiming/timing-design-system/react';
+
+// Spinner
+&lt;Spinner /&gt;
+&lt;Spinner size="lg" variant="success" /&gt;
+&lt;Spinner size="sm" variant="white" label="Saving..." /&gt;
+
+// Dots
+&lt;Dots /&gt;
+&lt;Dots size="sm" accent /&gt;
+&lt;span&gt;Loading&lt;Dots size="sm" /&gt;&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      html.classList.remove('theme-light', 'theme-dark');
+      if (theme === 'light') html.classList.add('theme-light');
+      else if (theme === 'dark') html.classList.add('theme-dark');
+    }
+  </script>
+</body>
+</html>
