@@ -20,9 +20,9 @@ Určeno pro použití v:
 
 ## Jazyky
 
-- **Komunikace:** čeština
+- **Komunikace s uživatelem:** čeština
+- **Dokumentace (README, docs):** angličtina
 - **Kód a commity:** angličtina
-- **Dokumentace:** čeština s anglickými technickými termíny
 
 ## Architektura
 
