@@ -100,3 +100,40 @@ export {
   type DropZoneSize,
   type FileInfo,
 } from './DropZone';
+export {
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  type TabsProps,
+  type TabListProps,
+  type TabProps,
+  type TabPanelsProps,
+  type TabPanelProps,
+  type TabsVariant,
+  type TabsSize,
+} from './Tabs';
+export { Kbd, type KbdProps, type KbdSize } from './Kbd';
+export {
+  ProgressBar,
+  type ProgressBarProps,
+  type ProgressBarVariant,
+  type ProgressBarSize,
+} from './ProgressBar';
+export {
+  Menu,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+  MenuLabel,
+  type MenuProps,
+  type MenuTriggerProps,
+  type MenuContentProps,
+  type MenuItemProps,
+  type MenuSeparatorProps,
+  type MenuLabelProps,
+  type MenuPosition,
+  type MenuItemVariant,
+} from './ContextMenu';

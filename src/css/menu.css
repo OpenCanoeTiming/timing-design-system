@@ -1,0 +1,188 @@
+/**
+ * Timing Design System - Context Menu / Dropdown Menu
+ *
+ * Dropdown/context menu for actions and navigation.
+ *
+ * Structure:
+ * .menu           - Container
+ * .menu-trigger   - Trigger button
+ * .menu-content   - Dropdown content
+ * .menu-item      - Menu item button
+ * .menu-separator - Horizontal divider
+ * .menu-label     - Section label
+ *
+ * Item variants:
+ * .menu-item-danger - Destructive action (red)
+ *
+ * Positions:
+ * .menu-content-bottom-start - Below, aligned left (default)
+ * .menu-content-bottom-end   - Below, aligned right
+ * .menu-content-top-start    - Above, aligned left
+ * .menu-content-top-end      - Above, aligned right
+ */
+
+/* Menu container */
+.menu {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Trigger button */
+.menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.menu-trigger:hover {
+  background-color: var(--color-bg-elevated);
+}
+
+.menu-trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Menu content dropdown */
+.menu-content {
+  position: absolute;
+  z-index: 50;
+  min-width: 160px;
+  padding: var(--space-1);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  animation: menuFadeIn var(--transition-fast) ease-out;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu-content {
+    animation: none;
+  }
+}
+
+/* Position variants */
+.menu-content-bottom-start {
+  top: 100%;
+  left: 0;
+  margin-top: var(--space-1);
+}
+
+.menu-content-bottom-end {
+  top: 100%;
+  right: 0;
+  margin-top: var(--space-1);
+}
+
+.menu-content-top-start {
+  bottom: 100%;
+  left: 0;
+  margin-bottom: var(--space-1);
+}
+
+.menu-content-top-end {
+  bottom: 100%;
+  right: 0;
+  margin-bottom: var(--space-1);
+}
+
+/* Menu item */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--transition-fast);
+}
+
+.menu-item:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+}
+
+.menu-item:focus-visible {
+  outline: none;
+  background-color: var(--color-bg-elevated);
+}
+
+.menu-item:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Item icon */
+.menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Item label */
+.menu-item-label {
+  flex: 1;
+}
+
+/* Item shortcut hint */
+.menu-item-shortcut {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-left: var(--space-4);
+}
+
+/* Danger variant */
+.menu-item-danger {
+  color: var(--color-error);
+}
+
+.menu-item-danger:hover:not(:disabled) {
+  background-color: var(--color-error-bg, rgba(239, 68, 68, 0.1));
+}
+
+/* Separator */
+.menu-separator {
+  height: 1px;
+  margin: var(--space-1) 0;
+  background-color: var(--color-border);
+}
+
+/* Label */
+.menu-label {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
