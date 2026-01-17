@@ -200,7 +200,37 @@ Download `dist/timing.css` from the [latest release](https://github.com/OpenCano
 
 ### Canoe-Specific Components
 
-#### App Header with Status Bar
+#### App Header
+
+The header is designed to be the unifying visual element across timing tools. It features a 4px accent bar on the left with a glow effect, and supports multiple layout patterns.
+
+**Admin Dashboard Style** (c123-server inspired):
+
+```html
+<header class="app-header">
+  <div class="header-brand">
+    <h1 class="header-title header-title-lg">C123-SERVER</h1>
+  </div>
+  <div class="header-status">
+    <span class="header-port">:27123</span>
+    <span class="header-status-item">
+      <span class="status-dot status-dot-success"></span>
+      <span>TCP</span>
+    </span>
+    <span class="header-status-item">
+      <span class="status-dot status-dot-warning status-dot-pulse"></span>
+      <span>UDP</span>
+    </span>
+    <span class="header-status-item">
+      <span class="status-dot status-dot-error"></span>
+      <span>XML</span>
+    </span>
+    <span class="badge-live">LIVE</span>
+  </div>
+</header>
+```
+
+**Badge-style Status Indicators** (alternative):
 
 ```html
 <header class="app-header">
@@ -217,6 +247,43 @@ Download `dist/timing.css` from the [latest release](https://github.com/OpenCano
     <span class="badge-live">LIVE</span>
   </div>
 </header>
+```
+
+#### Header Components
+
+| Class | Description |
+|-------|-------------|
+| `.app-header` | Main header container with accent bar |
+| `.header-brand` | Logo/title area |
+| `.header-title` | Main heading (H1) |
+| `.header-title-lg` | Larger title variant (text-2xl, bold) |
+| `.header-status` | Status indicators container (right-aligned) |
+| `.header-status-item` | Minimal status: dot + label, monospace |
+| `.header-port` | Server port display (`:27123`) |
+| `.header-actions` | Action buttons area |
+| `.status-indicator` | Badge-style status with border |
+| `.badge-live` | LIVE badge with gate pole animation |
+| `.header-live` | Simple LIVE indicator (dot + text) |
+
+#### Header Variants
+
+| Class | Effect |
+|-------|--------|
+| `.header-compact` | Smaller 44px height |
+| `.header-plain` | No accent bar |
+| `.header-elevated` | With shadow |
+
+#### LIVE Badge Variants
+
+```html
+<!-- Default: with gate pole animation (paddling flair) -->
+<span class="badge-live">LIVE</span>
+
+<!-- Simple: just dot + text (for simpler tools) -->
+<span class="header-live">
+  <span class="status-dot status-dot-success"></span>
+  LIVE
+</span>
 ```
 
 #### Gate Pole Indicators
@@ -286,7 +353,11 @@ All values are CSS variables for easy customization:
 React components are available in `src/react/`:
 
 ```tsx
-import { Button, Card, Badge, Modal, Toast, Header } from '@opencanoetiming/timing-design-system/react';
+import {
+  Button, Card, Badge, Modal, Toast,
+  Header, HeaderBrand, HeaderTitle, HeaderStatus,
+  HeaderPort, HeaderStatusItem, LiveBadge
+} from '@opencanoetiming/timing-design-system/react';
 
 function App() {
   return (
@@ -294,6 +365,47 @@ function App() {
       <Badge variant="success">Live</Badge>
       <Button variant="primary">Start</Button>
     </Card>
+  );
+}
+```
+
+### Header Components (React)
+
+```tsx
+import {
+  Header, HeaderBrand, HeaderTitle, HeaderStatus,
+  HeaderPort, HeaderStatusItem, LiveBadge
+} from '@opencanoetiming/timing-design-system/react';
+
+// Admin dashboard style
+function AdminHeader() {
+  return (
+    <Header>
+      <HeaderBrand>
+        <HeaderTitle className="header-title-lg">C123-SERVER</HeaderTitle>
+      </HeaderBrand>
+      <HeaderStatus>
+        <HeaderPort port={27123} />
+        <HeaderStatusItem label="TCP" status="connected" />
+        <HeaderStatusItem label="UDP" status="connecting" />
+        <HeaderStatusItem label="XML" status="disconnected" />
+        <LiveBadge />  {/* default: with gate pole */}
+      </HeaderStatus>
+    </Header>
+  );
+}
+
+// Simple app header
+function SimpleHeader() {
+  return (
+    <Header>
+      <HeaderBrand>
+        <HeaderTitle>My App</HeaderTitle>
+      </HeaderBrand>
+      <HeaderStatus>
+        <LiveBadge variant="simple" />  {/* simple: just dot + text */}
+      </HeaderStatus>
+    </Header>
   );
 }
 ```

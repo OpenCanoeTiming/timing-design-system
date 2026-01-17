@@ -65,6 +65,13 @@
   margin: 0;
 }
 
+/* Larger title variant for admin dashboards (c123-server style) */
+.header-title-lg {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
 .header-subtitle {
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
@@ -93,6 +100,55 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   MINIMAL STATUS ITEM (admin dashboard style)
+   Jednoduchý status: dot + label, bez badge stylu
+   ========================================================================== */
+
+.header-status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.header-status-item .status-dot {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   PORT DISPLAY
+   ========================================================================== */
+
+.header-port {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   SIMPLE LIVE INDICATOR (alternative to badge-live)
+   Pro projekty kde gate pole animace nedává smysl
+   ========================================================================== */
+
+.header-live {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-success);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.header-live .status-dot {
+  flex-shrink: 0;
 }
 
 .status-indicator {

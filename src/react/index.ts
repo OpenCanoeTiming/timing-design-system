@@ -68,6 +68,8 @@ export {
   HeaderNav,
   HeaderActions,
   HeaderStatus,
+  HeaderPort,
+  HeaderStatusItem,
   StatusIndicator,
   LiveBadge,
   type HeaderProps,
@@ -76,6 +78,8 @@ export {
   type HeaderNavProps,
   type HeaderActionsProps,
   type HeaderStatusProps,
+  type HeaderPortProps,
+  type HeaderStatusItemProps,
   type StatusIndicatorProps,
   type LiveBadgeProps,
 } from './Header';

@@ -87,10 +87,93 @@
       </div>
     </section>
 
-    <!-- Header with Status Indicators -->
+    <!-- Admin Dashboard Style (c123-server inspired) -->
     <section class="demo-section">
-      <h2 class="demo-title">Header with Status Indicators</h2>
-      <p class="demo-description">Status indikatory pro TCP/UDP/XML spojeni</p>
+      <h2 class="demo-title">⭐ Admin Dashboard Style</h2>
+      <p class="demo-description">Styl inspirovaný c123-server admin - minimální status items, port display, LIVE badge</p>
+
+      <div class="demo-header-wrapper">
+        <header class="app-header">
+          <div class="header-brand">
+            <h1 class="header-title header-title-lg">C123-SERVER</h1>
+          </div>
+          <div class="header-status">
+            <span class="header-port">:27123</span>
+            <span class="header-status-item">
+              <span class="status-dot status-dot-success"></span>
+              <span>TCP</span>
+            </span>
+            <span class="header-status-item">
+              <span class="status-dot status-dot-warning status-dot-pulse"></span>
+              <span>UDP</span>
+            </span>
+            <span class="header-status-item">
+              <span class="status-dot status-dot-error"></span>
+              <span>XML</span>
+            </span>
+            <span class="badge-live">LIVE</span>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <!-- Minimal Status Items -->
+    <section class="demo-section">
+      <h2 class="demo-title">Minimal Status Items</h2>
+      <p class="demo-description">Jednoduchý status: dot + label, monospace font, bez badge stylu</p>
+
+      <div class="flex gap-6 flex-wrap">
+        <span class="header-status-item">
+          <span class="status-dot status-dot-success"></span>
+          <span>Connected</span>
+        </span>
+        <span class="header-status-item">
+          <span class="status-dot status-dot-warning status-dot-pulse"></span>
+          <span>Connecting</span>
+        </span>
+        <span class="header-status-item">
+          <span class="status-dot status-dot-error"></span>
+          <span>Disconnected</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- Port Display -->
+    <section class="demo-section">
+      <h2 class="demo-title">Port Display</h2>
+      <p class="demo-description">Zobrazení portu serveru v headeru</p>
+
+      <div class="flex gap-4 items-center">
+        <span class="header-port">:27123</span>
+        <span class="header-port">:8080</span>
+        <span class="header-port">:3000</span>
+      </div>
+    </section>
+
+    <!-- LiveBadge Variants -->
+    <section class="demo-section">
+      <h2 class="demo-title">LIVE Badge Variants</h2>
+      <p class="demo-description">Default (s gate pole) vs Simple (jen dot + text)</p>
+
+      <div class="flex gap-8 items-center">
+        <div class="flex flex-col gap-2 items-center">
+          <span class="badge-live">LIVE</span>
+          <span class="text-muted text-xs">Default (gate pole)</span>
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+          <span class="header-live">
+            <span class="status-dot status-dot-success"></span>
+            LIVE
+          </span>
+          <span class="text-muted text-xs">Simple</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Header with Status Indicators (badge style) -->
+    <section class="demo-section">
+      <h2 class="demo-title">Header with Badge-style Status Indicators</h2>
+      <p class="demo-description">Alternativní styl s badge indikátory (s rámečkem a pozadím)</p>
 
       <div class="demo-header-wrapper">
         <header class="app-header">
