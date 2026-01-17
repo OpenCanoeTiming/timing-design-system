@@ -1,8 +1,12 @@
 import { forwardRef, type SelectHTMLAttributes, type ReactNode } from 'react';
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export type SelectSize = 'sm' | 'md' | 'lg';
+
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   /** Show error state */
   error?: boolean;
+  /** Size variant (visual size, not HTML size attribute) */
+  size?: SelectSize;
   /** Select options */
   children: ReactNode;
 }
@@ -16,10 +20,15 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
  *   <option value="1">Option 1</option>
  *   <option value="2">Option 2</option>
  * </Select>
+ *
+ * @example
+ * <Select size="sm">...</Select>  // Compact
+ * <Select size="lg">...</Select>  // Large
  */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ error = false, className = '', children, ...props }, ref) => {
-    const classes = ['input', 'select', error ? 'input-error' : '', className]
+  ({ error = false, size = 'md', className = '', children, ...props }, ref) => {
+    const sizeClass = size !== 'md' ? `select-${size}` : '';
+    const classes = ['input', 'select', sizeClass, error ? 'input-error' : '', className]
       .filter(Boolean)
       .join(' ');
 

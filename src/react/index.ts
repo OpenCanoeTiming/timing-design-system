@@ -18,7 +18,7 @@ export {
   type CardStatus,
 } from './Card';
 export { Input, type InputProps } from './Input';
-export { Select, type SelectProps } from './Select';
+export { Select, type SelectProps, type SelectSize } from './Select';
 export { Checkbox, Radio, type CheckboxProps, type RadioProps } from './Checkbox';
 export { Badge, StatusDot, type BadgeProps, type BadgeVariant, type StatusDotProps, type StatusDotVariant } from './Badge';
 export {
