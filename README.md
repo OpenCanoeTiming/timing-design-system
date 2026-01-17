@@ -15,13 +15,34 @@ Design system for canoe slalom timing applications. Professional, elegant UI com
 
 ## Installation
 
-### From npm
+### From GitHub Packages
+
+This package is published to [GitHub Packages](https://github.com/OpenCanoeTiming/timing-design-system/pkgs/npm/timing-design-system). GitHub Packages requires authentication even for public packages.
+
+**1. Create a GitHub Personal Access Token:**
+- Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
+- Generate new token with `read:packages` scope
+- Copy the token
+
+**2. Configure npm to use GitHub Packages:**
+
+Create or edit `~/.npmrc` (global) or `.npmrc` in your project:
+
+```
+@opencanoetiming:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+> **Tip:** For CI/CD, use environment variable instead of hardcoding the token:
+> ```
+> //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+> ```
+
+**3. Install the package:**
 
 ```bash
 npm install @opencanoetiming/timing-design-system
 ```
-
-The package is automatically published to npmjs.com when changes are pushed to main.
 
 ### Direct Download
 
