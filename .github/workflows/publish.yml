@@ -13,6 +13,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # Required for OIDC trusted publishing
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,8 +49,9 @@ jobs:
 
       - name: Publish
         if: steps.check.outputs.exists == 'false'
-        run: npm publish
+        run: npm publish --access public
         env:
+          # NPM_TOKEN needed only for first publish, then OIDC takes over
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Skip publish (version exists)
