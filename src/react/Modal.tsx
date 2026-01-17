@@ -5,7 +5,6 @@ import {
   type HTMLAttributes,
   type ReactNode,
   type MouseEvent,
-  type KeyboardEvent,
 } from 'react';
 
 export type ModalSize = 'sm' | 'default' | 'lg' | 'xl' | 'fullscreen';
