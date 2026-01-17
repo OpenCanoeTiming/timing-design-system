@@ -1,30 +1,30 @@
-# Canoe Timing Design System - Plán implementace
+# Canoe Timing Design System - Implementation Plan
 
-## Status: 🟢 Fáze 6 - Canoe branding + nové komponenty (dokončeno)
-
----
-
-## Přehled
-
-Design systém pro vodáckou časomíru s podporou:
-- **Dark theme** pro admin nástroje (c123-server)
-- **Light theme** pro uživatelské nástroje (c123-xml-tools)
-- **Vanilla CSS** i **React komponenty**
+## Status: 🟢 Phase 6 - Canoe Branding + New Components (Complete)
 
 ---
 
-## Fáze 1: Základy (tokens + base CSS)
+## Overview
 
-### 1.1 Projekt setup
-- [x] Vytvořit CLAUDE.md
-- [x] Vytvořit PLAN.md
-- [x] Inicializovat package.json
-- [x] Vytvořit adresářovou strukturu
-- [x] Nastavit .editorconfig
+Design system for canoe slalom timing with support for:
+- **Dark theme** for admin tools (c123-server)
+- **Light theme** for user tools (c123-xml-tools)
+- **Vanilla CSS** and **React components**
 
-### 1.2 Design tokens
-- [x] Extrahovat barvy z c123-server/admin-ui/styles.css
-- [x] Definovat light theme variantu
+---
+
+## Phase 1: Foundation (Tokens + Base CSS)
+
+### 1.1 Project Setup
+- [x] Create CLAUDE.md
+- [x] Create PLAN.md
+- [x] Initialize package.json
+- [x] Create directory structure
+- [x] Set up .editorconfig
+
+### 1.2 Design Tokens
+- [x] Extract colors from c123-server/admin-ui/styles.css
+- [x] Define light theme variant
 - [x] Typography tokens (font sizes, weights, line heights)
 - [x] Spacing scale (4px base)
 - [x] Border radius tokens
@@ -32,30 +32,30 @@ Design systém pro vodáckou časomíru s podporou:
 
 ### 1.3 Base CSS
 - [x] CSS reset (normalize)
-- [x] Základní typografie
-- [x] Theme switching logika (`prefers-color-scheme` + class override)
+- [x] Basic typography
+- [x] Theme switching logic (`prefers-color-scheme` + class override)
 
-### 1.4 Fonty
-- [x] Stáhnout Inter + JetBrains Mono woff2 (latin subset, z Fontsource CDN)
-- [x] Font-face deklarace (src/tokens/fonts.css)
+### 1.4 Fonts
+- [x] Download Inter + JetBrains Mono woff2 (latin subset, from Fontsource CDN)
+- [x] Font-face declarations (src/tokens/fonts.css)
 
 ---
 
-## Fáze 2: Komponenty
+## Phase 2: Components
 
-### 2.1 Základní komponenty
+### 2.1 Basic Components
 - [x] Buttons (primary, secondary, ghost, danger)
 - [x] Form inputs (text, select, checkbox, radio, switch)
 - [x] Cards (basic, elevated, interactive)
 - [x] Status badges (success, warning, error, info)
 
-### 2.2 Layout komponenty
+### 2.2 Layout Components
 - [x] Container
 - [x] Grid system
 - [x] Flex utilities
 - [x] Spacing utilities (.m-*, .p-*)
 
-### 2.3 Komplexní komponenty
+### 2.3 Complex Components
 - [x] Tables (striped, hover)
 - [x] Modals
 - [x] Toasts/Notifications
@@ -63,28 +63,28 @@ Design systém pro vodáckou časomíru s podporou:
 
 ---
 
-## Fáze 3: Playbooks
+## Phase 3: Playbooks
 
-### 3.1 Demo stránky
-- [x] Index - katalog všech komponent (základní verze)
+### 3.1 Demo Pages
+- [x] Index - catalog of all components (basic version)
 - [x] Dark theme showcase
 - [x] Light theme showcase
 - [x] Forms demo
 - [x] Tables demo
 
-### 3.2 Dokumentace
-- [x] README s příklady použití
-- [x] Inline komentáře v CSS
+### 3.2 Documentation
+- [x] README with usage examples
+- [x] Inline comments in CSS
 
 ---
 
-## Fáze 4: React komponenty
+## Phase 4: React Components
 
 ### 4.1 Setup
-- [x] TypeScript konfigurace
-- [x] React peer dependency (již bylo)
+- [x] TypeScript configuration
+- [x] React peer dependency (already was)
 
-### 4.2 Komponenty
+### 4.2 Components
 - [x] Button
 - [x] Card
 - [x] Input, Select, Checkbox, Radio
@@ -95,99 +95,99 @@ Design systém pro vodáckou časomíru s podporou:
 
 ---
 
-## Fáze 5: Integrace
+## Phase 5: Integration
 
 ### 5.1 Build
 - [x] CSS concatenation script (scripts/build-css.js)
-- [x] Minifikace (dist/timing.min.css)
-- [x] Kopírování fontů do dist/fonts/
+- [x] Minification (dist/timing.min.css)
+- [x] Copy fonts to dist/fonts/
 - [x] Bundle test playbook (bundle-test.html)
 
-### 5.2 Testování - jeste nedelat!!
-- Integrace do c123-server (ověření kompatibility)
-- Integrace do c123-xml-tools
-- Vizuální regresní testy (screenshot comparison)
+### 5.2 Testing - not yet!!
+- Integration into c123-server (verify compatibility)
+- Integration into c123-xml-tools
+- Visual regression tests (screenshot comparison)
 
 ---
 
-## Fáze 6: Canoe branding + nové komponenty
+## Phase 6: Canoe Branding + New Components
 
-### 6.0 Oprava navigace
-- [x] Přidat chybějící odkazy na modal.html a toast.html v playbook index
+### 6.0 Navigation Fix
+- [x] Add missing links to modal.html and toast.html in playbook index
 
 ### 6.1 Rebranding
-- [x] Přejmenovat na "Canoe Timing Design System" (package.json, README, CLAUDE.md)
-- [x] Aktualizovat titulky ve všech playbook stránkách
-- [x] Vytvořit vodácké tokeny (src/tokens/canoe.css)
-  - gate-green/gate-red (slalomové barvy)
-  - glow efekty
+- [x] Rename to "Canoe Timing Design System" (package.json, README, CLAUDE.md)
+- [x] Update titles in all playbook pages
+- [x] Create paddling tokens (src/tokens/canoe.css)
+  - gate-green/gate-red (slalom colors)
+  - glow effects
   - wave pattern SVG
 
-### 6.2 Header komponenta
+### 6.2 Header Component
 - [x] CSS: src/css/header.css
-  - app-header s 4px barevným barem vlevo + glow
-  - status indikátory (connected/connecting/disconnected)
-  - badge-live se slalomovými pruhy
+  - app-header with 4px color bar left + glow
+  - status indicators (connected/connecting/disconnected)
+  - badge-live with slalom stripes
 - [x] React: src/react/Header.tsx
 - [x] Playbook: src/playbooks/header.html
 
-### 6.3 Log komponenta
+### 6.3 Log Component
 - [x] CSS: src/css/log.css
   - log-container, log-entry
-  - barevné level badges (debug/info/warn/error)
+  - colored level badges (debug/info/warn/error)
   - component highlighting
 - [x] React: src/react/Log.tsx
 - [x] Playbook: src/playbooks/log.html
 
-### 6.4 DropZone komponenta
+### 6.4 DropZone Component
 - [x] CSS: src/css/dropzone.css
   - dashed border, hover glow
-  - drag-over animované pruhy
+  - drag-over animated stripes
   - has-file state
 - [x] React: src/react/DropZone.tsx
 - [x] Playbook: src/playbooks/dropzone.html
 
-### 6.5 Rozšíření existujících komponent
+### 6.5 Extending Existing Components
 - [x] cards.css: card-canoe (wavy border), card-status-*
 - [x] status.css: status-dot-glow
 - [x] modal.css: backdrop-filter blur
 
-### 6.6 Finalizace
-- [x] Aktualizovat build script pro nové CSS
-- [x] Aktualizovat React exporty
+### 6.6 Finalization
+- [x] Update build script for new CSS
+- [x] Update React exports
 - [x] Rebuild dist/
 
 ---
 
-## Deník vývoje
+## Development Log
 
 ### 2026-01-15
-- Založen projekt
-- Vytvořeny CLAUDE.md a PLAN.md
-- Definována architektura a workflow
-- Vytvořeny design tokens (colors, typography, spacing)
-- Vytvořeny základní CSS komponenty (buttons, forms, cards, tables, status, layout)
-- Vytvořen playbook index.html s ukázkami všech komponent
-- Implementován dual-theme systém (light/dark)
-- Přidány self-hosted fonty Inter (400-700) a JetBrains Mono (400, 500, 700)
-- Přidána Modal komponenta (backdrop, velikosti, confirmation variant, a11y)
-- Přidána Toast/Notification komponenta (všechny varianty, 6 pozic, progress bar, animace, a11y)
-- Přidána Tabs komponenta (základní, pills, bordered varianty, velikosti sm/lg, full-width, badge, a11y)
-- Přidána dark.html showcase stránka (barevná paleta, admin panel demo, timing display, ovládací prvky, status indikátory)
-- Přidána light.html showcase stránka (výsledková tabule, stupně vítězů, barevná paleta, ovládací prvky, status indikátory)
-- Přidána forms.html demo stránka (všechny input typy, select, textarea, checkbox/radio, switch, praktické formuláře, validace)
-- Přidána tables.html demo stránka (základní, striped, hover, bordered, compact varianty, responzivní tabulka, praktické příklady - výsledky, startovní listina, admin panel)
-- Přidán README.md s dokumentací a příklady použití všech komponent
-- Přidána readme-test.html pro vizuální testování příkladů z README
-- TypeScript konfigurace pro React komponenty (tsconfig.json)
-- První React komponenta: Button (variant, size, icon props)
-- React komponenta: Card (Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle)
-- React komponenty pro formuláře: Input, Select, Checkbox, Radio
-- React komponenta Badge (status indikátor)
-- React komponenta Table (Table, TableHead, TableBody, TableFoot, TableRow, TableCell, TableHeaderCell)
-- React komponenta Modal (Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter) s a11y, velikostmi a demo stránkou
-- React komponenta Toast (Toast, ToastContainer) s variantami, pozicemi, progress bar, auto-dismiss a demo stránkou toast.html
-- Build script (scripts/build-css.js) - concatenation, minifikace, kopírování fontů
-- dist/timing.css (50 KB) a dist/timing.min.css (28 KB, 44% menší)
-- bundle-test.html playbook pro testování standalone CSS bundle
-- Ověřeno, že všechny CSS soubory mají adekvátní inline komentáře (hlavičky, sekce, inline poznámky)
+- Project created
+- Created CLAUDE.md and PLAN.md
+- Defined architecture and workflow
+- Created design tokens (colors, typography, spacing)
+- Created basic CSS components (buttons, forms, cards, tables, status, layout)
+- Created playbook index.html with examples of all components
+- Implemented dual-theme system (light/dark)
+- Added self-hosted fonts Inter (400-700) and JetBrains Mono (400, 500, 700)
+- Added Modal component (backdrop, sizes, confirmation variant, a11y)
+- Added Toast/Notification component (all variants, 6 positions, progress bar, animations, a11y)
+- Added Tabs component (basic, pills, bordered variants, sizes sm/lg, full-width, badge, a11y)
+- Added dark.html showcase page (color palette, admin panel demo, timing display, controls, status indicators)
+- Added light.html showcase page (results table, podium, color palette, controls, status indicators)
+- Added forms.html demo page (all input types, select, textarea, checkbox/radio, switch, practical forms, validation)
+- Added tables.html demo page (basic, striped, hover, bordered, compact variants, responsive table, practical examples - results, start list, admin panel)
+- Added README.md with documentation and usage examples for all components
+- Added readme-test.html for visual testing of README examples
+- TypeScript configuration for React components (tsconfig.json)
+- First React component: Button (variant, size, icon props)
+- React component: Card (Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle)
+- React components for forms: Input, Select, Checkbox, Radio
+- React component Badge (status indicator)
+- React component Table (Table, TableHead, TableBody, TableFoot, TableRow, TableCell, TableHeaderCell)
+- React component Modal (Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter) with a11y, sizes and demo page
+- React component Toast (Toast, ToastContainer) with variants, positions, progress bar, auto-dismiss and demo page toast.html
+- Build script (scripts/build-css.js) - concatenation, minification, font copying
+- dist/timing.css (50 KB) and dist/timing.min.css (28 KB, 44% smaller)
+- bundle-test.html playbook for testing standalone CSS bundle
+- Verified all CSS files have adequate inline comments (headers, sections, inline notes)

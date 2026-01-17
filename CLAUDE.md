@@ -1,55 +1,55 @@
 # Canoe Timing Design System - CLAUDE.md
 
-## Kontext projektu
+## Project Context
 
-Canoe Timing Design System je knihovna UI komponent a stylů pro vodáckou časomíru (canoe slalom timing).
-Inspirováno stylem z c123-server admin dashboardu - profesionální, elegantní vzhled s vodáckým šmrncem.
+Canoe Timing Design System is a UI component and style library for canoe slalom timing.
+Inspired by the c123-server admin dashboard style - professional, elegant look with paddling flair.
 
-**GitHub:** OpenCanoeTiming/timing-design-system | **Licence:** MIT
+**GitHub:** OpenCanoeTiming/timing-design-system | **License:** MIT
 
-Určeno pro použití v:
+Intended for use in:
 - c123-server (admin dashboard) - `../c123-server/`
-- c123-xml-tools (utility nástroje) - `../c123-xml-tools/`
-- c123-scoreboard (React aplikace) - `../c123-scoreboard/`
+- c123-xml-tools (utility tools) - `../c123-xml-tools/`
+- c123-scoreboard (React application) - `../c123-scoreboard/`
 
-## Vizuální identita
+## Visual Identity
 
-- **Vodácký šmrnc:** Subtilní vlnkový pattern + červeno-zelené slalomové pruhy (LIVE badge)
-- **Header styl:** 4px barevný bar v headeru s glow efektem, elegantní animace
-- **Glow efekty:** Na status indikátorech, hover stavech
+- **Paddling flair:** Subtle wave pattern + red-green slalom stripes (LIVE badge)
+- **Header style:** 4px color bar in header with glow effect, elegant animations
+- **Glow effects:** On status indicators, hover states
 
-## Jazyky
+## Language
 
-- **Komunikace s uživatelem:** čeština
-- **Dokumentace (README, docs):** angličtina
-- **Kód a commity:** angličtina
+- User communication: **Czech**
+- Documentation (README, docs): **English**
+- Code, comments, commit messages: **English**
 
-## Architektura
+## Architecture
 
 ```
 src/
 ├── tokens/           # Design tokens (CSS variables)
-│   ├── colors.css    # Barevná paleta (dark + light)
+│   ├── colors.css    # Color palette (dark + light)
 │   ├── typography.css
 │   ├── spacing.css
-│   ├── canoe.css     # Vodácké tokeny (gate colors, glow, wave pattern)
-│   └── index.css     # Agregátor
-├── css/              # Vanilla CSS komponenty
-│   ├── base.css      # Reset, základní styly
+│   ├── canoe.css     # Paddling tokens (gate colors, glow, wave pattern)
+│   └── index.css     # Aggregator
+├── css/              # Vanilla CSS components
+│   ├── base.css      # Reset, basic styles
 │   ├── buttons.css
 │   ├── forms.css
-│   ├── cards.css     # + canoe varianta s wavy border
+│   ├── cards.css     # + canoe variant with wavy border
 │   ├── tables.css
-│   ├── status.css    # Status indikátory, badges, LIVE badge
+│   ├── status.css    # Status indicators, badges, LIVE badge
 │   ├── layout.css    # Grid, flex helpers
-│   ├── modal.css     # Modální dialogy
-│   ├── toast.css     # Toast notifikace
-│   ├── tabs.css      # Tab navigace
-│   ├── header.css    # App header s barevným barem
-│   ├── log.css       # Log viewer komponenta
-│   ├── dropzone.css  # Drag & drop zóny
-│   └── index.css     # Agregátor
-├── react/            # React komponenty
+│   ├── modal.css     # Modal dialogs
+│   ├── toast.css     # Toast notifications
+│   ├── tabs.css      # Tab navigation
+│   ├── header.css    # App header with color bar
+│   ├── log.css       # Log viewer component
+│   ├── dropzone.css  # Drag & drop zones
+│   └── index.css     # Aggregator
+├── react/            # React components
 │   ├── Button.tsx
 │   ├── Card.tsx
 │   ├── Badge.tsx
@@ -58,12 +58,12 @@ src/
 │   ├── Header.tsx    # App header
 │   ├── Log.tsx       # Log viewer
 │   ├── DropZone.tsx  # Drag & drop
-│   └── index.ts      # Exporty
-├── dist/             # Buildnuté soubory
-│   ├── timing.css    # Konkatenované CSS
+│   └── index.ts      # Exports
+├── dist/             # Built files
+│   ├── timing.css    # Concatenated CSS
 │   └── timing.min.css
-└── playbooks/        # Demo stránky
-    ├── index.html    # Přehled všech komponent
+└── playbooks/        # Demo pages
+    ├── index.html    # Overview of all components
     ├── dark.html     # Dark theme demo
     ├── light.html    # Light theme demo
     ├── header.html   # Header demo
@@ -73,23 +73,23 @@ src/
 
 ## Workflow
 
-1. **Vždy nejdřív PLAN.md** - aktualizovat stav, plánované změny
-2. **Malé kroky** - max jeden logický blok změn najednou
-3. **Testovat v playbooku** - každá změna musí být viditelná v demo stránce
-4. **Commit po každém bloku** - anglické commit messages
-5. **DENIK.md** - zapsat co bylo uděláno (česky, stručně)
+1. **Always PLAN.md first** - update status, planned changes
+2. **Small steps** - max one logical block of changes at a time
+3. **Test in playbook** - every change must be visible in demo page
+4. **Commit after each block** - English commit messages
+5. **DENIK.md** - record what was done (concise)
 
-!Vzdy udrzuj striktne synchronii vanilla js i react casti, zmeny promitej do obou  testuj oboje.
+!Always maintain strict sync between vanilla JS and React parts, reflect changes in both, test both.
 
-## Design principy
+## Design Principles
 
-### Dual-theme systém
-- **Dark mode** (`.theme-dark`): Pro admin nástroje, profesionální vzhled
-- **Light mode** (`.theme-light`): Pro uživatelské nástroje, přívětivý vzhled
-- Automatická detekce: `prefers-color-scheme` media query
+### Dual-theme System
+- **Dark mode** (`.theme-dark`): For admin tools, professional look
+- **Light mode** (`.theme-light`): For user tools, friendly look
+- Automatic detection: `prefers-color-scheme` media query
 
 ### CSS Custom Properties
-Všechny hodnoty jako CSS variables pro snadnou customizaci:
+All values as CSS variables for easy customization:
 ```css
 :root, .theme-light {
   --color-bg-primary: #ffffff;
@@ -102,110 +102,110 @@ Všechny hodnoty jako CSS variables pro snadnou customizaci:
 ```
 
 ### Accessibility
-- WCAG AA contrast (min 4.5:1 pro text)
-- Focus visible styly
+- WCAG AA contrast (min 4.5:1 for text)
+- Focus visible styles
 - Reduced motion support
 - Semantic HTML
 
-## Fonty
+## Fonts
 
-- **Sans-serif:** Inter (primární)
-- **Monospace:** JetBrains Mono (kód, čísla)
-- Self-hosted woff2 soubory (v src/fonts/)
+- **Sans-serif:** Inter (primary)
+- **Monospace:** JetBrains Mono (code, numbers)
+- Self-hosted woff2 files (in src/fonts/)
 
-## Porty pro vývoj
+## Ports for Development
 
-- Playbook server: `npx serve src/playbooks` na portu 3000
+- Playbook server: `npx serve src/playbooks` on port 3000
 
-## Příkazy
+## Commands
 
 ```bash
-# Vývoj - spustit demo server
+# Development - start demo server
 npm run dev
 
-# Build - generování dist/timing.css
+# Build - generate dist/timing.css
 npm run build
 
 # Lint CSS
 npm run lint
 ```
 
-## CI/CD a publikace
+## CI/CD and Publishing
 
-### GitHub Actions workflows
+### GitHub Actions Workflows
 
-Projekt používá dva automatické workflows (`.github/workflows/`):
+Project uses two automatic workflows (`.github/workflows/`):
 
 1. **Deploy Playbooks** (`pages.yml`)
-   - Spouští se: na každý push do `main`
-   - Publikuje playbook demo na GitHub Pages
+   - Triggers: on every push to `main`
+   - Publishes playbook demo to GitHub Pages
    - URL: https://opencanoetiming.github.io/timing-design-system/playbooks/
 
 2. **Publish to GitHub Packages** (`publish.yml`)
-   - Spouští se: na push tagu `v*` (např. `v0.3.1`)
-   - Publikuje npm balíček na GitHub Packages
-   - Balíček: `@opencanoetiming/timing-design-system`
+   - Triggers: on push of tag `v*` (e.g., `v0.3.1`)
+   - Publishes npm package to GitHub Packages
+   - Package: `@opencanoetiming/timing-design-system`
 
-### Postup vydání nové verze
+### New Version Release Process
 
 ```bash
-# 1. Upravit verzi v package.json
-npm version patch  # nebo minor/major
+# 1. Update version in package.json
+npm version patch  # or minor/major
 
-# 2. Commit a push
+# 2. Commit and push
 git push
 
-# 3. Vytvořit a pushnout tag
-git tag -a v0.3.1 -m "Release v0.3.1 - popis změn"
+# 3. Create and push tag
+git tag -a v0.3.1 -m "Release v0.3.1 - change description"
 git push origin v0.3.1
 ```
 
-Po pushnutí tagu GitHub Actions automaticky publikuje balíček.
+After pushing the tag, GitHub Actions automatically publishes the package.
 
-### Použití v jiných projektech
+### Usage in Other Projects
 
-**Lokální vývoj** (doporučeno pro projekty ve stejném workspace):
+**Local development** (recommended for projects in same workspace):
 ```json
 "@opencanoetiming/timing-design-system": "file:../timing-design-system"
 ```
 
-**Z GitHub Packages** (pro samostatné projekty):
+**From GitHub Packages** (for standalone projects):
 ```json
 "@opencanoetiming/timing-design-system": "^0.3.1"
 ```
 
-Vyžaduje `.npmrc` s konfigurací GitHub Packages registry.
+Requires `.npmrc` with GitHub Packages registry configuration.
 
-## Vztah k ostatním projektům
+## Relationship to Other Projects
 
-- **c123-server:** `../c123-server/` - Importuje CSS pro admin dashboard
-- **c123-scoreboard:** `../c123-scoreboard/` - Může použít React komponenty
+- **c123-server:** `../c123-server/` - Imports CSS for admin dashboard
+- **c123-scoreboard:** `../c123-scoreboard/` - Can use React components
 - **c123-xml-tools:** `../c123-xml-tools/` - Standalone CSS bundle (dist/timing.css)
-- **Nové projekty:** `npm install @opencanoetiming/timing-design-system`
+- **New projects:** `npm install @opencanoetiming/timing-design-system`
 
-## Barevná paleta (z c123-server)
+## Color Palette (from c123-server)
 
-### Dark theme (admin)
+### Dark Theme (admin)
 ```
---bg-body:       #0a0a0a   /* Čistá černá */
---bg-surface:    #141414   /* Karty, panely */
---bg-elevated:   #1f1f1f   /* Hover, modaly */
+--bg-body:       #0a0a0a   /* Pure black */
+--bg-surface:    #141414   /* Cards, panels */
+--bg-elevated:   #1f1f1f   /* Hover, modals */
 --text-primary:  #ffffff
 --text-secondary:#999999
---accent:        #0088ff   /* Elektrická modrá */
+--accent:        #0088ff   /* Electric blue */
 --success:       #00d26a
 --warning:       #ff9500
 --error:         #ff3b30
 ```
 
-### Light theme (user-friendly)
+### Light Theme (user-friendly)
 ```
---bg-body:       #f5f5f5   /* Světle šedá */
---bg-surface:    #ffffff   /* Bílé karty */
+--bg-body:       #f5f5f5   /* Light gray */
+--bg-surface:    #ffffff   /* White cards */
 --bg-elevated:   #ffffff
 --text-primary:  #1a1a1a
 --text-secondary:#666666
---accent:        #0066cc   /* Tlumená modrá */
+--accent:        #0066cc   /* Muted blue */
 --success:       #059669
 --warning:       #d97706
 --error:         #dc2626
