@@ -11,10 +11,10 @@ export interface TableProps extends HTMLAttributes<HTMLTableElement> {
   compact?: boolean;
 }
 
-export interface TableHeadProps extends HTMLAttributes<HTMLTableSectionElement> {}
-export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> {}
-export interface TableFootProps extends HTMLAttributes<HTMLTableSectionElement> {}
-export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {}
+export type TableHeadProps = HTMLAttributes<HTMLTableSectionElement>;
+export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement>;
+export type TableFootProps = HTMLAttributes<HTMLTableSectionElement>;
+export type TableRowProps = HTMLAttributes<HTMLTableRowElement>;
 
 export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
   /** Numeric cell (monospace, right-aligned) */
