@@ -464,7 +464,7 @@ dist/
 
 - [c123-server](https://github.com/OpenCanoeTiming/c123-server) - WebSocket bridge to Canoe123
 - [c123-scoreboard](https://github.com/OpenCanoeTiming/c123-scoreboard) - Live results display
-- [c123-scoring](https://github.com/OpenCanoeTiming/c123-scoring) - Penalty entry application
+- [c123-penalty-check](https://github.com/OpenCanoeTiming/c123-penalty-check) - Penalty entry application
 
 ## License
 
