@@ -56,21 +56,19 @@ Download `dist/timing.css` from the [latest release](https://github.com/OpenCano
 
 ```html
 <!DOCTYPE html>
-<html>
+<!-- Theme class goes on <html>, not <body> - see Theming section below -->
+<html class="theme-dark">
 <head>
   <link rel="stylesheet" href="path/to/timing.css">
 </head>
 <body>
-  <!-- Automatic theme based on system preference -->
   <button class="btn btn-primary">Start Race</button>
-
-  <!-- Or force a specific theme -->
-  <div class="theme-dark">
-    <span class="badge-live">LIVE</span>
-  </div>
+  <span class="badge-live">LIVE</span>
 </body>
 </html>
 ```
+
+Omit the class to let the system preference (`prefers-color-scheme`) decide automatically.
 
 ## Components
 
@@ -343,12 +341,41 @@ The header is designed to be the unifying visual element across timing tools. It
 
 ### Automatic Theme Detection
 
-By default, the system respects `prefers-color-scheme`. Override with classes:
+By default, the system respects `prefers-color-scheme`. Override by putting a theme
+class on the **root element** (`<html>`):
 
 ```html
-<body class="theme-dark">Dark mode forced</body>
-<body class="theme-light">Light mode forced</body>
+<html class="theme-dark">...</html>   <!-- Dark mode forced -->
+<html class="theme-light">...</html>  <!-- Light mode forced -->
 ```
+
+### ⚠️ Apply the theme class on `<html>`, not `<body>`
+
+The theme class **must** live on the `:root` element (`<html>`). Putting it on
+`<body>` (or any descendant) breaks any CSS variable that is itself defined in
+terms of another variable — for example:
+
+```css
+/* Anti-pattern in a consumer stylesheet */
+:root {
+  --my-bg: var(--color-bg-surface); /* alias on :root */
+}
+```
+
+The alias `--my-bg` is **computed and frozen** on `:root` using the theme active
+there. If you later apply `.theme-dark` further down the tree, descendants
+override `--color-bg-surface` but keep inheriting the already-resolved `--my-bg`
+from `:root`, so elements using the alias render with the *wrong* theme colors.
+This is how CSS custom property inheritance is specified — computed values are
+resolved at the declaration site, not at the use site.
+
+The design system's own auto-detection (`@media (prefers-color-scheme: dark)`)
+targets `:root` precisely because of this. Applying the explicit override class
+anywhere else puts those two mechanisms in conflict.
+
+**Rule of thumb:** if you ever reference a `--color-*` variable from inside
+another custom property declaration, that declaration and the theme class must
+live on the same element — practically always `:root`.
 
 ### CSS Custom Properties
 

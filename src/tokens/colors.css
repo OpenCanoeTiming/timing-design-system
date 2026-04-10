@@ -3,6 +3,17 @@
  *
  * Barevná paleta pro Timing Design System.
  * Podpora dark a light theme pomocí CSS custom properties.
+ *
+ * ⚠️ THEME CLASS PLACEMENT
+ * Apply `.theme-dark` / `.theme-light` on the root element (`<html>`), never on
+ * `<body>` or deeper. CSS custom properties computed from other custom properties
+ * (e.g. `--my-bg: var(--color-bg-surface)` on `:root`) are resolved at the
+ * declaration site and inherited as already-computed values. Putting the theme
+ * class on a descendant will override the underlying `--color-*` tokens, but the
+ * derived aliases will keep the value resolved at `:root` — mixing themes.
+ *
+ * The auto-detection media query below targets `:root` for the same reason; keep
+ * manual overrides consistent with it.
  */
 
 /* ==========================================================================
