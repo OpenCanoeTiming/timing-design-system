@@ -1,13 +1,8 @@
 name: Publish to GitHub Packages
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'package.json'
-      - 'src/**'
-      - 'dist/**'
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
