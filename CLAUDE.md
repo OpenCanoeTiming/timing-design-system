@@ -92,16 +92,8 @@ npm run lint
 ### GitHub Actions Workflows
 
 1. **Deploy Playbooks** (`pages.yml`) — on push to `main`, publishes to GitHub Pages
-2. **Publish to GitHub Packages** (`publish.yml`) — on tag `v*`, publishes npm package
-
-### Release Process
-
-```bash
-npm version patch  # or minor/major
-git push
-git tag -a v0.4.1 -m "Release v0.4.1 - description"
-git push origin v0.4.1
-```
+2. **Release Please** (`release-please.yml`) — on push to `main`, maintains rolling release PR from conventional commits
+3. **Publish to GitHub Packages** (`publish.yml`) — on `release: [published]` (fires when a Release Please release is created), publishes npm package
 
 ### Usage in Consumer Projects
 
@@ -112,10 +104,56 @@ git push origin v0.4.1
 
 **From GitHub Packages:**
 ```json
-"@opencanoetiming/timing-design-system": "^0.4.0"
+"@opencanoetiming/timing-design-system": "^0.9.0"
 ```
 
 Requires `.npmrc` with GitHub Packages registry configuration.
+
+---
+
+## Versioning & Releases
+
+This project uses **Release Please** (commit-based) for automatic versioning. **Never manually bump `package.json` version or edit `CHANGELOG.md`** — Release Please owns both via its rolling release PR.
+
+### How it works
+
+1. Every push to `main` runs `release-please.yml`.
+2. Release Please keeps a rolling **release PR** open (label `autorelease: pending`) that aggregates pending changes and proposes the next version.
+3. Merging the release PR creates:
+   - A commit `chore(main): release X.Y.Z` on `main`
+   - A git tag `vX.Y.Z`
+   - A GitHub Release with generated CHANGELOG
+   - Triggers `publish.yml` → publishes `@opencanoetiming/timing-design-system@X.Y.Z` to GitHub Packages
+
+### Commit types and bump rules
+
+| Commit type | Bump | Shown in CHANGELOG |
+|---|---|---|
+| `feat:` | **minor** (see 0.x note) | ✓ Features |
+| `fix:` / `perf:` | **patch** | ✓ Bug Fixes / Performance |
+| `feat!:` or `BREAKING CHANGE:` | **minor** (see 0.x note) | ✓ Features |
+| `revert:` / `docs:` | none | ✓ Reverts / Documentation |
+| `chore:` / `ci:` / `test:` / `style:` / `refactor:` / `build:` | **none** | hidden |
+| `chore(deps):` / `chore(deps-dev):` (dependabot) | **none** | hidden |
+
+**0.x series note:** Project is configured with `bump-minor-pre-major: true`. While in 0.x, `feat!:` bumps **minor** instead of major so that breaking changes don't accidentally promote the package to 1.0.0. See "Graduating to 1.0.0" below.
+
+### Rules for agents preparing PRs
+
+1. **Always use conventional commits** (`feat:`, `fix:`, `chore:`...). Release Please reads commit prefixes to decide bumps.
+2. **Don't edit `package.json` version or `CHANGELOG.md`** in regular PRs — Release Please owns those.
+3. **Don't merge the release PR together with feature PRs** — it must be the last to merge in a release cycle.
+4. **PR title should keep the commit prefix** (squash merges — ensure the final merged commit stays conventional).
+5. **Never commit skill state** — `.superpowers/` and `.claude/` are local per-session tool state. Prefer `git add <file>` over `git add -A`.
+6. **Consumers update separately** — after a new DS version publishes, bumping `^X.Y.0` in consuming projects (c123-server, c123-penalty-check, ...) is a separate `chore:` commit in those repos, not bundled here.
+
+### Graduating to 1.0.0
+
+To force a release to a specific version (e.g., graduating from 0.x to 1.0.0), add this footer to a commit in the next release cycle:
+
+```
+Release-As: 1.0.0
+```
 
 ---
 
