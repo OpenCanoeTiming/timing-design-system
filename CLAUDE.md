@@ -4,11 +4,19 @@
 
 Canoe Timing Design System — UI component and style library for canoe slalom timing applications. Professional, elegant look with paddling flair.
 
-**GitHub:** OpenCanoeTiming/timing-design-system | **License:** MIT | **Status:** Stable (v0.4.0)
+**GitHub:** OpenCanoeTiming/timing-design-system | **License:** MIT | **Status:** Stable (v0.9.0)
 
 **Package:** `@opencanoetiming/timing-design-system` (GitHub Packages)
 
-Used by: c123-server (admin dashboard), c123-penalty-check, c123-scoreboard, c123-xml-tools
+Used by: c123-server (admin dashboard), c123-penalty-check (npm), c123-xml-tools (GitHub Pages `dist/timing.min.css`)
+
+---
+
+## Rebuild 2026/27 — read first
+
+- **Design:** c123-server `docs/arch`; this repo is context, not a subject (TEST-ARCHITECTURE §8).
+- **Legacy line:** the legacy apps (tag `legacy-2026` in each deployable) pin this package by npm version (`^0.9.0`, resolved 0.9.0). Here tag `legacy-2026` and branch `legacy/2026` mark `main` at the freeze (c123-server `docs/arch/DECISIONS/LOG.md`); `legacy/2026` takes `fix:` commits only.
+- **Git:** conventional commits; Release Please owns versions and CHANGELOG; squash merges; `git add <file>`, never commit `.claude/` or `.superpowers/`. Czech with the maintainer, English in code, commits and docs.
 
 ---
 
@@ -22,7 +30,7 @@ src/
 │   ├── spacing.css
 │   ├── canoe.css     # Paddling tokens (gate colors, glow, wave pattern)
 │   └── index.css     # Aggregator
-├── css/              # Vanilla CSS components
+├── css/              # Vanilla CSS components (see src/css/index.css)
 │   ├── base.css      # Reset, basic styles
 │   ├── buttons.css
 │   ├── forms.css
@@ -36,10 +44,12 @@ src/
 │   ├── header.css    # App header with color bar
 │   ├── log.css       # Log viewer component
 │   ├── dropzone.css  # Drag & drop zones
+│   ├── kbd.css, menu.css, progress.css, spinner.css
 │   └── index.css     # Aggregator
-├── react/            # React components (Button, Card, Badge, Modal, Toast, Header, Log, DropZone)
-├── dist/             # Built files (timing.css, timing.min.css)
+├── react/            # React components (see src/react/index.ts)
+├── fonts/            # Self-hosted woff2
 └── playbooks/        # Demo pages (index, dark, light, header, log, dropzone)
+dist/                 # Built files (timing.css, timing.min.css)
 ```
 
 ---
@@ -132,7 +142,8 @@ This project uses **Release Please** (commit-based) for automatic versioning. **
 | `feat:` | **minor** (see 0.x note) | ✓ Features |
 | `fix:` / `perf:` | **patch** | ✓ Bug Fixes / Performance |
 | `feat!:` or `BREAKING CHANGE:` | **minor** (see 0.x note) | ✓ Features |
-| `revert:` / `docs:` | none | ✓ Reverts / Documentation |
+| `revert:` | none | ✓ Reverts |
+| `docs:` | none | hidden |
 | `chore:` / `ci:` / `test:` / `style:` / `refactor:` / `build:` | **none** | hidden |
 | `chore(deps):` / `chore(deps-dev):` (dependabot) | **none** | hidden |
 
@@ -185,6 +196,8 @@ All values as CSS variables:
 ## Workflow
 
 Issue-driven development. Every change starts with a GitHub issue.
+
+Rebuild 2026/27: the legacy apps pin this package by npm version and `legacy-2026` marks this repo's `main` at the freeze; a breaking change is fine on `main`, and each consumer bumps in its own `chore:` commit (Versioning, agent rule 6).
 
 ### 1. Rozbor (Analysis)
 - Comment on issue: restate problem, challenge the idea, define scope, identify risks

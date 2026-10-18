@@ -20,3 +20,7 @@ core
 # Logs
 *.log
 npm-debug.log*
+
+# Local per-session tool state (skills, agents) — never commit
+.claude/
+.superpowers/
