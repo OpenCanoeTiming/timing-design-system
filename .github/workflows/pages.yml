@@ -36,18 +36,27 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
+      - name: Checkout legacy line (0.9) for versioned CSS
+        uses: actions/checkout@v7
+        with:
+          ref: legacy/2026
+          path: legacy
+
+      - name: Build legacy CSS bundle
+        working-directory: legacy
+        run: npm ci && npm run build
+
       - name: Build site
         run: |
-          mkdir -p _site/playbooks
-          # Copy playbooks
+          mkdir -p _site/playbooks _site/v1 _site/v0.9
+          # Playbooks for the current line
           cp src/playbooks/*.html _site/playbooks/
-          # Copy CSS and tokens (one level up from playbooks)
-          cp -r src/tokens _site/
-          cp -r src/css _site/
-          cp -r src/fonts _site/
-          # Copy dist for bundle-test
-          cp -r dist _site/
-          # Create redirect from root to playbooks/index.html
+          cp -r src/tokens src/css src/fonts _site/
+          # Versioned bundles — consumers pin one of these
+          cp -r dist/. _site/v1/
+          cp -r legacy/dist/. _site/v0.9/
+          # Unversioned /dist/ keeps serving 0.9 until every consumer has pinned (c123-xml-tools#7)
+          cp -r legacy/dist _site/dist
           echo '<meta http-equiv="refresh" content="0;url=playbooks/">' > _site/index.html
 
       - name: Upload artifact

@@ -2,9 +2,9 @@
 
 ## Project
 
-Canoe Timing Design System — UI component and style library for canoe slalom timing applications. Professional, elegant look with paddling flair.
+Timing Design System — CSS component library (plus thin React wrappers) for canoe slalom timing tools. Quiet operator UI: legibility and comfort over decoration.
 
-**GitHub:** OpenCanoeTiming/timing-design-system | **License:** MIT | **Status:** Stable (v0.9.0)
+**GitHub:** OpenCanoeTiming/timing-design-system | **License:** MIT | **Status:** 1.0 line on `main`; 0.9.x on `legacy/2026`
 
 **Package:** `@opencanoetiming/timing-design-system` (GitHub Packages)
 
@@ -24,63 +24,61 @@ Used by: c123-server (admin dashboard), c123-penalty-check (npm), c123-xml-tools
 
 ```
 src/
-├── tokens/           # Design tokens (CSS variables)
-│   ├── colors.css    # Color palette (dark + light)
+├── tokens/           # CSS custom properties
+│   ├── fonts.css     # @font-face Inter + JetBrains Mono (self-hosted)
+│   ├── colors.css    # light + dark + auto; semantic and result-mark colors
 │   ├── typography.css
-│   ├── spacing.css
-│   ├── canoe.css     # Paddling tokens (gate colors, glow, wave pattern)
-│   └── index.css     # Aggregator
-├── css/              # Vanilla CSS components (see src/css/index.css)
-│   ├── base.css      # Reset, basic styles
-│   ├── buttons.css
-│   ├── forms.css
-│   ├── cards.css     # + canoe variant with wavy border
-│   ├── tables.css
-│   ├── status.css    # Status indicators, badges, LIVE badge
-│   ├── layout.css    # Grid, flex helpers
-│   ├── modal.css     # Modal dialogs
-│   ├── toast.css     # Toast notifications
-│   ├── tabs.css      # Tab navigation
-│   ├── header.css    # App header with color bar
-│   ├── log.css       # Log viewer component
-│   ├── dropzone.css  # Drag & drop zones
-│   ├── kbd.css, menu.css, progress.css, spinner.css
-│   └── index.css     # Aggregator
-├── react/            # React components (see src/react/index.ts)
-├── fonts/            # Self-hosted woff2
-└── playbooks/        # Demo pages (index, dark, light, header, log, dropzone)
-dist/                 # Built files (timing.css, timing.min.css)
+│   ├── spacing.css   # space, radius, shadow, focus ring, control/row heights, motion
+│   └── index.css
+├── css/              # Components, one file each (order in src/css/index.css)
+│   ├── base.css      # reset, document defaults, focus, text helpers
+│   ├── layout.css    # container, page scaffold, kv, stat-row, flex/grid helpers
+│   ├── buttons.css   forms.css   cards.css   tables.css
+│   ├── status.css    # status-dot / badge / alert + result marks (.mark-*)
+│   ├── header.css    tabs.css   modal.css   toast.css   menu.css
+│   ├── log.css       dropzone.css   progress.css   spinner.css
+│   └── index.css
+├── react/            # Thin wrappers over the CSS classes
+│   ├── Controls.tsx  # Button, FormField, Input, Textarea, Select, Checkbox, Radio, Switch
+│   ├── Status.tsx    # StatusDot, StatusItem, Badge, Alert, Mark
+│   ├── Layout.tsx    # Card*, Table*, Tabs, AppHeader, PageBanner
+│   ├── Overlays.tsx  # Modal, Toast, ToastContainer, Menu
+│   ├── Feedback.tsx  # Spinner, ProgressBar, DropZone, LogViewer, LogFilter
+│   └── index.ts
+├── fonts/
+└── playbooks/        # index.html (every component), specimen-admin.html, specimen-user.html
+dist/                 # timing.css, timing.min.css, fonts/ (built, not committed)
 ```
-
----
 
 ## Key References
 
 | Purpose | Path |
 |---------|------|
-| **Playbook demos** | `./src/playbooks/` |
+| **Playbook** | `./src/playbooks/index.html` (+ `specimen-admin.html`, `specimen-user.html`) |
 | **Built CSS** | `./dist/timing.css` |
-| **GitHub Pages** | https://opencanoetiming.github.io/timing-design-system/playbooks/ |
+| **GitHub Pages** | https://opencanoetiming.github.io/timing-design-system/playbooks/ — bundles at `/v1/` (main) and `/v0.9/` (legacy); `/dist/` = 0.9 until consumers pin |
 
 ---
 
 ## Important Rules
 
-1. **Dual delivery** — always maintain strict sync between vanilla CSS and React parts, reflect changes in both, test both
-2. **Test in playbook** — every change must be visible in a demo page
+1. **CSS first, React thin** — every look lives in a class; React wrappers only compose classes. Change CSS and the wrapper together.
+2. **Test in playbook** — every class appears in `playbooks/index.html`; admin-facing changes also in `specimen-admin.html`, user-tool changes in `specimen-user.html`.
+5. **Scope from usage** — add a class only when a consumer needs it; remove when none does. Check with a grep across c123-server, c123-penalty-check, c123-xml-tools before adding variants.
 3. **Dual-theme** — dark mode (`.theme-dark`) for admin tools, light mode (`.theme-light`) for user tools
 4. **Accessibility** — WCAG AA contrast (min 4.5:1), focus visible, reduced motion support
 
 ---
 
-## Visual Identity
+## Visual Identity (1.0)
 
-- **Paddling flair:** Subtle wave pattern + red-green slalom stripes (LIVE badge)
-- **Header style:** 4px color bar in header with glow effect, elegant animations
-- **Glow effects:** On status indicators, hover states
-- **Fonts:** Inter (sans-serif), JetBrains Mono (monospace) — self-hosted woff2
-
----
+- **Quiet.** Hairline borders, flat cards, no glow, no gradients, no decoration. Elevation only on overlays (menu, toast, modal).
+- **Neutrals are tinted, text is not pure.** Dark: `#0f1115` body, `#e8eaee` text. Light: `#f3f4f7` body, `#171a21` text.
+- **One accent.** Blue. In dark theme the primary button uses dark text on the accent (AA); in light, white text.
+- **Status has three primitives** (`status-dot`, `badge`, `alert`) and one modifier set. Result marks differ in shape, not only color: provisional dashed/hollow, review solid amber, stale struck + dimmed, pending hollow + italic, live green with heartbeat ring.
+- **Numbers line up.** `font-variant-numeric: tabular-nums` on `body`; times in JetBrains Mono, right-aligned.
+- **Fonts:** Inter (UI), JetBrains Mono (values) — self-hosted woff2.
+- Legacy identity (wave, slalom stripes, gate poles) lives only on `legacy/2026`.
 
 ## Development
 
@@ -114,7 +112,7 @@ npm run lint
 
 **From GitHub Packages:**
 ```json
-"@opencanoetiming/timing-design-system": "^0.9.0"
+"@opencanoetiming/timing-design-system": "^1.0.0"   // legacy apps stay on ^0.9.0
 ```
 
 Requires `.npmrc` with GitHub Packages registry configuration.
@@ -147,7 +145,7 @@ This project uses **Release Please** (commit-based) for automatic versioning. **
 | `chore:` / `ci:` / `test:` / `style:` / `refactor:` / `build:` | **none** | hidden |
 | `chore(deps):` / `chore(deps-dev):` (dependabot) | **none** | hidden |
 
-**0.x series note:** Project is configured with `bump-minor-pre-major: true`. While in 0.x, `feat!:` bumps **minor** instead of major so that breaking changes don't accidentally promote the package to 1.0.0. See "Graduating to 1.0.0" below.
+**1.0 graduation:** the first 1.0 release is forced with a `Release-As: 1.0.0` footer (see below). After that, `feat!:` bumps major as usual; drop `bump-minor-pre-major` from `release-please-config.json` in the same release cycle.
 
 ### Rules for agents preparing PRs
 
@@ -185,11 +183,7 @@ All values as CSS variables:
 
 ### Color Palette
 
-**Dark Theme (admin):**
-`--bg-body: #0a0a0a` | `--accent: #0088ff` | `--success: #00d26a` | `--error: #ff3b30`
-
-**Light Theme (user-friendly):**
-`--bg-body: #f5f5f5` | `--accent: #0066cc` | `--success: #059669` | `--error: #dc2626`
+See `src/tokens/colors.css` — it is the source of truth. Do not duplicate values here.
 
 ---
 

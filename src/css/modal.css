@@ -93,3 +93,6 @@ dialog.modal::backdrop { background: transparent; }
 
 @keyframes modal-fade { from { opacity: 0; } }
 @keyframes modal-rise { from { opacity: 0; transform: translateY(-6px); } }
+
+/* Body scroll lock while a modal is open */
+body.modal-open { overflow: hidden; }
