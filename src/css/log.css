@@ -1,415 +1,113 @@
 /**
- * Canoe Timing Design System - Log Component
+ * Log viewer — a scrollable monospace stream with level, component and message.
  *
- * Log viewer komponenta pro zobrazeni aplikacnich logu:
- * - log-container: scrollable kontejner
- * - log-entry: jednotliva log zprava
- * - level badges (debug/info/warn/error)
- * - component highlighting
- * - timestamp a auto-scroll
+ * Markup:
+ *   .log-container
+ *     .log-header  (title, filters, actions)
+ *     .log-entries
+ *       .log-entry[data-level=warn]
+ *         .log-time  .log-level.log-level-warn  .log-component  .log-message
+ *     .log-empty
  */
-
-/* ==========================================================================
-   LOG CONTAINER
-   ========================================================================== */
 
 .log-container {
   display: flex;
   flex-direction: column;
-  min-height: 200px;
-  max-height: 500px;
-  overflow-y: auto;
-  background-color: var(--color-bg-primary);
+  min-height: 12rem;
+  max-height: 32rem;
+  background: var(--color-bg-input);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  line-height: var(--leading-relaxed);
+  overflow: hidden;
 }
+.log-fullheight { max-height: none; flex: 1; }
 
-/* Full-height variant */
-.log-container.log-fullheight {
-  max-height: none;
-  flex: 1;
-}
-
-/* Fixed height variants */
-.log-container.log-sm {
-  max-height: 200px;
-}
-
-.log-container.log-md {
-  max-height: 400px;
-}
-
-.log-container.log-lg {
-  max-height: 600px;
-}
-
-/* Scroll shadow indicators */
-.log-container::before,
-.log-container::after {
-  content: '';
-  position: sticky;
-  left: 0;
-  right: 0;
-  height: 16px;
-  pointer-events: none;
-  flex-shrink: 0;
-  z-index: 1;
-}
-
-.log-container::before {
-  top: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--color-bg-primary),
-    transparent
-  );
-}
-
-.log-container::after {
-  bottom: 0;
-  background: linear-gradient(
-    to top,
-    var(--color-bg-primary),
-    transparent
-  );
-}
-
-/* ==========================================================================
-   LOG ENTRY
-   ========================================================================== */
-
-.log-entry {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: 3px var(--space-3);
-}
-
-.log-entry:hover {
-  background-color: rgba(255, 255, 255, 0.02);
-}
-
-/* Timestamp */
-.log-timestamp {
-  flex-shrink: 0;
-  color: var(--color-text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Level - lehký styl */
-.log-level {
-  flex-shrink: 0;
-  min-width: 40px;
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-medium);
-  text-transform: uppercase;
-}
-
-.log-level-debug {
-  color: var(--color-text-muted);
-}
-
-.log-level-info {
-  color: var(--color-success);
-}
-
-.log-level-warn {
-  color: var(--color-warning);
-}
-
-.log-level-error {
-  color: var(--color-error);
-}
-
-/* Component */
-.log-component {
-  flex-shrink: 0;
-  color: var(--color-accent);
-}
-
-.log-component::before {
-  content: '[';
-  opacity: 0.5;
-}
-
-.log-component::after {
-  content: ']';
-  opacity: 0.5;
-}
-
-/* Message */
-.log-message {
-  flex: 1;
-  min-width: 0;
-  color: var(--color-text-primary);
-  word-break: break-word;
-  white-space: pre-wrap;
-}
-
-/* ==========================================================================
-   LOG ENTRY VARIANTS
-   ========================================================================== */
-
-/* Error entry - subtle highlight */
-.log-entry.log-entry-error {
-  background-color: rgba(255, 59, 48, 0.05);
-}
-
-.log-entry.log-entry-error:hover {
-  background-color: rgba(255, 59, 48, 0.1);
-}
-
-/* Warning entry - subtle highlight */
-.log-entry.log-entry-warn {
-  background-color: rgba(255, 149, 0, 0.05);
-}
-
-.log-entry.log-entry-warn:hover {
-  background-color: rgba(255, 149, 0, 0.1);
-}
-
-/* Compact variant (no gaps, denser) */
-.log-container.log-compact .log-entry {
-  padding: var(--space-0-5) var(--space-2);
-  gap: var(--space-1);
-}
-
-.log-container.log-compact .log-level {
-  min-width: 40px;
-  font-size: 9px;
-}
-
-.log-container.log-compact .log-component {
-  min-width: 60px;
-}
-
-/* ==========================================================================
-   LOG HEADER / TOOLBAR
-   ========================================================================== */
-
+/* Header row with filters */
 .log-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-2) var(--space-3);
-  background-color: var(--color-bg-surface);
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  min-height: var(--control-h-lg);
+  padding: var(--space-1) var(--space-3);
   border-bottom: 1px solid var(--color-border);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  background: var(--color-bg-surface);
 }
+.log-header-title { font-size: var(--text-sm); font-weight: var(--font-semibold); }
+.log-header-actions { display: flex; align-items: center; gap: var(--space-2); margin-left: auto; }
 
-.log-header-title {
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-}
-
-.log-header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-/* Filter buttons */
+.log-filters { display: flex; gap: var(--space-1); }
 .log-filter {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  padding: var(--space-0-5) var(--space-2);
-  background-color: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
+  height: var(--control-h-sm);
+  padding: 0 var(--space-2);
   font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: var(--color-text-secondary);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all var(--transition-fast);
+}
+.log-filter:hover { background: var(--color-neutral-subtle); }
+.log-filter.active { color: var(--color-text-primary); background: var(--color-neutral-subtle); border-color: var(--color-border); }
+.log-filter-count { color: var(--color-text-muted); }
+
+.log-search { max-width: 16rem; }
+
+/* Stream */
+.log-entries {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-1) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.6;
 }
 
-.log-filter:hover {
-  background-color: var(--color-bg-elevated);
-  color: var(--color-text-primary);
+.log-entry {
+  display: grid;
+  grid-template-columns: max-content 3.25rem max-content minmax(0, 1fr);
+  column-gap: var(--space-3);
+  align-items: baseline;
+  padding: 1px var(--space-3);
 }
+.log-entry:hover { background: var(--color-neutral-subtle); }
 
-.log-filter.active {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: white;
-}
+.log-time,
+.log-timestamp { color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
 
-.log-filter-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 var(--space-1);
-  border-radius: var(--radius-full);
-  background-color: var(--color-bg-elevated);
-  font-size: 10px;
-  font-weight: var(--font-weight-bold);
-}
+.log-level { font-weight: var(--font-medium); text-transform: uppercase; }
+.log-level-debug { color: var(--color-text-muted); }
+.log-level-info  { color: var(--color-text-secondary); }
+.log-level-warn  { color: var(--color-warning-text); }
+.log-level-error { color: var(--color-error-text); }
 
-.log-filter.active .log-filter-count {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+.log-component { color: var(--color-accent-text); }
 
-/* Filter color variants - subtle level indication */
-.log-filter-error {
-  color: var(--color-error);
-  border-color: rgba(255, 59, 48, 0.3);
-}
+.log-message { color: var(--color-text-primary); overflow-wrap: anywhere; white-space: pre-wrap; }
 
-.log-filter-error:hover {
-  background-color: rgba(255, 59, 48, 0.1);
-  border-color: var(--color-error);
-}
+/* Whole-row emphasis for problems */
+.log-entry[data-level="error"] { background: var(--color-error-subtle); }
+.log-entry[data-level="error"]:hover { background: color-mix(in srgb, var(--color-error-subtle) 80%, var(--color-neutral-subtle)); }
+.log-entry[data-level="debug"] .log-message { color: var(--color-text-secondary); }
 
-.log-filter-error.active {
-  background-color: var(--color-error);
-  border-color: var(--color-error);
-  color: white;
-}
-
-.log-filter-warn {
-  color: var(--color-warning);
-  border-color: rgba(255, 149, 0, 0.3);
-}
-
-.log-filter-warn:hover {
-  background-color: rgba(255, 149, 0, 0.1);
-  border-color: var(--color-warning);
-}
-
-.log-filter-warn.active {
-  background-color: var(--color-warning);
-  border-color: var(--color-warning);
-  color: white;
-}
-
-.log-filter-info {
-  color: var(--color-success);
-  border-color: rgba(0, 210, 106, 0.3);
-}
-
-.log-filter-info:hover {
-  background-color: rgba(0, 210, 106, 0.1);
-  border-color: var(--color-success);
-}
-
-.log-filter-info.active {
-  background-color: var(--color-success);
-  border-color: var(--color-success);
-  color: white;
-}
-
-.log-filter-debug {
-  color: var(--color-text-muted);
-  border-color: rgba(128, 128, 128, 0.3);
-}
-
-.log-filter-debug:hover {
-  background-color: rgba(128, 128, 128, 0.1);
-  border-color: var(--color-text-muted);
-}
-
-.log-filter-debug.active {
-  background-color: var(--color-text-muted);
-  border-color: var(--color-text-muted);
-  color: white;
-}
-
-/* ==========================================================================
-   LOG EMPTY STATE
-   ========================================================================== */
-
+/* Empty */
 .log-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
+  flex: 1;
   padding: var(--space-8);
   color: var(--color-text-muted);
+  font-size: var(--text-sm);
   text-align: center;
 }
 
-.log-empty-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: var(--space-3);
-  opacity: 0.5;
-}
-
-.log-empty-text {
-  font-size: var(--text-sm);
-}
-
-/* ==========================================================================
-   LIVE INDICATOR
-   ========================================================================== */
-
-.log-live-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-success);
-}
-
-.log-live-indicator::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-success);
-  animation: log-live-pulse 2s ease-in-out infinite;
-}
-
-@keyframes log-live-pulse {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 4px var(--color-success);
-  }
-  50% {
-    opacity: 0.5;
-    box-shadow: 0 0 8px var(--color-success);
-  }
-}
-
-/* ==========================================================================
-   LIGHT THEME ADJUSTMENTS
-   ========================================================================== */
-
-.theme-light .log-entry.log-entry-error {
-  background-color: rgba(220, 38, 38, 0.05);
-}
-
-.theme-light .log-entry.log-entry-error:hover {
-  background-color: rgba(220, 38, 38, 0.1);
-}
-
-.theme-light .log-entry.log-entry-warn {
-  background-color: rgba(217, 119, 6, 0.05);
-}
-
-.theme-light .log-entry.log-entry-warn:hover {
-  background-color: rgba(217, 119, 6, 0.1);
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .log-live-indicator::before {
-    animation: none;
-  }
-}
+/* Live tail indicator in the header */
+.log-live { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-secondary); }

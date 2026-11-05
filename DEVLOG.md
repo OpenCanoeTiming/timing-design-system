@@ -108,3 +108,10 @@ Design system created, extracted from c123-server for use in canoe timing tools.
 - Light theme as default (for user tools)
 - Dark theme via `.theme-dark` class or `prefers-color-scheme`
 - Ready for integration into c123-server and c123-xml-tools
+
+## 2026-11-05 — 1.0: scope from measured usage
+
+**Problem:** #26 asked for a "refactor" with no scope. 0.9 defined 302 classes; nobody knew which ones mattered, and the canoe identity (gate poles, LIVE stripes, wave, glow) competed with legibility.
+**Attempted:** Grepped every class name against the HTML/JS/TSX of c123-server, c123-penalty-check and c123-xml-tools. 226 of 302 classes had no consumer. c123-server's `styles.css` (2 864 lines) overrode 48 DS classes and aliased the tokens, so DS changes never reached the admin anyway.
+**Solution:** 1.0 keeps the measured set, collapses status into three primitives with one modifier set, adds the rebuild's result marks, drops the identity. Dark primary buttons use dark text on the accent because white on `#3b8bff` is 3.3:1. Pages now publishes `/v1/` and `/v0.9/`; `/dist/` stays 0.9 until c123-xml-tools pins (it linked the unversioned URL).
+**Lesson:** `var(--font-weight-semibold)` had been silently falling back to normal weight in header/log/dropzone since the files were written — a token name that doesn't exist fails without a warning. Grep `var(--` against the token files before every release (`comm -23 used defined`).

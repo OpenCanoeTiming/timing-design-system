@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specimen — penalty check (DS 1.0, light)</title>
+  <link rel="stylesheet" href="../tokens/index.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <style>
+    .gate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr)); gap: var(--space-1); }
+    .gate { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: var(--space-1); font-size: var(--text-xs); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+    .gate b { font-family: var(--font-mono); font-weight: var(--font-medium); }
+    .gate-pen { color: var(--color-warning-text); }
+    .gate-50 { color: var(--color-error-text); }
+    .pc-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-4); align-items: start; }
+    .pc-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); min-width: 0; }
+    @media (max-width: 48rem) { .pc-layout { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-brand">
+    <span class="header-title">Penalty check</span>
+    <span class="header-context">ČP Troja 2026</span>
+  </div>
+  <div class="header-status">
+    <span class="header-status-item"><span class="status-dot status-dot-success"></span>c123-server</span>
+    <span class="header-status-item header-port">10.0.0.5:27123</span>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-sm btn-ghost">Settings</button>
+    <button class="btn btn-sm btn-primary">Check again</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="pc-layout">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Race</span></div>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="form-label" for="race">Race</label>
+          <select class="select" id="race"><option>K1M · 2nd run</option><option>K1M · 1st run</option><option>K1W · 2nd run</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Results XML</label>
+          <div class="dropzone dropzone-compact has-file" tabindex="0">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg>
+            <div><div class="dropzone-title">Troja_CP_2026.xml</div><div class="dropzone-hint">184 kB · 14:02 · click to replace</div></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gate groups</label>
+          <div class="flex gap-2 flex-wrap">
+            <span class="badge badge-neutral">1–6 · judge A</span>
+            <span class="badge badge-neutral">7–12 · judge B</span>
+            <span class="badge badge-neutral">13–18 · judge C</span>
+            <button class="btn btn-sm btn-ghost">Edit</button>
+          </div>
+        </div>
+        <label class="switch"><input type="checkbox" class="switch-input" checked><span class="switch-slider"></span>Flag differences only</label>
+      </div>
+    </div>
+
+    <div class="pc-main">
+      <div class="card">
+        <div class="card-body">
+          <div class="progress-row"><span class="progress-text">Comparing XML against live penalties</span><span class="progress-value">38 / 42</span></div>
+          <div class="progress progress-success"><div class="progress-bar" style="width: 90%"></div></div>
+          <div class="stat-row" style="margin-top: var(--space-3)">
+            <span class="stat"><span class="stat-value">42</span> boats</span>
+            <span class="stat"><span class="stat-value text-success">35</span> match</span>
+            <span class="stat"><span class="stat-value text-warning">3</span> differ</span>
+            <span class="stat"><span class="stat-value">4</span> pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        <div class="alert-content"><div class="alert-title">3 boats differ between XML and live data</div>Bib 23 gate 14, bib 31 gate 9, bib 08 gates 2 and 17. Fix in Canoe123 and re-export, or flag for the jury.</div>
+        <div class="alert-actions"><button class="btn btn-sm">Flag all</button></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Differences</span>
+          <div class="flex gap-2"><input class="input input-sm" placeholder="Bib or name" style="width: 12rem"><button class="btn btn-sm">Export</button></div>
+        </div>
+        <div class="card-body card-body-flush table-responsive">
+          <table class="table table-hover">
+            <thead><tr><th class="col-bib">Bib</th><th>Name</th><th class="col-num">Gate</th><th class="col-num">XML</th><th class="col-num">Live</th><th>Status</th><th class="col-actions"></th></tr></thead>
+            <tbody>
+              <tr><td class="col-bib">23</td><td>Jan Novák</td><td class="col-num">14</td><td class="col-num">2</td><td class="col-num mark mark-review">0</td><td><span class="badge badge-review">Under review</span></td><td class="col-actions"><button class="btn btn-sm">Flag</button></td></tr>
+              <tr><td class="col-bib">31</td><td>Martin Dvořák</td><td class="col-num">9</td><td class="col-num">50</td><td class="col-num">50</td><td><span class="badge badge-success">Match</span></td><td class="col-actions"></td></tr>
+              <tr class="is-selected"><td class="col-bib">08</td><td>Tomáš Procházka</td><td class="col-num">2, 17</td><td class="col-num">0</td><td class="col-num mark mark-provisional">4</td><td><span class="badge badge-provisional">Provisional</span></td><td class="col-actions"><button class="btn btn-sm">Flag</button></td></tr>
+              <tr class="is-dimmed"><td class="col-bib">12</td><td>Lukáš Rohan</td><td class="col-num">–</td><td class="col-num">–</td><td class="col-num mark mark-pending">not yet</td><td><span class="badge badge-pending">Pending</span></td><td class="col-actions"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">Bib 08 · gates</span><span class="text-muted text-sm">XML vs live</span></div>
+        <div class="card-body">
+          <div class="gate-grid">
+            <div class="gate"><span class="text-muted">1</span><b>0</b></div>
+            <div class="gate" style="border-color: var(--color-warning)"><span class="text-muted">2</span><b class="gate-pen">2</b></div>
+            <div class="gate"><span class="text-muted">3</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">4</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">5</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">6</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">7</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">8</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">9</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">10</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">11</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">12</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">13</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">14</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">15</span><b>0</b></div>
+            <div class="gate"><span class="text-muted">16</span><b>0</b></div>
+            <div class="gate" style="border-color: var(--color-warning)"><span class="text-muted">17</span><b class="gate-pen">2</b></div>
+            <div class="gate"><span class="text-muted">18</span><b>0</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>

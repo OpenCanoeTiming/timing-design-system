@@ -1,24 +1,21 @@
 /**
- * Canoe Timing Design System - CSS Components
- *
- * Tento soubor agreguje všechny CSS komponenty.
- * Pro kompletní design systém importujte také tokens/index.css.
+ * Timing Design System — CSS components (1.0)
+ * Import tokens/index.css first.
  */
 
 @import './base.css';
+@import './layout.css';
 @import './buttons.css';
 @import './forms.css';
 @import './cards.css';
 @import './tables.css';
 @import './status.css';
-@import './layout.css';
+@import './header.css';
+@import './tabs.css';
 @import './modal.css';
 @import './toast.css';
-@import './tabs.css';
-@import './header.css';
+@import './menu.css';
 @import './log.css';
 @import './dropzone.css';
-@import './kbd.css';
 @import './progress.css';
-@import './menu.css';
 @import './spinner.css';

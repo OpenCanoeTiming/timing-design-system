@@ -1,228 +1,99 @@
 /**
- * Modal Components
- *
- * Accessible modal dialogs with backdrop overlay.
+ * Modal — one size (max 32rem) plus .modal-lg (max 48rem) and .modal-fullscreen.
+ * Markup: .modal[open] > .modal-content > .modal-header / .modal-body / .modal-footer
+ * Works with <dialog> or with a div toggled by display.
  */
 
-/* ==========================================================================
-   Modal Backdrop
-   ========================================================================== */
-
-.modal-backdrop {
+.modal {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4);
   z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-normal), visibility var(--transition-normal), backdrop-filter var(--transition-normal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh var(--space-4) var(--space-4);
+  background: var(--color-bg-overlay);
+  overflow-y: auto;
+  animation: modal-fade var(--duration-fast) ease-out;
 }
+dialog.modal { border: 0; margin: 0; width: 100%; height: 100%; max-width: none; max-height: none; color: inherit; }
+dialog.modal:not([open]) { display: none; }
+dialog.modal::backdrop { background: transparent; }
 
-.modal-backdrop.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Dark theme: darker backdrop */
-.theme-dark .modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
-/* ==========================================================================
-   Modal Container
-   ========================================================================== */
-
-.modal {
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  max-width: 500px;
+.modal-content {
   width: 100%;
-  max-height: calc(100vh - var(--space-8));
-  overflow: hidden;
+  max-width: 32rem;
+  max-height: calc(100vh - 12vh);
   display: flex;
   flex-direction: column;
-  transform: scale(0.95) translateY(-10px);
-  transition: transform var(--transition-normal);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  animation: modal-rise var(--duration-normal) ease-out;
 }
 
-.modal-backdrop.open .modal {
-  transform: scale(1) translateY(0);
-}
-
-/* ==========================================================================
-   Modal Sizes
-   ========================================================================== */
-
-.modal-sm {
-  max-width: 400px;
-}
-
-.modal-lg {
-  max-width: 700px;
-}
-
-.modal-xl {
-  max-width: 900px;
-}
-
-.modal-fullscreen {
-  max-width: calc(100vw - var(--space-8));
-  max-height: calc(100vh - var(--space-8));
-  width: 100%;
-  height: 100%;
-}
-
-/* ==========================================================================
-   Modal Header
-   ========================================================================== */
+.modal-lg .modal-content { max-width: 48rem; }
+.modal-fullscreen { padding: 0; }
+.modal-fullscreen .modal-content { max-width: none; max-height: none; height: 100%; border-radius: 0; border: 0; }
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-  flex-shrink: 0;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-3);
 }
 
-.modal-title {
-  margin: 0;
+.modal-title,
+.modal-header h2,
+.modal-header h3 {
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tight);
 }
 
 .modal-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.modal-close:hover {
-  background-color: var(--color-bg-elevated);
-  color: var(--color-text-primary);
-}
-
-.modal-close:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-/* ==========================================================================
-   Modal Body
-   ========================================================================== */
-
-.modal-body {
-  padding: var(--space-4);
-  overflow-y: auto;
-  flex-grow: 1;
-}
-
-/* ==========================================================================
-   Modal Footer
-   ========================================================================== */
-
-.modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-border);
-  flex-shrink: 0;
-}
-
-.modal-footer-left {
-  justify-content: flex-start;
-}
-
-.modal-footer-center {
-  justify-content: center;
-}
-
-.modal-footer-between {
-  justify-content: space-between;
-}
-
-/* ==========================================================================
-   Confirmation Modal Variant
-   ========================================================================== */
-
-.modal-confirm .modal-body {
-  text-align: center;
-  padding: var(--space-6);
-}
-
-.modal-confirm .modal-icon {
+  flex: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  margin-bottom: var(--space-4);
+  width: var(--control-h-sm);
+  height: var(--control-h-sm);
+  margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2)) 0 0;
+  font-size: var(--text-xl);
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.modal-close:hover { color: var(--color-text-primary); background: var(--color-neutral-subtle); }
+
+.modal-body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 var(--space-4) var(--space-4);
+  overflow-y: auto;
 }
 
-.modal-confirm .modal-icon-warning {
-  background-color: var(--color-warning-subtle);
-  color: var(--color-warning);
+.modal-footer,
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
 }
+.modal-footer-between { justify-content: space-between; }
 
-.modal-confirm .modal-icon-error {
-  background-color: var(--color-error-subtle);
-  color: var(--color-error);
-}
+@keyframes modal-fade { from { opacity: 0; } }
+@keyframes modal-rise { from { opacity: 0; transform: translateY(-6px); } }
 
-.modal-confirm .modal-icon-success {
-  background-color: var(--color-success-subtle);
-  color: var(--color-success);
-}
-
-.modal-confirm .modal-icon-info {
-  background-color: var(--color-info-subtle);
-  color: var(--color-info);
-}
-
-.modal-confirm .modal-footer {
-  justify-content: center;
-}
-
-/* ==========================================================================
-   Accessibility
-   ========================================================================== */
-
-/* Prevent body scroll when modal is open */
-body.modal-open {
-  overflow: hidden;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .modal-backdrop {
-    transition: none;
-  }
-
-  .modal {
-    transition: none;
-    transform: none;
-  }
-
-  .modal-backdrop.open .modal {
-    transform: none;
-  }
-}
+/* Body scroll lock while a modal is open */
+body.modal-open { overflow: hidden; }

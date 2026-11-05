@@ -1,497 +1,157 @@
-# Canoe Timing Design System
+# Timing Design System
 
-Design system for canoe slalom timing applications. Professional, elegant UI components with a paddling touch.
+CSS design system (plus thin React wrappers) for the OpenCanoeTiming tools: c123-server admin, penalty check, XML tools and the 2026/27 rebuild clients.
 
-**[Live Demo & Component Playground](https://opencanoetiming.github.io/timing-design-system/playbooks/)**
+**[Components](https://opencanoetiming.github.io/timing-design-system/playbooks/)** · [Admin specimen](https://opencanoetiming.github.io/timing-design-system/playbooks/specimen-admin.html) · [User-tool specimen](https://opencanoetiming.github.io/timing-design-system/playbooks/specimen-user.html)
 
-## Features
+## What 1.0 is
 
-- Dual theme support (light/dark) with automatic system detection
-- Self-hosted Inter & JetBrains Mono fonts
-- CSS-only components (no JavaScript required)
-- Optional React components
-- Accessible (WCAG AA compliant)
-- Canoe-specific styling: wave patterns, gate pole indicators, LIVE badges
+- **Quiet operator UI.** Cool-tinted neutrals, off-white text on dark, one accent, hairline borders, no decoration. Built for long sessions at a finish line.
+- **Two themes, one token surface.** `.theme-light` (user tools) and `.theme-dark` (admin), or `prefers-color-scheme` when no class is set. Every color is a CSS custom property; WCAG AA checked for both themes.
+- **Three status primitives.** `status-dot`, `badge`, `alert` share one modifier set: `success | warning | error | info | neutral` and the result marks `provisional | review | stale | pending | live`.
+- **Dense, legible tables.** Fixed row height, sticky header, tabular figures everywhere, `col-time` / `col-bib` / `col-num` helpers.
+- **Scope from usage.** 1.0 ships what the three consumers actually use; everything else was removed (see Migration).
 
-## Installation
+## Install
 
-### From GitHub Packages
-
-This package is published to [GitHub Packages](https://github.com/OpenCanoeTiming/timing-design-system/pkgs/npm/timing-design-system). GitHub Packages requires authentication even for public packages.
-
-**1. Create a GitHub Personal Access Token:**
-- Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
-- Generate new token with `read:packages` scope
-- Copy the token
-
-**2. Configure npm to use GitHub Packages:**
-
-Create or edit `~/.npmrc` (global) or `.npmrc` in your project:
+The package is on GitHub Packages, which needs a token even for public packages.
 
 ```
+# ~/.npmrc or ./.npmrc
 @opencanoetiming:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
-
-> **Tip:** For CI/CD, use environment variable instead of hardcoding the token:
-> ```
-> //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-> ```
-
-**3. Install the package:**
 
 ```bash
 npm install @opencanoetiming/timing-design-system
 ```
 
-### Direct Download
+```js
+import '@opencanoetiming/timing-design-system/css';        // dist/timing.css
+// or the sources, if your bundler resolves CSS imports:
+import '@opencanoetiming/timing-design-system/src/tokens/index.css';
+import '@opencanoetiming/timing-design-system/src/css/index.css';
+```
 
-Download `dist/timing.css` from the [latest release](https://github.com/OpenCanoeTiming/timing-design-system/releases) and include it in your project:
+Static pages can link the built file from GitHub Pages. Pin the major:
 
 ```html
+<link rel="stylesheet" href="https://opencanoetiming.github.io/timing-design-system/v1/timing.min.css">
+```
+
+`v0.9/timing.min.css` keeps serving the legacy line. Note that `/v1/` tracks `main` on every push (not only releases), and `/v0.9/` is rebuilt from `legacy/2026` only when `main` deploys — after a `fix:` on the legacy branch, run the Pages workflow manually.
+
+## Quick start
+
+```html
+<html class="theme-dark">            <!-- or theme-light, or nothing for auto -->
 <link rel="stylesheet" href="timing.css">
+
+<header class="app-header">
+  <div class="header-brand"><span class="header-title">C123-SERVER</span></div>
+  <div class="header-status">
+    <span class="header-status-item"><span class="status-dot status-dot-success"></span>TCP</span>
+    <span class="badge badge-live"><span class="status-dot status-dot-live"></span>LIVE</span>
+  </div>
+</header>
+
+<table class="table table-hover">
+  <tr><td class="col-bib">24</td><td>Petr Svoboda</td>
+      <td class="col-time mark mark-provisional">1:38.52</td>
+      <td><span class="badge badge-provisional">Provisional</span></td></tr>
+</table>
 ```
-
-## Quick Start
-
-```html
-<!DOCTYPE html>
-<!-- Theme class goes on <html>, not <body> - see Theming section below -->
-<html class="theme-dark">
-<head>
-  <link rel="stylesheet" href="path/to/timing.css">
-</head>
-<body>
-  <button class="btn btn-primary">Start Race</button>
-  <span class="badge-live">LIVE</span>
-</body>
-</html>
-```
-
-Omit the class to let the system preference (`prefers-color-scheme`) decide automatically.
 
 ## Components
 
-### Buttons
+| Component | Classes | React |
+|---|---|---|
+| Buttons | `btn`, `btn-primary` / `-secondary` / `-ghost` / `-danger`, `btn-sm`, `btn-icon`, `is-loading` | `Button` |
+| Forms | `form-group`, `form-label`, `form-hint`, `form-error`, `input`, `textarea`, `select`, `checkbox`, `radio`, `switch`, `input-group`, `input-addon` | `FormField`, `Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `Switch` |
+| Status | `status-dot-*`, `status-item`, `badge-*`, `badge-sm`, `badge-mono`, `alert-*`, `alert-tinted`, `mark-*` | `StatusDot`, `StatusItem`, `Badge`, `Alert`, `MarkedValue` |
+| Cards | `card`, `card-header`, `card-title`, `card-body`, `card-body-flush`, `card-footer`, `card-compact`, `card-interactive`, `card-selected`, `card-grid` | `Card`, `CardHeader`, `CardBody`, `CardFooter` |
+| Tables | `table`, `table-striped`, `table-hover`, `table-compact`, `table-responsive`, `col-*`, `is-selected`, `is-dimmed`, `table-empty` | `Table`, `TableRow`, `TableCell`, `TableHeaderCell`, `TableEmpty` |
+| Tabs | `tabs`, `tab-list`, `tab`, `tab-badge`, `tab-panels`, `tab-panel` | `Tabs` |
+| Header | `app-header`, `header-brand`, `header-title`, `header-context`, `header-status`, `header-status-item`, `header-port`, `header-actions`, `page-banner-*` | `AppHeader`, `PageBanner` |
+| Modal | `modal`, `modal-content`, `modal-header`, `modal-title`, `modal-close`, `modal-body`, `modal-footer`, `modal-lg`, `modal-fullscreen` | `Modal` |
+| Toast | `toast-container`, `toast-*`, `toast-title`, `toast-message`, `toast-close` | `Toast`, `ToastContainer` |
+| Menu | `menu`, `menu-content-*`, `menu-item`, `menu-item-danger`, `menu-separator`, `menu-label` | `Menu` |
+| Log | `log-container`, `log-header`, `log-filter`, `log-entries`, `log-entry`, `log-time`, `log-level-*`, `log-component`, `log-message` | `LogViewer`, `LogFilter` |
+| Dropzone | `dropzone`, `dropzone-compact`, `drag-over`, `has-file`, `has-error`, `dropzone-title`, `dropzone-hint`, `dropzone-files` | `DropZone` |
+| Progress | `progress`, `progress-bar`, `progress-*`, `progress-row`, `progress-indeterminate`, `spinner`, `loading-overlay` | `ProgressBar`, `Spinner` |
+| Layout | `container`, `page-main`, `section-head`, `stat-row`, `kv`, `flex`, `grid`, `grid-cols-*`, `gap-*`, `hidden`, `truncate` | — |
 
-```html
-<button class="btn btn-primary">Primary</button>
-<button class="btn btn-secondary">Secondary</button>
-<button class="btn btn-ghost">Ghost</button>
-<button class="btn btn-danger">Danger</button>
+The playbook shows every class in both themes.
 
-<!-- Sizes -->
-<button class="btn btn-primary btn-sm">Small</button>
-<button class="btn btn-primary btn-lg">Large</button>
+## Tokens
+
+```
+--color-bg-body | -surface | -elevated | -input | -overlay
+--color-border | -border-strong | -border-focus
+--color-text-primary | -secondary | -muted | -on-accent
+--color-accent | -accent-hover | -accent-active | -accent-subtle | -accent-text
+--color-{success|warning|error|info|neutral} | -subtle | -text
+--color-mark-{provisional|review|stale|pending|live} | -subtle
+--space-1…12  --radius-sm…xl  --shadow-sm…lg  --focus-ring
+--control-h-sm | --control-h | --control-h-lg   --row-h | --row-h-compact
+--font-sans | --font-mono   --text-xs…3xl   --font-normal…bold
 ```
 
-### Cards
+Put the theme class on `<html>`, not on `<body>`: derived custom properties resolve where they are declared, so a theme class deeper in the tree mixes themes.
 
-```html
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Race Results</h3>
-  </div>
-  <div class="card-body">Content here</div>
-</div>
+## Migration from 0.9
 
-<!-- Variants -->
-<div class="card card-elevated">With shadow</div>
-<div class="card card-interactive">Hover effect</div>
-<div class="card card-canoe">Wavy top border</div>
-```
+Breaking. Consumers migrate in their own issue: c123-server#221, c123-penalty-check#172, c123-xml-tools#7.
 
-### Status Indicators
+**Removed, no replacement:**
 
-```html
-<!-- Badges -->
-<span class="badge badge-success">Finished</span>
-<span class="badge badge-warning">On Course</span>
-<span class="badge badge-error">DNS</span>
+- tokens: `canoe.css` (`--pattern-wave*`, `--glow-*`, `--color-gate-*`, `--header-bar-*`)
+- identity: `gate-pole-*`, `line-wave`, `card-canoe`, glow cards, `status-dot-glow`
+- status: `card-status-*`, `connection-status`, `status-indicator*`, `connected` / `connecting` / `disconnected` / `open` / `disabled` state classes, `cell-status`
+- components: `kbd*`, `dots-*`, `spinner-{md,accent,success,warning,error,white}`, `loading-overlay-blur`, `toast-container-*` positions, `toast-progress*`, `toast-exiting`, `tabs-{pills,bordered,full,sm,lg}`, `tab-icon`, `modal-{sm,xl}`, `modal-backdrop`, `modal-confirm`, `modal-icon-*`, `modal-footer-{left,center}`, `menu-trigger`, `btn-lg`, `card-spacious`, `table-bordered`, `cell-numeric` (→ `col-num`), `header-title-lg`, `header-{compact,elevated,plain}` (→ `app-header-compact`), `log-{sm,md,lg,compact}`, `log-entry-{error,warn}` (→ `data-level`), `log-filter-{level}`, `log-live-indicator` (→ `log-live`), `log-empty-{icon,text}`, `progress-{striped,animated,lg,accent}`, `dropzone-{sm,lg,text,file-icon,file-info}`
+- layout/utilities: `container-{sm,md,lg,xl}`, `grid-cols-{1,4}`, `m-*`, `p-*`, `mt-*`, `mb-*`, `gap-{6,8}`, `text-{base,lg,xl,2xl,left,primary,accent}`, `font-{normal,bold,mono}`, `inline*`, `h-full`, `min-h-screen`, `flex-{row,auto,none}`, `items-end`, `justify-{start,center}`
 
-<!-- Status dots -->
-<span class="status-dot status-dot-success"></span>
-<span class="status-dot status-dot-success status-dot-pulse"></span>
-<span class="status-dot status-dot-success status-dot-glow"></span>
+Known consumer hits: c123-xml-tools uses `cell-numeric` and `text-primary` (penalties-quality-analyzer, race-combinator, participant-adder); c123-server uses `card-status-success` and `status-dot-glow`.
 
-<!-- Alerts -->
-<div class="alert alert-success">
-  <div class="alert-title">Success</div>
-  Time saved successfully.
-</div>
-```
+**Renamed / reshaped:**
 
-### Forms
+| 0.9 | 1.0 |
+|---|---|
+| `.header` with 4px bar + glow | `.app-header` (`.header` still matches, bar is gone) |
+| `.badge-live` with slalom stripes | `.badge-live` = green badge; add `<span class="status-dot status-dot-live">` for the heartbeat |
+| `.status-dot-pulse` | still works; prefer `status-dot-live` |
+| `.modal-backdrop > .modal` | `.modal > .modal-content` (matches c123-server markup) |
+| `.log-container > .log-entry` | `.log-container > .log-entries > .log-entry`; `.log-timestamp` → `.log-time` |
+| `.progress-label` inside bar | `.progress-row` above the track |
+| `.table th` always sticky | `.table-sticky` opt-in; needs a scroll container with a max-height |
+| `.select-lg`, `.input` 16px | one control height; `-sm` variant only |
+| `--font-weight-*` (never existed) | `--font-*` — 0.9 declarations using the former silently fell back to normal weight |
+| `--shadow-*` only under `.theme-dark` | also under `prefers-color-scheme: dark` |
 
-```html
-<div class="form-group">
-  <label class="form-label">Competitor Name</label>
-  <input type="text" class="input" placeholder="Enter name">
-  <span class="form-hint">Full name as on registration</span>
-</div>
+**React:** the wrapper set is smaller and flatter.
 
-<select class="input select">
-  <option>K1 Men</option>
-  <option>C1 Women</option>
-</select>
-
-<label class="switch">
-  <input type="checkbox" class="switch-input">
-  <span class="switch-slider"></span>
-  <span>Active</span>
-</label>
-```
-
-### Tables
-
-```html
-<div class="table-responsive">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th class="cell-numeric">Time</th>
-        <th class="cell-status">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="cell-numeric">1</td>
-        <td>Jan Novak</td>
-        <td class="cell-numeric">94.32</td>
-        <td class="cell-status"><span class="badge badge-success">FIN</span></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-```
-
-### Modal
-
-```html
-<div class="modal-backdrop open">
-  <div class="modal" role="dialog">
-    <div class="modal-header">
-      <h3 class="modal-title">Confirm Action</h3>
-      <button class="modal-close">&times;</button>
-    </div>
-    <div class="modal-body">Are you sure?</div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost">Cancel</button>
-      <button class="btn btn-primary">Confirm</button>
-    </div>
-  </div>
-</div>
-
-<!-- Sizes: modal-sm, modal-lg, modal-xl -->
-```
-
-### Toast Notifications
-
-```html
-<div class="toast-container toast-container-top-right">
-  <div class="toast toast-success">
-    <div class="toast-content">
-      <div class="toast-title">Saved</div>
-      <div class="toast-message">Changes saved successfully.</div>
-    </div>
-    <div class="toast-progress">
-      <div class="toast-progress-bar"></div>
-    </div>
-  </div>
-</div>
-```
-
-### Tabs
-
-```html
-<div class="tabs">
-  <div class="tab-list">
-    <button class="tab active">Results</button>
-    <button class="tab">Start List</button>
-    <button class="tab">
-      Competitors <span class="tab-badge">24</span>
-    </button>
-  </div>
-</div>
-
-<!-- Variants: tabs-pills, tabs-full -->
-```
-
-### Canoe-Specific Components
-
-#### App Header
-
-The header is designed to be the unifying visual element across timing tools. It features a 4px accent bar on the left with a glow effect, and supports multiple layout patterns.
-
-**Admin Dashboard Style** (c123-server inspired):
-
-```html
-<header class="app-header">
-  <div class="header-brand">
-    <h1 class="header-title header-title-lg">C123-SERVER</h1>
-  </div>
-  <div class="header-status">
-    <span class="header-port">:27123</span>
-    <span class="header-status-item">
-      <span class="status-dot status-dot-success"></span>
-      <span>TCP</span>
-    </span>
-    <span class="header-status-item">
-      <span class="status-dot status-dot-warning status-dot-pulse"></span>
-      <span>UDP</span>
-    </span>
-    <span class="header-status-item">
-      <span class="status-dot status-dot-error"></span>
-      <span>XML</span>
-    </span>
-    <span class="badge-live">LIVE</span>
-  </div>
-</header>
-```
-
-**Badge-style Status Indicators** (alternative):
-
-```html
-<header class="app-header">
-  <div class="header-brand">
-    <h1 class="header-title">Canoe Timing</h1>
-  </div>
-  <div class="header-status">
-    <div class="status-indicator connected">
-      <span class="status-indicator-dot"></span>
-      <span>TCP</span>
-    </div>
-  </div>
-  <div class="header-actions">
-    <span class="badge-live">LIVE</span>
-  </div>
-</header>
-```
-
-#### Header Components
-
-| Class | Description |
-|-------|-------------|
-| `.app-header` | Main header container with accent bar |
-| `.header-brand` | Logo/title area |
-| `.header-title` | Main heading (H1) |
-| `.header-title-lg` | Larger title variant (text-2xl, bold) |
-| `.header-status` | Status indicators container (right-aligned) |
-| `.header-status-item` | Minimal status: dot + label, monospace |
-| `.header-port` | Server port display (`:27123`) |
-| `.header-actions` | Action buttons area |
-| `.status-indicator` | Badge-style status with border |
-| `.badge-live` | LIVE badge with gate pole animation |
-| `.header-live` | Simple LIVE indicator (dot + text) |
-
-#### Header Variants
-
-| Class | Effect |
-|-------|--------|
-| `.header-compact` | Smaller 44px height |
-| `.header-plain` | No accent bar |
-| `.header-elevated` | With shadow |
-
-#### LIVE Badge Variants
-
-```html
-<!-- Default: with gate pole animation (paddling flair) -->
-<span class="badge-live">LIVE</span>
-
-<!-- Simple: just dot + text (for simpler tools) -->
-<span class="header-live">
-  <span class="status-dot status-dot-success"></span>
-  LIVE
-</span>
-```
-
-#### Gate Pole Indicators
-
-```html
-<span class="gate-pole gate-pole-success"></span>
-<span class="gate-pole gate-pole-warning"></span>
-<span class="gate-pole gate-pole-error"></span>
-```
-
-#### Log Viewer
-
-```html
-<div class="log-container">
-  <div class="log-entry">
-    <span class="log-timestamp">14:23:45.123</span>
-    <span class="log-level log-level-info">info</span>
-    <span class="log-component">TCP</span>
-    <span class="log-message">Connected to server</span>
-  </div>
-</div>
-```
-
-#### Drop Zone
-
-```html
-<div class="dropzone">
-  <span class="dropzone-label">Drop file here</span>
-  <span class="dropzone-hint">or click to browse</span>
-</div>
-```
-
-## Theming
-
-### Automatic Theme Detection
-
-By default, the system respects `prefers-color-scheme`. Override by putting a theme
-class on the **root element** (`<html>`):
-
-```html
-<html class="theme-dark">...</html>   <!-- Dark mode forced -->
-<html class="theme-light">...</html>  <!-- Light mode forced -->
-```
-
-### ⚠️ Apply the theme class on `<html>`, not `<body>`
-
-The theme class **must** live on the `:root` element (`<html>`). Putting it on
-`<body>` (or any descendant) breaks any CSS variable that is itself defined in
-terms of another variable — for example:
-
-```css
-/* Anti-pattern in a consumer stylesheet */
-:root {
-  --my-bg: var(--color-bg-surface); /* alias on :root */
-}
-```
-
-The alias `--my-bg` is **computed and frozen** on `:root` using the theme active
-there. If you later apply `.theme-dark` further down the tree, descendants
-override `--color-bg-surface` but keep inheriting the already-resolved `--my-bg`
-from `:root`, so elements using the alias render with the *wrong* theme colors.
-This is how CSS custom property inheritance is specified — computed values are
-resolved at the declaration site, not at the use site.
-
-The design system's own auto-detection (`@media (prefers-color-scheme: dark)`)
-targets `:root` precisely because of this. Applying the explicit override class
-anywhere else puts those two mechanisms in conflict.
-
-**Rule of thumb:** if you ever reference a `--color-*` variable from inside
-another custom property declaration, that declaration and the theme class must
-live on the same element — practically always `:root`.
-
-### CSS Custom Properties
-
-All values are CSS variables for easy customization:
-
-```css
-:root {
-  --color-accent: #ff6600;
-  --color-accent-hover: #cc5200;
-}
-```
-
-| Variable | Light | Dark |
-|----------|-------|------|
-| `--color-bg-body` | #f5f5f5 | #0a0a0a |
-| `--color-bg-surface` | #ffffff | #141414 |
-| `--color-text-primary` | #1a1a1a | #ffffff |
-| `--color-accent` | #0066cc | #0088ff |
-| `--color-success` | #059669 | #00d26a |
-| `--color-warning` | #d97706 | #ff9500 |
-| `--color-error` | #dc2626 | #ff3b30 |
-
-## React Components
-
-React components are available in `src/react/`:
-
-```tsx
-import {
-  Button, Card, Badge, Modal, Toast,
-  Header, HeaderBrand, HeaderTitle, HeaderStatus,
-  HeaderPort, HeaderStatusItem, LiveBadge
-} from '@opencanoetiming/timing-design-system/react';
-
-function App() {
-  return (
-    <Card variant="canoe">
-      <Badge variant="success">Live</Badge>
-      <Button variant="primary">Start</Button>
-    </Card>
-  );
-}
-```
-
-### Header Components (React)
-
-```tsx
-import {
-  Header, HeaderBrand, HeaderTitle, HeaderStatus,
-  HeaderPort, HeaderStatusItem, LiveBadge
-} from '@opencanoetiming/timing-design-system/react';
-
-// Admin dashboard style
-function AdminHeader() {
-  return (
-    <Header>
-      <HeaderBrand>
-        <HeaderTitle className="header-title-lg">C123-SERVER</HeaderTitle>
-      </HeaderBrand>
-      <HeaderStatus>
-        <HeaderPort port={27123} />
-        <HeaderStatusItem label="TCP" status="connected" />
-        <HeaderStatusItem label="UDP" status="connecting" />
-        <HeaderStatusItem label="XML" status="disconnected" />
-        <LiveBadge />  {/* default: with gate pole */}
-      </HeaderStatus>
-    </Header>
-  );
-}
-
-// Simple app header
-function SimpleHeader() {
-  return (
-    <Header>
-      <HeaderBrand>
-        <HeaderTitle>My App</HeaderTitle>
-      </HeaderBrand>
-      <HeaderStatus>
-        <LiveBadge variant="simple" />  {/* simple: just dot + text */}
-      </HeaderStatus>
-    </Header>
-  );
-}
-```
+| 0.9 | 1.0 |
+|---|---|
+| `Badge variant=` / `StatusDot variant=` | `tone=` (semantic or mark) |
+| `ModalHeader`, `ModalTitle`, `ModalClose`, `ModalBody`, `ModalFooter` | `<Modal title footer>` slots; `ref` now points at `.modal-content`; `size="sm"` dropped; focus trap and restore built in |
+| `CardTitle`, `CardSubtitle`, `CardStatus` | `<CardHeader title subtitle actions>` |
+| `Header`, `HeaderBrand`, `HeaderTitle`, `HeaderStatus`, `LiveBadge` | `<AppHeader title context status actions>`; LIVE = `<Badge tone="live" dot>` |
+| `Tabs activeTab variant` + `Tab`, `TabList`, `TabPanel`, `TabPanels` | `<Tabs value onChange tabs>` with the active panel as children |
+| `Table*` sub-components (`TableHead`, `TableBody`, `TableFoot`) | plain `<thead>/<tbody>`; `Table responsive` now defaults to `false` |
+| `ContextMenu`, `MenuTrigger`, `MenuItem`… | `<Menu trigger items>` |
+| `Log`, `LogEntry`, `LogFilters`… | `<LogViewer entries header>` + `LogFilter` |
+| `Dots`, `Kbd` | removed |
+| `FormField` | new; pairs with `describedBy(id)` for `aria-describedby` |
 
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Start dev server with playbook demos
-npm run dev
-
-# Build CSS bundle
-npm run build
+npm run dev        # serve playbooks on :3000
+npm run build      # dist/timing.css + timing.min.css + fonts
+npm run typecheck  # React wrappers
 ```
 
-## Project Structure
-
-```
-src/
-├── tokens/          # Design tokens (colors, typography, spacing)
-├── css/             # CSS components
-├── fonts/           # Self-hosted woff2 fonts
-├── react/           # React components
-└── playbooks/       # Demo pages
-dist/
-├── timing.css       # Combined CSS bundle
-└── timing.min.css   # Minified bundle
-```
-
-## Related Projects
-
-- [c123-server](https://github.com/OpenCanoeTiming/c123-server) - WebSocket bridge to Canoe123
-- [c123-scoreboard](https://github.com/OpenCanoeTiming/c123-scoreboard) - Live results display
-- [c123-penalty-check](https://github.com/OpenCanoeTiming/c123-penalty-check) - Penalty entry application
+Conventional commits; Release Please owns versions and CHANGELOG. `legacy/2026` takes `fix:` only.
 
 ## License
 

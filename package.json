@@ -1,7 +1,7 @@
 {
   "name": "@opencanoetiming/timing-design-system",
   "version": "0.9.0",
-  "description": "Canoe Timing Design System - UI komponenty pro vodáckou časomíru",
+  "description": "Timing Design System — CSS and React UI for canoe slalom timing tools",
   "author": "Open Canoe Timing Contributors",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,8 @@
     "./react": "./src/react/index.ts",
     "./css": "./dist/timing.css",
     "./css/min": "./dist/timing.min.css",
-    "./dist/*": "./dist/*"
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*"
   },
   "types": "./src/react/index.ts",
   "files": [

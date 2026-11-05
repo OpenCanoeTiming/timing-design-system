@@ -21,21 +21,23 @@ const FILES = [
   'src/tokens/colors.css',
   'src/tokens/typography.css',
   'src/tokens/spacing.css',
-  'src/tokens/canoe.css',
-  // CSS components (base first)
+  // CSS components (order matches src/css/index.css)
   'src/css/base.css',
+  'src/css/layout.css',
   'src/css/buttons.css',
   'src/css/forms.css',
   'src/css/cards.css',
   'src/css/tables.css',
   'src/css/status.css',
-  'src/css/layout.css',
+  'src/css/header.css',
+  'src/css/tabs.css',
   'src/css/modal.css',
   'src/css/toast.css',
-  'src/css/tabs.css',
-  'src/css/header.css',
+  'src/css/menu.css',
   'src/css/log.css',
   'src/css/dropzone.css',
+  'src/css/progress.css',
+  'src/css/spinner.css',
 ];
 
 function readCssFile(relativePath) {
