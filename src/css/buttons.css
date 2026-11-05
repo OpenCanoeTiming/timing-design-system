@@ -78,6 +78,7 @@
 
 /* Loading state: keep width, hide label, show spinner */
 .btn.is-loading { position: relative; color: transparent !important; pointer-events: none; }
+.btn.is-loading:disabled { opacity: 1; }
 .btn.is-loading::after {
   content: '';
   position: absolute;

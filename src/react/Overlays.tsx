@@ -168,7 +168,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(({ tone = 'neutral',
   }, [leaving]);
 
   return (
-    <div ref={ref} className={cx('toast', `toast-${tone}`, leaving && 'is-leaving', className)} {...rest}>
+    <div ref={ref} className={cx('toast', `toast-${tone}`, leaving && 'is-leaving', className)} role={tone === 'error' ? 'alert' : undefined} {...rest}>
       {icon && <span className="toast-icon">{icon}</span>}
       <div className="toast-content">
         {title && <div className="toast-title">{title}</div>}
