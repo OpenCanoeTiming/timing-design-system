@@ -102,7 +102,7 @@ npm run lint
 
 1. **Deploy Playbooks** (`pages.yml`) — on push to `main`, publishes to GitHub Pages
 2. **Release Please** (`release-please.yml`) — on push to `main`, maintains rolling release PR from conventional commits
-3. **Publish to GitHub Packages** (`publish.yml`) — on `release: [published]` (fires when a Release Please release is created), publishes npm package
+3. **Publish to GitHub Packages** (`publish.yml`) — dispatched by `release-please.yml` right after it creates a release (the `release: published` event does not fire for releases made with `GITHUB_TOKEN`); also runnable by hand via *Run workflow*. Publishes the npm package.
 
 ### Usage in Consumer Projects
 
