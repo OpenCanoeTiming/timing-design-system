@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specimen — c123-server admin (DS 1.0)</title>
+  <link rel="stylesheet" href="../tokens/index.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <style>
+    /* Admin-specific composition only — nothing here restyles a DS component. */
+    .client-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: var(--space-3); }
+    .client-id { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); }
+    .live-time { font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: var(--font-medium); letter-spacing: -0.01em; }
+    .live-pen { font-family: var(--font-mono); font-size: var(--text-base); color: var(--color-warning-text); }
+    .live-total { font-family: var(--font-mono); font-size: var(--text-2xl); font-weight: var(--font-medium); color: var(--color-success-text); }
+  </style>
+</head>
+<body>
+
+<header class="app-header" role="banner">
+  <div class="header-brand">
+    <span class="header-title">C123-SERVER</span>
+    <span class="header-context">ČP Troja 2026 · K1M · 2nd run</span>
+  </div>
+  <div class="header-status" role="status">
+    <span class="header-status-item header-port">:27123</span>
+    <span class="header-status-item"><span class="status-dot status-dot-success"></span>TCP</span>
+    <span class="header-status-item"><span class="status-dot status-dot-success"></span>UDP</span>
+    <span class="header-status-item"><span class="status-dot status-dot-warning"></span>XML</span>
+    <span class="badge badge-live header-live"><span class="status-dot status-dot-live"></span>LIVE</span>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-sm btn-ghost">Docs</button>
+    <button class="btn btn-sm">Settings</button>
+  </div>
+</header>
+
+<div class="page-banner page-banner-warning" role="alert">
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--color-warning)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+  <span>XML file does not match C123 live data — <code>Troja_CP_2026.xml</code> last written 14:02:11</span>
+  <button class="btn btn-sm">Re-detect XML</button>
+</div>
+
+<main class="page-main">
+
+  <!-- Live now + clients -->
+  <div class="grid grid-cols-3" style="align-items: start">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">On course</span>
+        <span class="status-item"><span class="status-dot status-dot-live"></span>live</span>
+      </div>
+      <div class="card-body">
+        <div class="kv">
+          <dt>Bib</dt><dd><strong>24</strong> · Petr Svoboda · USK Praha</dd>
+        </div>
+        <div style="margin-top: var(--space-3); display:flex; gap: var(--space-4); align-items: baseline;">
+          <span class="live-time">1:34.52</span>
+          <span class="live-pen">+4 (2× touch)</span>
+          <span class="live-total mark mark-provisional">1:38.52</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="grid-column: span 2;">
+      <div class="card-header">
+        <span class="card-title">Clients</span>
+        <div class="stat-row">
+          <span class="stat"><span class="stat-value text-success">3</span> online</span>
+          <span class="stat"><span class="stat-value">4</span> total</span>
+          <button class="btn btn-sm">Refresh all</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="client-grid">
+          <div class="card card-compact card-interactive">
+            <div class="card-header">
+              <span class="font-medium">Scoreboard LED</span>
+              <span class="badge badge-success"><span class="status-dot status-dot-success"></span>Online</span>
+            </div>
+            <div class="card-body">
+              <div class="client-id">ID scoreboard-main · from 10.0.0.21</div>
+              <dl class="kv" style="margin-top: var(--space-2)"><dt>Layout</dt><dd>vertical</dd><dt>Rows</dt><dd>10</dd></dl>
+            </div>
+          </div>
+          <div class="card card-compact card-interactive">
+            <div class="card-header">
+              <span class="font-medium">Finish booth</span>
+              <span class="badge badge-success"><span class="status-dot status-dot-success"></span>Online</span>
+            </div>
+            <div class="card-body">
+              <div class="client-id">IP 10.0.0.34</div>
+              <dl class="kv" style="margin-top: var(--space-2)"><dt>Layout</dt><dd>horizontal</dd><dt>Title</dt><dd>Cíl — ČP Troja</dd></dl>
+            </div>
+          </div>
+          <div class="card card-compact card-interactive">
+            <div class="card-header">
+              <span class="font-medium">Stream overlay</span>
+              <span class="badge badge-stale"><span class="status-dot status-dot-stale"></span>Stale</span>
+            </div>
+            <div class="card-body">
+              <div class="client-id">ID obs-overlay · last seen 00:42 ago</div>
+              <div class="text-muted text-sm" style="margin-top: var(--space-2)">Default configuration</div>
+            </div>
+          </div>
+          <div class="card card-compact card-interactive">
+            <div class="card-header">
+              <span class="font-medium text-muted">(unnamed)</span>
+              <span class="badge badge-neutral"><span class="status-dot"></span>Offline</span>
+            </div>
+            <div class="card-body">
+              <div class="client-id">IP 10.0.0.77</div>
+              <div class="text-muted text-sm" style="margin-top: var(--space-2)">Default configuration</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <nav class="tab-list" role="tablist">
+      <button class="tab" role="tab">Logs <span class="tab-badge">2</span></button>
+      <button class="tab active" role="tab" aria-selected="true">Results</button>
+      <button class="tab" role="tab">Sources</button>
+      <button class="tab" role="tab">XML</button>
+      <button class="tab" role="tab">Assets</button>
+    </nav>
+    <div class="tab-panels">
+      <section class="tab-panel active">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">K1M · 2nd run · provisional standings</span>
+            <div class="flex gap-2">
+              <input class="input input-sm" placeholder="Filter bib or name" style="width: 14rem">
+              <button class="btn btn-sm">Export</button>
+            </div>
+          </div>
+          <div class="card-body card-body-flush table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr><th class="col-num">Rank</th><th class="col-bib">Bib</th><th>Name</th><th>Club</th><th class="col-time">Run</th><th class="col-num">Pen</th><th class="col-time">Total</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="col-num">1</td><td class="col-bib">17</td><td>Jiří Prskavec</td><td class="col-muted">Dukla Praha</td><td class="col-time">1:29.84</td><td class="col-num">0</td><td class="col-time">1:29.84</td><td><span class="badge badge-success">Verified</span></td></tr>
+                <tr><td class="col-num">2</td><td class="col-bib">23</td><td>Jan Novák</td><td class="col-muted">USK Praha</td><td class="col-time">1:31.02</td><td class="col-num">2</td><td class="col-time mark mark-review">1:33.02</td><td><span class="badge badge-review">Under review</span></td></tr>
+                <tr class="is-selected"><td class="col-num">3</td><td class="col-bib">24</td><td>Petr Svoboda</td><td class="col-muted">USK Praha</td><td class="col-time">1:34.52</td><td class="col-num">4</td><td class="col-time mark mark-provisional">1:38.52</td><td><span class="badge badge-provisional">Provisional</span></td></tr>
+                <tr><td class="col-num">4</td><td class="col-bib">31</td><td>Martin Dvořák</td><td class="col-muted">Bohemians</td><td class="col-time">1:36.40</td><td class="col-num">50</td><td class="col-time">2:26.40</td><td><span class="badge badge-warning">50 · gate 14</span></td></tr>
+                <tr class="is-dimmed"><td class="col-num">–</td><td class="col-bib">08</td><td>Tomáš Procházka</td><td class="col-muted">Slavia</td><td class="col-time mark mark-stale">1:40.11</td><td class="col-num">–</td><td class="col-time mark mark-pending">not yet</td><td><span class="badge badge-pending">Pending</span></td></tr>
+                <tr class="is-dimmed"><td class="col-num">–</td><td class="col-bib">12</td><td>Lukáš Rohan</td><td class="col-muted">Dukla Praha</td><td class="col-time">–</td><td class="col-num">–</td><td class="col-time">–</td><td><span class="badge badge-error">DNS</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Log -->
+  <div class="log-container">
+    <div class="log-header">
+      <span class="log-header-title">Server log</span>
+      <div class="log-filters">
+        <button class="log-filter active">all <span class="log-filter-count">412</span></button>
+        <button class="log-filter">error <span class="log-filter-count">1</span></button>
+        <button class="log-filter">warn <span class="log-filter-count">3</span></button>
+        <button class="log-filter">debug</button>
+      </div>
+      <div class="log-header-actions">
+        <input class="input input-sm log-search" placeholder="Search…">
+        <span class="log-live"><span class="status-dot status-dot-live"></span>tail</span>
+        <button class="btn btn-sm btn-ghost">Clear</button>
+      </div>
+    </div>
+    <div class="log-entries">
+      <div class="log-entry" data-level="info"><span class="log-time">14:02:08.122</span><span class="log-level log-level-info">INFO</span><span class="log-component">TCP</span><span class="log-message">Client 10.0.0.34 connected (finish booth)</span></div>
+      <div class="log-entry" data-level="debug"><span class="log-time">14:02:08.410</span><span class="log-level log-level-debug">DEBUG</span><span class="log-component">UDP</span><span class="log-message">Running time bib 24 → 1:12.04</span></div>
+      <div class="log-entry" data-level="warn"><span class="log-time">14:02:11.004</span><span class="log-level log-level-warn">WARN</span><span class="log-component">XML</span><span class="log-message">Troja_CP_2026.xml: 2 entries differ from live data (bib 08, 12)</span></div>
+      <div class="log-entry" data-level="info"><span class="log-time">14:02:11.980</span><span class="log-level log-level-info">INFO</span><span class="log-component">Timer</span><span class="log-message">Finish bib 24 raw 1:34.52 pen +4 provisional 1:38.52</span></div>
+      <div class="log-entry" data-level="error"><span class="log-time">14:02:12.301</span><span class="log-level log-level-error">ERROR</span><span class="log-component">Live</span><span class="log-message">POST https://live.canoe123.cz/api/results → 502 Bad Gateway (retry 1/5 in 2 s)</span></div>
+      <div class="log-entry" data-level="debug"><span class="log-time">14:02:12.880</span><span class="log-level log-level-debug">DEBUG</span><span class="log-component">UDP</span><span class="log-message">Heartbeat obs-overlay missed (3/3) → stale</span></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast-container">
+  <div class="toast toast-success">
+    <span class="toast-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd"/></svg></span>
+    <div class="toast-content"><div class="toast-title">Saved</div><div class="toast-message">Scoreboard LED configuration updated.</div></div>
+    <button class="toast-close" aria-label="Close">×</button>
+  </div>
+</div>
+
+</body>
+</html>

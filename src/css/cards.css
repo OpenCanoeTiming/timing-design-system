@@ -1,144 +1,72 @@
 /**
- * Card Components
- *
- * Basic, elevated, and interactive card styles.
+ * Cards — card, card-header, card-body, card-footer; compact and interactive.
+ * Cards are flat: a hairline border, no shadow. Elevation is for overlays only.
  */
 
-/* ==========================================================================
-   Base Card
-   ========================================================================== */
-
 .card {
-  background-color: var(--color-bg-surface);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 
 .card-header {
-  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--control-h-lg);
+  padding: var(--space-3) var(--space-4);
   border-bottom: 1px solid var(--color-border);
 }
 
-.card-body {
-  padding: var(--space-4);
-}
-
-.card-footer {
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-border);
-}
-
 .card-title {
-  margin: 0;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
 }
 
 .card-subtitle {
-  margin-top: var(--space-1);
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
 }
 
-/* ==========================================================================
-   Elevated Card
-   ========================================================================== */
+.card-body { padding: var(--space-4); }
+.card-body + .card-body { border-top: 1px solid var(--color-border); }
 
-.card-elevated {
-  border-color: transparent;
-  box-shadow: var(--shadow-md);
+/* A table or log that fills the card edge to edge */
+.card-body-flush { padding: 0; }
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
 }
 
-/* ==========================================================================
-   Interactive Card
-   ========================================================================== */
+.card-compact .card-header { padding: var(--space-2) var(--space-3); min-height: var(--control-h); }
+.card-compact .card-body { padding: var(--space-3); }
 
 .card-interactive {
   cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
+.card-interactive:hover { border-color: var(--color-border-strong); }
+.card-interactive:focus-visible { box-shadow: var(--focus-ring); }
 
-.card-interactive:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
+/* Selected / attention — one accent edge, nothing else */
+.card-selected { border-color: var(--color-accent); box-shadow: inset 3px 0 0 var(--color-accent); }
 
-.card-interactive:active {
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   Card Padding Variants
-   ========================================================================== */
-
-.card-compact .card-header,
-.card-compact .card-body,
-.card-compact .card-footer {
-  padding: var(--space-3);
-}
-
-.card-spacious .card-header,
-.card-spacious .card-body,
-.card-spacious .card-footer {
-  padding: var(--space-6);
-}
-
-/* ==========================================================================
-   Canoe Card Variant (wavy border)
-   ========================================================================== */
-
-.card-canoe {
-  position: relative;
-  border-top: none;
-  padding-top: var(--pattern-wave-height);
-}
-
-.card-canoe::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--pattern-wave-height);
-  background-image: var(--pattern-wave);
-  background-repeat: repeat-x;
-  background-size: 40px var(--pattern-wave-height);
-}
-
-/* ==========================================================================
-   Status Card Variants
-   ========================================================================== */
-
-.card-status-success {
-  border-left: 4px solid var(--color-success);
-}
-
-.card-status-warning {
-  border-left: 4px solid var(--color-warning);
-}
-
-.card-status-error {
-  border-left: 4px solid var(--color-error);
-}
-
-.card-status-info {
-  border-left: 4px solid var(--color-info);
-}
-
-/* Status cards with glow effect */
-.card-status-success.card-glow {
-  box-shadow: var(--glow-success);
-}
-
-.card-status-warning.card-glow {
-  box-shadow: var(--glow-warning);
-}
-
-.card-status-error.card-glow {
-  box-shadow: var(--glow-error);
-}
-
-.card-status-info.card-glow {
-  box-shadow: var(--glow-accent);
+/* Grid of cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-3);
 }

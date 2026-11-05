@@ -1,131 +1,204 @@
 /**
- * Color Tokens
+ * Color Tokens — 1.0
  *
- * Barevná paleta pro Timing Design System.
- * Podpora dark a light theme pomocí CSS custom properties.
+ * Two themes with the same semantic surface. Neutrals are slightly cool-tinted
+ * (not pure grey / pure black) so long sessions are easier on the eyes; text is
+ * off-white on dark to avoid halation. All component colors derive from these.
  *
- * ⚠️ THEME CLASS PLACEMENT
- * Apply `.theme-dark` / `.theme-light` on the root element (`<html>`), never on
- * `<body>` or deeper. CSS custom properties computed from other custom properties
- * (e.g. `--my-bg: var(--color-bg-surface)` on `:root`) are resolved at the
- * declaration site and inherited as already-computed values. Putting the theme
- * class on a descendant will override the underlying `--color-*` tokens, but the
- * derived aliases will keep the value resolved at `:root` — mixing themes.
+ * Theme class goes on the root element (<html>): `.theme-dark` / `.theme-light`.
+ * With no class, `prefers-color-scheme` decides. Derived custom properties are
+ * resolved at the declaration site, so a theme class on a descendant would mix
+ * themes — keep it on <html>.
  *
- * The auto-detection media query below targets `:root` for the same reason; keep
- * manual overrides consistent with it.
+ * Naming:
+ *   --color-bg-*        surfaces (body < surface < elevated < overlay)
+ *   --color-border-*    hairlines
+ *   --color-text-*      foreground
+ *   --color-accent*     the one brand color (interactive)
+ *   --color-<semantic>  success | warning | error | info  (+ -subtle, -text)
+ *   --color-mark-*      result-mark states: provisional | review | stale | pending | live
  */
 
 /* ==========================================================================
-   Light Theme (default)
+   Light theme (default) — user-facing tools
    ========================================================================== */
 
 :root,
 .theme-light {
-  /* Backgrounds */
-  --color-bg-body: #f5f5f5;
+  color-scheme: light;
+
+  --color-bg-body: #f3f4f7;
   --color-bg-surface: #ffffff;
-  --color-bg-elevated: #ffffff;
+  --color-bg-elevated: #f7f8fa;
   --color-bg-input: #ffffff;
+  --color-bg-overlay: rgba(23, 26, 33, 0.55);
 
-  /* Borders */
-  --color-border: #e0e0e0;
-  --color-border-focus: #999999;
+  --color-border: #dfe2e8;
+  --color-border-strong: #c5cad4;
+  --color-border-focus: #0a62d0;
 
-  /* Text */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #666666;
-  --color-text-muted: #999999;
+  --color-text-primary: #171a21;
+  --color-text-secondary: #545b69;
+  --color-text-muted: #6a7281;
+  --color-text-on-accent: #ffffff;
 
-  /* Accent (primary brand color) */
-  --color-accent: #0066cc;
-  --color-accent-hover: #0052a3;
-  --color-accent-subtle: rgba(0, 102, 204, 0.1);
-  --color-accent-glow: rgba(0, 102, 204, 0.3);
+  --color-accent: #0a62d0;
+  --color-accent-hover: #084fa8;
+  --color-accent-active: #063d82;
+  --color-accent-subtle: rgba(10, 98, 208, 0.10);
+  --color-accent-text: #0a56b8;
 
-  /* Semantic colors */
-  --color-success: #059669;
-  --color-success-subtle: rgba(5, 150, 105, 0.1);
-  --color-warning: #d97706;
-  --color-warning-subtle: rgba(217, 119, 6, 0.1);
-  --color-error: #dc2626;
-  --color-error-subtle: rgba(220, 38, 38, 0.1);
-  --color-info: #0284c7;
-  --color-info-subtle: rgba(2, 132, 199, 0.1);
+  --color-success: #15803d;
+  --color-success-subtle: rgba(21, 128, 61, 0.12);
+  --color-success-text: #116a33;
+
+  --color-warning: #b45309;
+  --color-warning-subtle: rgba(180, 83, 9, 0.12);
+  --color-warning-text: #93430a;
+
+  --color-error: #c81e1e;
+  --color-error-subtle: rgba(200, 30, 30, 0.10);
+  --color-error-text: #b01919;
+
+  --color-info: #0a62d0;
+  --color-info-subtle: rgba(10, 98, 208, 0.10);
+  --color-info-text: #0a56b8;
+
+  --color-neutral: #6a7281;
+  --color-neutral-subtle: rgba(84, 91, 105, 0.10);
+  --color-neutral-text: #545b69;
+
+  /* Result marks (c123-server#161 / #176 / #178) */
+  --color-mark-provisional: #0a62d0;
+  --color-mark-provisional-subtle: rgba(10, 98, 208, 0.10);
+  --color-mark-review: #b45309;
+  --color-mark-review-subtle: rgba(180, 83, 9, 0.12);
+  --color-mark-stale: #6a7281;
+  --color-mark-stale-subtle: rgba(123, 131, 146, 0.12);
+  --color-mark-pending: #6a7281;
+  --color-mark-pending-subtle: transparent;
+  --color-mark-live: #15803d;
+  --color-mark-live-subtle: rgba(21, 128, 61, 0.14);
 }
 
 /* ==========================================================================
-   Dark Theme
+   Dark theme — admin / operator tools
    ========================================================================== */
 
 .theme-dark {
-  /* Backgrounds - Anthracite palette */
-  --color-bg-body: #0a0a0a;
-  --color-bg-surface: #141414;
-  --color-bg-elevated: #1f1f1f;
-  --color-bg-input: #0d0d0d;
+  color-scheme: dark;
 
-  /* Borders */
-  --color-border: #2a2a2a;
-  --color-border-focus: #404040;
+  --color-bg-body: #0f1115;
+  --color-bg-surface: #161920;
+  --color-bg-elevated: #1d212a;
+  --color-bg-input: #0c0e12;
+  --color-bg-overlay: rgba(5, 6, 9, 0.70);
 
-  /* Text */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #999999;
-  --color-text-muted: #707070;
+  --color-border: #272c37;
+  --color-border-strong: #39404e;
+  --color-border-focus: #4a97ff;
 
-  /* Accent (electric blue) */
-  --color-accent: #0088ff;
-  --color-accent-hover: #0066cc;
-  --color-accent-subtle: rgba(0, 136, 255, 0.12);
-  --color-accent-glow: rgba(0, 136, 255, 0.4);
+  --color-text-primary: #e8eaee;
+  --color-text-secondary: #9aa3b2;
+  --color-text-muted: #808a9c;
+  --color-text-on-accent: #0b1220;
 
-  /* Semantic colors */
-  --color-success: #00d26a;
-  --color-success-subtle: rgba(0, 210, 106, 0.15);
-  --color-warning: #ff9500;
-  --color-warning-subtle: rgba(255, 149, 0, 0.15);
-  --color-error: #ff3b30;
-  --color-error-subtle: rgba(255, 59, 48, 0.15);
-  --color-info: #0a84ff;
-  --color-info-subtle: rgba(10, 132, 255, 0.15);
+  --color-accent: #3b8bff;
+  --color-accent-hover: #5c9fff;
+  --color-accent-active: #2a74e0;
+  --color-accent-subtle: rgba(59, 139, 255, 0.14);
+  --color-accent-text: #6eaaff;
+
+  --color-success: #2fcf7a;
+  --color-success-subtle: rgba(47, 207, 122, 0.14);
+  --color-success-text: #5fe09a;
+
+  --color-warning: #f5a524;
+  --color-warning-subtle: rgba(245, 165, 36, 0.14);
+  --color-warning-text: #ffc15c;
+
+  --color-error: #ff5c5c;
+  --color-error-subtle: rgba(255, 92, 92, 0.14);
+  --color-error-text: #ff8080;
+
+  --color-info: #4a97ff;
+  --color-info-subtle: rgba(74, 151, 255, 0.14);
+  --color-info-text: #7fb4ff;
+
+  --color-neutral: #6b7484;
+  --color-neutral-subtle: rgba(154, 163, 178, 0.12);
+  --color-neutral-text: #9aa3b2;
+
+  --color-mark-provisional: #4a97ff;
+  --color-mark-provisional-subtle: rgba(74, 151, 255, 0.14);
+  --color-mark-review: #f5a524;
+  --color-mark-review-subtle: rgba(245, 165, 36, 0.14);
+  --color-mark-stale: #6b7484;
+  --color-mark-stale-subtle: rgba(107, 116, 132, 0.16);
+  --color-mark-pending: #6b7484;
+  --color-mark-pending-subtle: transparent;
+  --color-mark-live: #2fcf7a;
+  --color-mark-live-subtle: rgba(47, 207, 122, 0.16);
 }
 
 /* ==========================================================================
-   Auto Theme (system preference)
+   Auto theme — mirror of .theme-dark for systems that prefer dark
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
   :root:not(.theme-light) {
-    /* Backgrounds - Anthracite palette */
-    --color-bg-body: #0a0a0a;
-    --color-bg-surface: #141414;
-    --color-bg-elevated: #1f1f1f;
-    --color-bg-input: #0d0d0d;
+    color-scheme: dark;
 
-    /* Borders */
-    --color-border: #2a2a2a;
-    --color-border-focus: #404040;
+    --color-bg-body: #0f1115;
+    --color-bg-surface: #161920;
+    --color-bg-elevated: #1d212a;
+    --color-bg-input: #0c0e12;
+    --color-bg-overlay: rgba(5, 6, 9, 0.70);
 
-    /* Text */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #999999;
-    --color-text-muted: #707070;
+    --color-border: #272c37;
+    --color-border-strong: #39404e;
+    --color-border-focus: #4a97ff;
 
-    /* Accent (electric blue) */
-    --color-accent: #0088ff;
-    --color-accent-hover: #0066cc;
-    --color-accent-subtle: rgba(0, 136, 255, 0.12);
-    --color-accent-glow: rgba(0, 136, 255, 0.4);
+    --color-text-primary: #e8eaee;
+    --color-text-secondary: #9aa3b2;
+    --color-text-muted: #808a9c;
+    --color-text-on-accent: #0b1220;
 
-    /* Semantic colors */
-    --color-success: #00d26a;
-    --color-success-subtle: rgba(0, 210, 106, 0.15);
-    --color-warning: #ff9500;
-    --color-warning-subtle: rgba(255, 149, 0, 0.15);
-    --color-error: #ff3b30;
-    --color-error-subtle: rgba(255, 59, 48, 0.15);
-    --color-info: #0a84ff;
-    --color-info-subtle: rgba(10, 132, 255, 0.15);
+    --color-accent: #3b8bff;
+    --color-accent-hover: #5c9fff;
+    --color-accent-active: #2a74e0;
+    --color-accent-subtle: rgba(59, 139, 255, 0.14);
+    --color-accent-text: #6eaaff;
+
+    --color-success: #2fcf7a;
+    --color-success-subtle: rgba(47, 207, 122, 0.14);
+    --color-success-text: #5fe09a;
+
+    --color-warning: #f5a524;
+    --color-warning-subtle: rgba(245, 165, 36, 0.14);
+    --color-warning-text: #ffc15c;
+
+    --color-error: #ff5c5c;
+    --color-error-subtle: rgba(255, 92, 92, 0.14);
+    --color-error-text: #ff8080;
+
+    --color-info: #4a97ff;
+    --color-info-subtle: rgba(74, 151, 255, 0.14);
+    --color-info-text: #7fb4ff;
+
+    --color-neutral: #6b7484;
+    --color-neutral-subtle: rgba(154, 163, 178, 0.12);
+    --color-neutral-text: #9aa3b2;
+
+    --color-mark-provisional: #4a97ff;
+    --color-mark-provisional-subtle: rgba(74, 151, 255, 0.14);
+    --color-mark-review: #f5a524;
+    --color-mark-review-subtle: rgba(245, 165, 36, 0.14);
+    --color-mark-stale: #6b7484;
+    --color-mark-stale-subtle: rgba(107, 116, 132, 0.16);
+    --color-mark-pending: #6b7484;
+    --color-mark-pending-subtle: transparent;
+    --color-mark-live: #2fcf7a;
+    --color-mark-live-subtle: rgba(47, 207, 122, 0.16);
   }
 }
