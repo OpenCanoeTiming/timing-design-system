@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useId, type HTMLAttributes, type KeyboardEvent, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes, type ReactNode } from 'react';
 import { cx } from './util';
 
 /* ------------------------------------------------------------------- Card */
@@ -9,14 +9,27 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   selected?: boolean;
 }
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(({ compact, interactive, selected, className, ...rest }, ref) => (
-  <div
-    ref={ref}
-    className={cx('card', compact && 'card-compact', interactive && 'card-interactive', selected && 'card-selected', className)}
-    tabIndex={interactive ? 0 : undefined}
-    {...rest}
-  />
-));
+export const Card = forwardRef<HTMLDivElement, CardProps>(({ compact, interactive, selected, className, onClick, onKeyDown, ...rest }, ref) => {
+  const keyActivate = (e: KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(e);
+    if (interactive && onClick && !e.defaultPrevented && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      (e.currentTarget as HTMLDivElement).click();
+    }
+  };
+  return (
+    <div
+      ref={ref}
+      className={cx('card', compact && 'card-compact', interactive && 'card-interactive', selected && 'card-selected', className)}
+      role={interactive && onClick ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-pressed={interactive && onClick && selected !== undefined ? selected : undefined}
+      onClick={onClick}
+      onKeyDown={interactive ? keyActivate : onKeyDown}
+      {...rest}
+    />
+  );
+});
 Card.displayName = 'Card';
 
 export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -61,13 +74,19 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   striped?: boolean;
   hover?: boolean;
   compact?: boolean;
-  /** Wrap in a horizontal scroll container */
+  /** Sticky header — only works inside a scroll container with a max-height */
+  sticky?: boolean;
+  /** Wrap in a horizontal scroll container (`.table-responsive`) */
   responsive?: boolean;
 }
 
-export const Table = forwardRef<HTMLTableElement, TableProps>(({ striped, hover, compact, responsive = true, className, ...rest }, ref) => {
+export const Table = forwardRef<HTMLTableElement, TableProps>(({ striped, hover, compact, sticky, responsive = false, className, ...rest }, ref) => {
   const table = (
-    <table ref={ref} className={cx('table', striped && 'table-striped', hover && 'table-hover', compact && 'table-compact', className)} {...rest} />
+    <table
+      ref={ref}
+      className={cx('table', striped && 'table-striped', hover && 'table-hover', compact && 'table-compact', sticky && 'table-sticky', className)}
+      {...rest}
+    />
   );
   return responsive ? <div className="table-responsive">{table}</div> : table;
 });
@@ -98,7 +117,7 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 }
 
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(({ selected, dimmed, className, ...rest }, ref) => (
-  <tr ref={ref} className={cx(selected && 'is-selected', dimmed && 'is-dimmed', className)} aria-selected={selected || undefined} {...rest} />
+  <tr ref={ref} className={cx(selected && 'is-selected', dimmed && 'is-dimmed', className)} data-selected={selected || undefined} {...rest} />
 ));
 TableRow.displayName = 'TableRow';
 
@@ -125,11 +144,27 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   children?: ReactNode;
 }
 
-/** Controlled tab list; render the active panel as children. */
-export function Tabs({ value, onChange, tabs, id = 'tabs', className, children, ...rest }: TabsProps) {
+/** Controlled tab list; render the active panel as children. Arrow keys move and activate. */
+export function Tabs({ value, onChange, tabs, id, className, children, ...rest }: TabsProps) {
+  const autoId = useId();
+  const base = id ?? autoId;
+  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    const enabled = tabs.filter((t) => !t.disabled);
+    const i = enabled.findIndex((t) => t.value === value);
+    if (i < 0) return;
+    let next = -1;
+    if (e.key === 'ArrowRight') next = (i + 1) % enabled.length;
+    else if (e.key === 'ArrowLeft') next = (i - 1 + enabled.length) % enabled.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = enabled.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    onChange(enabled[next].value);
+    (e.currentTarget.querySelector(`#${CSS.escape(`${base}-tab-${enabled[next].value}`)}`) as HTMLElement | null)?.focus();
+  };
   return (
     <div className={cx('tabs', className)} {...rest}>
-      <div className="tab-list" role="tablist">
+      <div className="tab-list" role="tablist" onKeyDown={onKey}>
         {tabs.map((t) => {
           const active = t.value === value;
           return (
@@ -137,9 +172,10 @@ export function Tabs({ value, onChange, tabs, id = 'tabs', className, children, 
               key={t.value}
               type="button"
               role="tab"
-              id={`${id}-tab-${t.value}`}
+              id={`${base}-tab-${t.value}`}
               aria-selected={active}
-              aria-controls={`${id}-panel-${t.value}`}
+              aria-controls={active ? `${base}-panel` : undefined}
+              tabIndex={active ? 0 : -1}
               className={cx('tab', active && 'active')}
               disabled={t.disabled}
               onClick={() => onChange(t.value)}
@@ -151,7 +187,7 @@ export function Tabs({ value, onChange, tabs, id = 'tabs', className, children, 
         })}
       </div>
       <div className="tab-panels">
-        <div role="tabpanel" id={`${id}-panel-${value}`} aria-labelledby={`${id}-tab-${value}`} className="tab-panel active">
+        <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${value}`} className="tab-panel active" tabIndex={0}>
           {children}
         </div>
       </div>
@@ -179,11 +215,7 @@ export const AppHeader = forwardRef<HTMLElement, AppHeaderProps>(({ title, conte
       {context && <span className="header-context">{context}</span>}
     </div>
     {children}
-    {status && (
-      <div className="header-status" role="status">
-        {status}
-      </div>
-    )}
+    {status && <div className="header-status">{status}</div>}
     {actions && <div className="header-actions">{actions}</div>}
   </header>
 ));
@@ -195,7 +227,7 @@ export interface PageBannerProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const PageBanner = forwardRef<HTMLDivElement, PageBannerProps>(({ tone = 'warning', action, className, children, ...rest }, ref) => (
-  <div ref={ref} className={cx('page-banner', `page-banner-${tone}`, className)} role={tone === 'info' ? 'status' : 'alert'} {...rest}>
+  <div ref={ref} className={cx('page-banner', `page-banner-${tone}`, className)} {...rest}>
     <span>{children}</span>
     {action}
   </div>

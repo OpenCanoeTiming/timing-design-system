@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type ChangeEvent, type DragEvent, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useEffect, useRef, useState, type ChangeEvent, type DragEvent, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from './util';
 
 /* ---------------------------------------------------------------- Spinner */
@@ -20,14 +20,17 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   value?: number;
   tone?: 'accent' | 'success' | 'warning' | 'error' | 'neutral';
   size?: 'sm' | 'md';
-  /** Text left of the percentage */
+  /** Text left of the percentage; also used as the accessible name when it is a string */
   label?: ReactNode;
+  /** Accessible name when `label` is not a plain string */
+  ariaLabel?: string;
   showValue?: boolean;
 }
 
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ value, tone = 'accent', size = 'md', label, showValue, className, ...rest }, ref) => {
+  ({ value, tone = 'accent', size = 'md', label, ariaLabel, showValue, className, ...rest }, ref) => {
     const v = value === undefined ? undefined : Math.max(0, Math.min(100, value));
+    const name = ariaLabel ?? (typeof label === 'string' ? label : undefined);
     return (
       <div ref={ref} className={className} {...rest}>
         {(label || (showValue && v !== undefined)) && (
@@ -39,6 +42,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         <div
           className={cx('progress', tone !== 'accent' && `progress-${tone}`, size === 'sm' && 'progress-sm', v === undefined && 'progress-indeterminate')}
           role="progressbar"
+          aria-label={name}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={v}
@@ -65,18 +69,18 @@ export interface DropZoneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onD
   icon?: ReactNode;
 }
 
+/**
+ * The hidden <input type=file> covers the zone and is the real control: it
+ * takes the click, the keyboard focus and the focus ring. The div only handles
+ * drag and drop and styling.
+ */
 export function DropZone({ onFiles, accept, multiple, disabled, title = 'Drop a file here or click to browse', hint, state = 'idle', compact, icon, className, ...rest }: DropZoneProps) {
-  const input = useRef<HTMLInputElement>(null);
-  const over = useRef(false);
-  const el = useRef<HTMLDivElement>(null);
-
-  const setOver = (v: boolean) => {
-    over.current = v;
-    el.current?.classList.toggle('drag-over', v);
-  };
+  const [over, setOver] = useState(false);
+  const depth = useRef(0);
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    depth.current = 0;
     setOver(false);
     if (disabled) return;
     const files = Array.from(e.dataTransfer.files);
@@ -89,28 +93,38 @@ export function DropZone({ onFiles, accept, multiple, disabled, title = 'Drop a 
     e.target.value = '';
   };
 
+  const label = typeof title === 'string' ? title : 'Choose file';
+
   return (
     <div
-      ref={el}
-      className={cx('dropzone', compact && 'dropzone-compact', state === 'has-file' && 'has-file', state === 'error' && 'has-error', disabled && 'is-disabled', className)}
-      role="button"
-      tabIndex={disabled ? -1 : 0}
-      onClick={() => input.current?.click()}
-      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && input.current?.click()}
-      onDragOver={(e) => {
+      className={cx(
+        'dropzone',
+        compact && 'dropzone-compact',
+        over && 'drag-over',
+        state === 'has-file' && 'has-file',
+        state === 'error' && 'has-error',
+        disabled && 'is-disabled',
+        className
+      )}
+      onDragEnter={(e) => {
         e.preventDefault();
-        if (!over.current) setOver(true);
+        depth.current += 1;
+        setOver(true);
       }}
-      onDragLeave={() => setOver(false)}
+      onDragOver={(e) => e.preventDefault()}
+      onDragLeave={() => {
+        depth.current = Math.max(0, depth.current - 1);
+        if (depth.current === 0) setOver(false);
+      }}
       onDrop={onDrop}
       {...rest}
     >
-      {icon && <span className="dropzone-icon">{icon}</span>}
+      {icon && <span className="dropzone-icon" aria-hidden="true">{icon}</span>}
       <div>
         <div className="dropzone-title">{title}</div>
         {hint && <div className="dropzone-hint">{hint}</div>}
       </div>
-      <input ref={input} type="file" className="dropzone-input" accept={accept} multiple={multiple} disabled={disabled} onChange={onChange} tabIndex={-1} />
+      <input type="file" className="dropzone-input" aria-label={label} accept={accept} multiple={multiple} disabled={disabled} onChange={onChange} />
     </div>
   );
 }
@@ -145,13 +159,19 @@ const defaultFormatTime = (t: Date | string) => {
 
 export function LogViewer({ entries, header, autoScroll = true, fullHeight, emptyMessage = 'No log entries', formatTime = defaultFormatTime, className, ...rest }: LogViewerProps) {
   const list = useRef<HTMLDivElement>(null);
-  const prev = useRef(entries.length);
+  const nearBottom = useRef(true);
+  const lastId = entries.length ? entries[entries.length - 1].id : undefined;
 
+  // Follow the tail only while the user is already at (or near) the bottom.
   useEffect(() => {
     const el = list.current;
-    if (autoScroll && el && entries.length > prev.current) el.scrollTop = el.scrollHeight;
-    prev.current = entries.length;
-  }, [entries.length, autoScroll]);
+    if (autoScroll && el && nearBottom.current) el.scrollTop = el.scrollHeight;
+  }, [lastId, autoScroll]);
+
+  const onScroll = () => {
+    const el = list.current;
+    if (el) nearBottom.current = el.scrollHeight - el.scrollTop - el.clientHeight < 24;
+  };
 
   return (
     <div className={cx('log-container', fullHeight && 'log-fullheight', className)} {...rest}>
@@ -159,7 +179,7 @@ export function LogViewer({ entries, header, autoScroll = true, fullHeight, empt
       {entries.length === 0 ? (
         <div className="log-empty">{emptyMessage}</div>
       ) : (
-        <div ref={list} className="log-entries" role="log" aria-live="polite">
+        <div ref={list} className="log-entries" role="log" onScroll={onScroll}>
           {entries.map((e) => (
             <div key={e.id} className="log-entry" data-level={e.level}>
               <span className="log-time">{formatTime(e.timestamp)}</span>

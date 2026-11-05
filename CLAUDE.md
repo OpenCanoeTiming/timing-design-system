@@ -64,9 +64,10 @@ dist/                 # timing.css, timing.min.css, fonts/ (built, not committed
 
 1. **CSS first, React thin** — every look lives in a class; React wrappers only compose classes. Change CSS and the wrapper together.
 2. **Test in playbook** — every class appears in `playbooks/index.html`; admin-facing changes also in `specimen-admin.html`, user-tool changes in `specimen-user.html`.
+3. **Dual-theme** — dark mode (`.theme-dark`) for admin tools, light mode (`.theme-light`) for user tools; theme class on `<html>`.
+4. **Accessibility** — WCAG AA contrast (≥ 4.5:1) for text on its real background (blend `-subtle` over surface when checking), visible focus on every interactive element, reduced motion respected. Verify with a script, not by eye: `comm -23` for undefined `var(--…)`, a contrast table for token pairs.
 5. **Scope from usage** — add a class only when a consumer needs it; remove when none does. Check with a grep across c123-server, c123-penalty-check, c123-xml-tools before adding variants.
-3. **Dual-theme** — dark mode (`.theme-dark`) for admin tools, light mode (`.theme-light`) for user tools
-4. **Accessibility** — WCAG AA contrast (min 4.5:1), focus visible, reduced motion support
+6. **`animation:` takes `--duration-*`, `transition:` takes `--transition-*`** — the transition tokens include an easing, so `animation: x var(--transition-fast) ease-out` is invalid and silently dropped.
 
 ---
 
@@ -169,17 +170,7 @@ Release-As: 1.0.0
 ## Design Principles
 
 ### CSS Custom Properties
-All values as CSS variables:
-```css
-:root, .theme-light {
-  --color-bg-primary: #ffffff;
-  --color-text-primary: #1a1a1a;
-}
-.theme-dark {
-  --color-bg-primary: #0a0a0a;
-  --color-text-primary: #ffffff;
-}
-```
+All values are CSS variables, declared three times in `colors.css`: `:root, .theme-light`, `.theme-dark`, and `@media (prefers-color-scheme: dark) { :root:not(.theme-light) }`. Keep the three blocks identical in token set; the dark pair must be identical in values. Components set private `--_c / --_bg / --_fg` from the public tokens and never hardcode a color.
 
 ### Color Palette
 

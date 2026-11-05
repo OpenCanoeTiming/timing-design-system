@@ -26,9 +26,10 @@
 .log-header {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
   min-height: var(--control-h-lg);
-  padding: 0 var(--space-3);
+  padding: var(--space-1) var(--space-3);
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg-surface);
 }
@@ -92,7 +93,7 @@
 /* Whole-row emphasis for problems */
 .log-entry[data-level="error"] { background: var(--color-error-subtle); }
 .log-entry[data-level="error"]:hover { background: color-mix(in srgb, var(--color-error-subtle) 80%, var(--color-neutral-subtle)); }
-.log-entry[data-level="debug"] { opacity: 0.7; }
+.log-entry[data-level="debug"] .log-message { color: var(--color-text-secondary); }
 
 /* Empty */
 .log-empty {

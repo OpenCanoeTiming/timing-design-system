@@ -19,7 +19,7 @@
   transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 .dropzone:hover { border-color: var(--color-text-muted); background: var(--color-bg-elevated); }
-.dropzone:focus-visible { box-shadow: var(--focus-ring); }
+.dropzone:focus-visible { box-shadow: var(--focus-ring); } /* when used as a plain focusable div */
 
 .dropzone.drag-over,
 .dropzone.is-dragover {
@@ -35,6 +35,7 @@
 
 .dropzone-icon { width: 1.75rem; height: 1.75rem; color: var(--color-text-muted); }
 .dropzone.drag-over .dropzone-icon,
+.dropzone.is-dragover .dropzone-icon,
 .dropzone:hover .dropzone-icon { color: var(--color-accent); }
 .dropzone.has-file .dropzone-icon { color: var(--color-success); }
 
@@ -68,3 +69,7 @@
   color: var(--color-text-muted); background: none; border: 0; border-radius: var(--radius-sm); cursor: pointer;
 }
 .dropzone-file-remove:hover { color: var(--color-error-text); background: var(--color-error-subtle); }
+
+/* The covering file input is the focusable control; show its focus on the zone. */
+.dropzone:has(.dropzone-input:focus-visible) { box-shadow: var(--focus-ring); }
+.dropzone-input:focus-visible { box-shadow: none; outline: none; }

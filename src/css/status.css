@@ -116,7 +116,7 @@
 /* marks */
 .badge-provisional { background: transparent; border-style: dashed; border-color: var(--_c); }
 .badge-pending     { background: transparent; border-color: var(--color-border-strong); }
-.badge-stale       { opacity: 0.75; }
+.badge-stale       { border-color: var(--color-border); }
 .badge-live        { border-color: var(--_c); }
 
 /* Compat alias used by c123-server header markup */
@@ -158,8 +158,13 @@
 
 /* ------------------------------------------------------- result mark cell */
 
-/* A time or rank that carries a mark. Use on <td>/<span> next to the value. */
-.mark { --_c: var(--color-neutral); color: inherit; }
+/* A time or rank that carries a mark. Use on <td>/<span> next to the value.
+   The dot sits in reserved trailing space so marked and unmarked values in a
+   right-aligned column keep the same baseline position. */
+.mark { --_c: var(--color-neutral); color: inherit; position: relative; padding-right: 0.875rem; }
+.table .col-time, .table .col-num, .table .col-bib { padding-right: calc(var(--space-3) + 0.875rem); }
+.table-compact .col-time, .table-compact .col-num, .table-compact .col-bib { padding-right: calc(var(--space-2) + 0.875rem); }
+td.mark { padding-right: calc(var(--space-3) + 0.875rem); }
 .mark-provisional { --_c: var(--color-mark-provisional); color: var(--color-info-text); }
 .mark-review      { --_c: var(--color-mark-review);      color: var(--color-warning-text); }
 .mark-stale       { --_c: var(--color-mark-stale);       color: var(--color-text-muted); }
@@ -168,14 +173,17 @@
 
 .mark::after {
   content: '';
-  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 50%;
   width: 0.375rem;
   height: 0.375rem;
-  margin-left: var(--space-2);
+  margin-top: -0.1875rem;
   border-radius: 50%;
   background: var(--_c);
-  vertical-align: middle;
 }
+td.mark::after { right: var(--space-3); }
+.table-compact td.mark::after { right: var(--space-2); }
 .mark-provisional::after { background: transparent; box-shadow: inset 0 0 0 1px var(--_c); }
 .mark-pending::after { background: transparent; box-shadow: inset 0 0 0 1px var(--color-border-strong); }
 .mark-stale { text-decoration: line-through; text-decoration-color: var(--color-mark-stale); text-decoration-thickness: 1px; }

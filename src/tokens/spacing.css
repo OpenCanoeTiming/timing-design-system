@@ -40,11 +40,20 @@
   /* Focus ring — one ring everywhere */
   --focus-ring: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--color-border-focus);
 
-  /* Motion */
-  --transition-fast: 120ms ease;
-  --transition-normal: 180ms ease;
-  --transition-slow: 280ms ease;
+  /* Motion — durations alone for `animation:`, duration+easing for `transition:` */
+  --duration-fast: 120ms;
+  --duration-normal: 180ms;
+  --duration-slow: 280ms;
+  --ease: ease;
+  --transition-fast: var(--duration-fast) var(--ease);
+  --transition-normal: var(--duration-normal) var(--ease);
+  --transition-slow: var(--duration-slow) var(--ease);
 }
+
+/* Focus ring is re-declared per theme so it resolves even if the theme class
+   is not on <html>. */
+.theme-light { --focus-ring: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--color-border-focus); }
+.theme-dark  { --focus-ring: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--color-border-focus); }
 
 .theme-dark {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
@@ -62,8 +71,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --transition-fast: 0ms;
-    --transition-normal: 0ms;
-    --transition-slow: 0ms;
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
   }
 }

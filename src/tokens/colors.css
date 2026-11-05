@@ -39,7 +39,7 @@
 
   --color-text-primary: #171a21;
   --color-text-secondary: #545b69;
-  --color-text-muted: #6a7281;
+  --color-text-muted: #616978;
   --color-text-on-accent: #ffffff;
 
   --color-accent: #0a62d0;
@@ -64,7 +64,7 @@
   --color-info-subtle: rgba(10, 98, 208, 0.10);
   --color-info-text: #0a56b8;
 
-  --color-neutral: #6a7281;
+  --color-neutral: #616978;
   --color-neutral-subtle: rgba(84, 91, 105, 0.10);
   --color-neutral-text: #545b69;
 
@@ -73,9 +73,9 @@
   --color-mark-provisional-subtle: rgba(10, 98, 208, 0.10);
   --color-mark-review: #b45309;
   --color-mark-review-subtle: rgba(180, 83, 9, 0.12);
-  --color-mark-stale: #6a7281;
+  --color-mark-stale: #616978;
   --color-mark-stale-subtle: rgba(123, 131, 146, 0.12);
-  --color-mark-pending: #6a7281;
+  --color-mark-pending: #616978;
   --color-mark-pending-subtle: transparent;
   --color-mark-live: #15803d;
   --color-mark-live-subtle: rgba(21, 128, 61, 0.14);

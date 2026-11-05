@@ -39,7 +39,7 @@ Static pages can link the built file from GitHub Pages. Pin the major:
 <link rel="stylesheet" href="https://opencanoetiming.github.io/timing-design-system/v1/timing.min.css">
 ```
 
-`v0.9/timing.min.css` keeps serving the legacy line.
+`v0.9/timing.min.css` keeps serving the legacy line. Note that `/v1/` tracks `main` on every push (not only releases), and `/v0.9/` is rebuilt from `legacy/2026` only when `main` deploys — after a `fix:` on the legacy branch, run the Pages workflow manually.
 
 ## Quick start
 
@@ -103,7 +103,15 @@ Put the theme class on `<html>`, not on `<body>`: derived custom properties reso
 
 Breaking. Consumers migrate in their own issue: c123-server#221, c123-penalty-check#172, c123-xml-tools#7.
 
-**Removed, no replacement:** `canoe.css` tokens (`--pattern-wave*`, `--glow-*`, `--color-gate-*`, `--header-bar-*`), `gate-pole-*`, `line-wave`, `card-canoe`, `card-elevated`, `card-status-*`, glow cards, `status-dot-glow`, `connection-status`, `status-indicator`, `kbd*`, `dots-*`, `spinner-{md,accent,success,warning,error,white}`, `toast-container-*` positions, `toast-progress*`, `tabs-{pills,bordered,full,sm,lg}`, `tab-icon`, `modal-{sm,xl}`, `modal-backdrop`, `modal-confirm`, `modal-footer-{left,center}`, `btn-lg`, `card-spacious`, `header-title-lg`, `header-subtitle` (kept, but no size variant), `container-{sm,md,lg,xl}`, `grid-cols-{1,4}`, the spacing/typography utility ladder (`m-*`, `p-*`, `mt-*`, `mb-*`, `gap-{6,8}`, `text-{base,lg,xl,2xl,left}`, `font-{normal,bold,mono}`, `inline*`, `h-full`, `min-h-screen`, `flex-{row,auto,none}`, `items-end`, `justify-{start,center}`).
+**Removed, no replacement:**
+
+- tokens: `canoe.css` (`--pattern-wave*`, `--glow-*`, `--color-gate-*`, `--header-bar-*`)
+- identity: `gate-pole-*`, `line-wave`, `card-canoe`, glow cards, `status-dot-glow`
+- status: `card-status-*`, `connection-status`, `status-indicator*`, `connected` / `connecting` / `disconnected` / `open` / `disabled` state classes, `cell-status`
+- components: `kbd*`, `dots-*`, `spinner-{md,accent,success,warning,error,white}`, `loading-overlay-blur`, `toast-container-*` positions, `toast-progress*`, `toast-exiting`, `tabs-{pills,bordered,full,sm,lg}`, `tab-icon`, `modal-{sm,xl}`, `modal-backdrop`, `modal-confirm`, `modal-icon-*`, `modal-footer-{left,center}`, `menu-trigger`, `btn-lg`, `card-spacious`, `table-bordered`, `cell-numeric` (→ `col-num`), `header-title-lg`, `header-{compact,elevated,plain}` (→ `app-header-compact`), `log-{sm,md,lg,compact}`, `log-entry-{error,warn}` (→ `data-level`), `log-filter-{level}`, `log-live-indicator` (→ `log-live`), `log-empty-{icon,text}`, `progress-{striped,animated,lg,accent}`, `dropzone-{sm,lg,text,file-icon,file-info}`
+- layout/utilities: `container-{sm,md,lg,xl}`, `grid-cols-{1,4}`, `m-*`, `p-*`, `mt-*`, `mb-*`, `gap-{6,8}`, `text-{base,lg,xl,2xl,left,primary,accent}`, `font-{normal,bold,mono}`, `inline*`, `h-full`, `min-h-screen`, `flex-{row,auto,none}`, `items-end`, `justify-{start,center}`
+
+Known consumer hits: c123-xml-tools uses `cell-numeric` and `text-primary` (penalties-quality-analyzer, race-combinator, participant-adder); c123-server uses `card-status-success` and `status-dot-glow`.
 
 **Renamed / reshaped:**
 
@@ -115,11 +123,25 @@ Breaking. Consumers migrate in their own issue: c123-server#221, c123-penalty-ch
 | `.modal-backdrop > .modal` | `.modal > .modal-content` (matches c123-server markup) |
 | `.log-container > .log-entry` | `.log-container > .log-entries > .log-entry`; `.log-timestamp` → `.log-time` |
 | `.progress-label` inside bar | `.progress-row` above the track |
+| `.table th` always sticky | `.table-sticky` opt-in; needs a scroll container with a max-height |
 | `.select-lg`, `.input` 16px | one control height; `-sm` variant only |
 | `--font-weight-*` (never existed) | `--font-*` — 0.9 declarations using the former silently fell back to normal weight |
 | `--shadow-*` only under `.theme-dark` | also under `prefers-color-scheme: dark` |
 
-**React:** the wrapper set is smaller and props changed (`variant` → `tone` on status components, slot props on `CardHeader` / `Modal` / `AppHeader`). See `src/react/index.ts`.
+**React:** the wrapper set is smaller and flatter.
+
+| 0.9 | 1.0 |
+|---|---|
+| `Badge variant=` / `StatusDot variant=` | `tone=` (semantic or mark) |
+| `ModalHeader`, `ModalTitle`, `ModalClose`, `ModalBody`, `ModalFooter` | `<Modal title footer>` slots; `ref` now points at `.modal-content`; `size="sm"` dropped; focus trap and restore built in |
+| `CardTitle`, `CardSubtitle`, `CardStatus` | `<CardHeader title subtitle actions>` |
+| `Header`, `HeaderBrand`, `HeaderTitle`, `HeaderStatus`, `LiveBadge` | `<AppHeader title context status actions>`; LIVE = `<Badge tone="live" dot>` |
+| `Tabs activeTab variant` + `Tab`, `TabList`, `TabPanel`, `TabPanels` | `<Tabs value onChange tabs>` with the active panel as children |
+| `Table*` sub-components (`TableHead`, `TableBody`, `TableFoot`) | plain `<thead>/<tbody>`; `Table responsive` now defaults to `false` |
+| `ContextMenu`, `MenuTrigger`, `MenuItem`… | `<Menu trigger items>` |
+| `Log`, `LogEntry`, `LogFilters`… | `<LogViewer entries header>` + `LogFilter` |
+| `Dots`, `Kbd` | removed |
+| `FormField` | new; pairs with `describedBy(id)` for `aria-describedby` |
 
 ## Development
 

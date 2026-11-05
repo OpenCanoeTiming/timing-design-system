@@ -16,6 +16,7 @@
 .page { min-height: 100vh; display: flex; flex-direction: column; }
 .page-main { flex: 1; padding: var(--space-4); }
 .page-main > * + * { margin-top: var(--space-4); }
+.page-main > * { min-width: 0; }
 
 /* Section heading row (title left, actions right) */
 .section-head {

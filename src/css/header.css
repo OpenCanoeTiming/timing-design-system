@@ -19,6 +19,12 @@
 
 .app-header-compact { height: 2.5rem; }
 
+@media (max-width: 40rem) {
+  .app-header, .header { height: auto; min-height: 3rem; flex-wrap: wrap; padding-top: var(--space-2); padding-bottom: var(--space-2); row-gap: var(--space-2); }
+  .header-status { margin-left: 0; flex-wrap: wrap; gap: var(--space-3); }
+  .header-actions { margin-left: auto; }
+}
+
 .header-brand {
   display: flex;
   align-items: center;

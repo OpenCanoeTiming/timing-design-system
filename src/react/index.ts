@@ -6,6 +6,7 @@ export { cx, type Semantic, type Mark, type Tone } from './util';
 export {
   Button,
   FormField,
+  describedBy,
   Input,
   Textarea,
   Select,

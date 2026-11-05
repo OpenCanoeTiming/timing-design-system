@@ -68,6 +68,8 @@ Badge.displayName = 'Badge';
 
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   tone?: Tone;
+  /** Announce to screen readers when it appears (dynamic messages only) */
+  live?: boolean;
   title?: ReactNode;
   icon?: ReactNode;
   actions?: ReactNode;
@@ -77,11 +79,11 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ tone = 'neutral', title, icon, actions, tinted, className, children, ...rest }, ref) => (
+  ({ tone = 'neutral', title, icon, actions, tinted, live, className, children, ...rest }, ref) => (
     <div
       ref={ref}
       className={cx('alert', `alert-${tone}`, tinted && 'alert-tinted', className)}
-      role={tone === 'error' || tone === 'warning' ? 'alert' : 'status'}
+      role={live ? (tone === 'error' || tone === 'warning' ? 'alert' : 'status') : undefined}
       {...rest}
     >
       {icon && <span className="alert-icon">{icon}</span>}

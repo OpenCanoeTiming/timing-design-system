@@ -24,12 +24,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'secondary', size = 'md', icon, loading, className, type = 'button', children, ...rest }, ref) => (
+  ({ variant = 'secondary', size = 'md', icon, loading, className, type = 'button', disabled, children, ...rest }, ref) => (
     <button
       ref={ref}
       type={type}
       className={cx('btn', `btn-${variant}`, size === 'sm' && 'btn-sm', icon && 'btn-icon', loading && 'is-loading', className)}
       aria-busy={loading || undefined}
+      disabled={disabled || loading}
       {...rest}
     >
       {children}
@@ -51,7 +52,13 @@ export interface FormFieldProps {
 }
 
 /** Label + control + hint/error. Pass the control as children. */
+/**
+ * Label + control + hint/error. Pass the control as children. When `htmlFor`
+ * is given, the hint/error gets `id={htmlFor}-desc`; put that in the control's
+ * `aria-describedby` (the `describedBy` helper below returns it).
+ */
 export function FormField({ label, hint, error, required, htmlFor, className, children }: FormFieldProps) {
+  const descId = htmlFor ? `${htmlFor}-desc` : undefined;
   return (
     <div className={cx('form-group', className)}>
       {label && (
@@ -61,10 +68,21 @@ export function FormField({ label, hint, error, required, htmlFor, className, ch
         </label>
       )}
       {children}
-      {error ? <div className="form-error">{error}</div> : hint ? <div className="form-hint">{hint}</div> : null}
+      {error ? (
+        <div className="form-error" id={descId} role="alert">
+          {error}
+        </div>
+      ) : hint ? (
+        <div className="form-hint" id={descId}>
+          {hint}
+        </div>
+      ) : null}
     </div>
   );
 }
+
+/** `aria-describedby` value matching a FormField with the same `htmlFor`. */
+export const describedBy = (id: string) => `${id}-desc`;
 
 /* ------------------------------------------------------------------- Input */
 

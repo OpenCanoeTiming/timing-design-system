@@ -136,4 +136,6 @@ hr {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  /* Indeterminate progress must not freeze as a fake 30 % — see progress.css */
+  .progress-indeterminate .progress-bar { animation: none !important; width: 100%; opacity: 0.35; }
 }
