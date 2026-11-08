@@ -73,9 +73,10 @@ Static pages can link the built file from GitHub Pages. Pin the major:
 | Tables | `table`, `table-striped`, `table-hover`, `table-compact`, `table-responsive`, `col-*`, `is-selected`, `is-dimmed`, `table-empty` | `Table`, `TableRow`, `TableCell`, `TableHeaderCell`, `TableEmpty` |
 | Tabs | `tabs`, `tab-list`, `tab`, `tab-badge`, `tab-panels`, `tab-panel` | `Tabs` |
 | Header | `app-header`, `header-brand`, `header-title`, `header-context`, `header-status`, `header-status-item`, `header-port`, `header-actions`, `page-banner-*` | `AppHeader`, `PageBanner` |
-| Modal | `modal`, `modal-content`, `modal-header`, `modal-title`, `modal-close`, `modal-body`, `modal-footer`, `modal-lg`, `modal-fullscreen` | `Modal` |
+| Modal | `modal`, `modal-content`, `modal-header`, `modal-title`, `modal-close`, `modal-body`, `modal-message`, `modal-footer`, `modal-lg`, `modal-fullscreen` | `Modal` (`title`, `message`, `footer` slots) |
 | Toast | `toast-container`, `toast-*`, `toast-title`, `toast-message`, `toast-close` | `Toast`, `ToastContainer` |
 | Menu | `menu`, `menu-content-*`, `menu-item`, `menu-item-danger`, `menu-separator`, `menu-label` | `Menu` |
+| Empty state | `empty-state`, `empty-state-{success,warning,error,info}`, `empty-state-busy`, `empty-state-card`, `empty-state-fill`, `empty-state-icon`, `empty-state-title`, `empty-state-text`, `empty-state-actions` | `EmptyState` |
 | Log | `log-container`, `log-header`, `log-filter`, `log-entries`, `log-entry`, `log-time`, `log-level-*`, `log-component`, `log-message` | `LogViewer`, `LogFilter` |
 | Dropzone | `dropzone`, `dropzone-compact`, `drag-over`, `has-file`, `has-error`, `dropzone-title`, `dropzone-hint`, `dropzone-files` | `DropZone` |
 | Progress | `progress`, `progress-bar`, `progress-*`, `progress-row`, `progress-indeterminate`, `spinner`, `loading-overlay` | `ProgressBar`, `Spinner` |
@@ -93,7 +94,7 @@ The playbook shows every class in both themes.
 --color-{success|warning|error|info|neutral} | -subtle | -text
 --color-mark-{provisional|review|stale|pending|live} | -subtle
 --space-1…12  --radius-sm…xl  --shadow-sm…lg  --focus-ring
---control-h-sm | --control-h | --control-h-lg   --row-h | --row-h-compact
+--control-h-sm | --control-h | --control-h-lg   --row-h | --row-h-compact   (grow under pointer: coarse)
 --font-sans | --font-mono   --text-xs…3xl   --font-normal…bold
 ```
 

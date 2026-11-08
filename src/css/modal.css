@@ -78,6 +78,14 @@ dialog.modal::backdrop { background: transparent; }
   overflow-y: auto;
 }
 
+/* Message pinned between body and footer: stays visible while the body scrolls */
+.modal-message {
+  flex: none;
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+.modal-message > .alert { margin: 0; }
+
 .modal-footer,
 .modal-actions {
   display: flex;

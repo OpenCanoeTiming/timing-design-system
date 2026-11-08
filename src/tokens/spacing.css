@@ -69,6 +69,19 @@
   }
 }
 
+/* Touch (tablets at the finish line): every control and tap row ≥ 44 px,
+   default controls 48 px. Components size from these tokens, so consumers
+   need no element-level overrides. */
+@media (pointer: coarse) {
+  :root {
+    --control-h-sm: 2.75rem;  /* 44px */
+    --control-h: 3rem;        /* 48px */
+    --control-h-lg: 3.25rem;  /* 52px */
+    --row-h: 2.75rem;         /* 44px */
+    --row-h-compact: 2.5rem;  /* 40px — dense tables stay denser, rows are rarely tap targets */
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --duration-fast: 0ms;

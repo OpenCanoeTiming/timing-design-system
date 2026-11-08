@@ -1,0 +1,80 @@
+/**
+ * Empty state — a centred block for "nothing here yet": no race selected,
+ * waiting for a server, connection lost.
+ *
+ *   <div class="empty-state empty-state-error">
+ *     <div class="empty-state-icon">⚡</div>
+ *     <h2 class="empty-state-title">Not connected</h2>
+ *     <p class="empty-state-text">Check your connection settings.</p>
+ *     <div class="empty-state-actions"><button class="btn btn-primary">Retry</button></div>
+ *   </div>
+ *
+ * Modifiers: tone (icon colour) -success -warning -error -info;
+ * .empty-state-busy (icon pulses — loading, discovering);
+ * .empty-state-card (on a card surface); .empty-state-fill (fills and
+ * centres in a flex/grid parent).
+ */
+
+.empty-state {
+  --_c: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+}
+
+.empty-state-success { --_c: var(--color-success); }
+.empty-state-warning { --_c: var(--color-warning); }
+.empty-state-error   { --_c: var(--color-error); }
+.empty-state-info    { --_c: var(--color-info); }
+
+.empty-state-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--_c);
+}
+.empty-state-icon svg { width: 2.5rem; height: 2.5rem; }
+
+.empty-state-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+.empty-state-text {
+  margin: 0;
+  max-width: 22rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.empty-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.empty-state-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.empty-state-fill { margin: auto; align-self: center; }
+
+.empty-state-busy .empty-state-icon { animation: empty-state-pulse 1.6s ease-in-out infinite; }
+@keyframes empty-state-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
+}

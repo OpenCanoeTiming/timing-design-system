@@ -190,3 +190,8 @@
 .switch-input:checked + .switch-slider::before { transform: translateX(1rem); background-color: var(--color-bg-surface); }
 .switch-input:focus-visible + .switch-slider { box-shadow: var(--focus-ring); }
 .switch-input:disabled + .switch-slider { opacity: 0.5; cursor: not-allowed; }
+
+/* Touch: iOS Safari zooms into inputs with text below 16px. */
+@media (pointer: coarse) {
+  .input, .textarea, .select, .input-sm, .select-sm { font-size: 1rem; }
+}
