@@ -13,6 +13,7 @@ import {
   type MouseEvent,
   type ReactElement,
   type ReactNode,
+  type RefObject,
 } from 'react';
 import { cx } from './util';
 
@@ -29,7 +30,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
   /** Element to focus on open; defaults to the first focusable in the body, else the panel */
-  initialFocus?: React.RefObject<HTMLElement>;
+  initialFocus?: RefObject<HTMLElement | null>;
   children?: ReactNode;
 }
 
@@ -54,7 +55,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       if (!open) return;
       restoreTo.current = document.activeElement as HTMLElement | null;
       document.body.classList.add('modal-open');
-      const target = initialFocus?.current ?? (panel.current?.querySelector<HTMLElement>('.modal-body ' + FOCUSABLE) || panel.current);
+      // Query inside .modal-body: prefixing the selector list would scope only its first entry.
+      const body = panel.current?.querySelector<HTMLElement>('.modal-body');
+      const target = initialFocus?.current ?? body?.querySelector<HTMLElement>(FOCUSABLE) ?? panel.current;
       target?.focus({ preventScroll: true });
       return () => {
         document.body.classList.remove('modal-open');
