@@ -34,6 +34,7 @@ const FILES = [
   'src/css/modal.css',
   'src/css/toast.css',
   'src/css/menu.css',
+  'src/css/empty-state.css',
   'src/css/log.css',
   'src/css/dropzone.css',
   'src/css/progress.css',

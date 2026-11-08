@@ -139,3 +139,9 @@ hr {
   /* Indeterminate progress must not freeze as a fake 30 % — see progress.css */
   .progress-indeterminate .progress-bar { animation: none !important; width: 100%; opacity: 0.35; }
 }
+
+/* Touch: fixed-size icon buttons grow to 44px (input text size is in forms.css). */
+@media (pointer: coarse) {
+  .toast-close, .modal-close, .dropzone-file-remove { min-width: 2.75rem; min-height: 2.75rem; }
+  .checkbox input, .radio input { width: 1.25rem; height: 1.25rem; }
+}

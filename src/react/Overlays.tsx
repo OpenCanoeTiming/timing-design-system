@@ -26,6 +26,8 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   onClose: () => void;
   title?: ReactNode;
   footer?: ReactNode;
+  /** Pinned between body and footer, stays visible while the body scrolls — e.g. <Alert tone="error"> */
+  message?: ReactNode;
   size?: 'md' | 'lg' | 'fullscreen';
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
@@ -40,7 +42,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
  * was not handled by something inside, e.g. a Menu).
  */
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ open, onClose, title, footer, size = 'md', closeOnBackdrop = true, closeOnEscape = true, initialFocus, className, children, ...rest }, ref) => {
+  ({ open, onClose, title, footer, message, size = 'md', closeOnBackdrop = true, closeOnEscape = true, initialFocus, className, children, ...rest }, ref) => {
     const panel = useRef<HTMLDivElement>(null);
     const titleId = useId();
     const restoreTo = useRef<HTMLElement | null>(null);
@@ -121,6 +123,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             </div>
           )}
           <div className="modal-body">{children}</div>
+          {message && (
+            <div className="modal-message" aria-live="polite">
+              {message}
+            </div>
+          )}
           {footer && <div className="modal-footer">{footer}</div>}
         </div>
       </div>

@@ -79,6 +79,8 @@ export {
 } from './Overlays';
 
 export {
+  EmptyState,
+  type EmptyStateProps,
   Spinner,
   ProgressBar,
   DropZone,

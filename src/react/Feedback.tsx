@@ -1,6 +1,48 @@
 import { forwardRef, useEffect, useRef, useState, type ChangeEvent, type DragEvent, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from './util';
 
+/* ------------------------------------------------------------- EmptyState */
+
+export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  title: ReactNode;
+  /** Emoji or SVG; coloured by `tone` when it uses currentColor */
+  icon?: ReactNode;
+  tone?: 'neutral' | 'success' | 'warning' | 'error' | 'info';
+  /** Pulsing icon for loading / discovering */
+  busy?: boolean;
+  /** On a card surface */
+  card?: boolean;
+  /** Centre within a flex/grid parent that has free space */
+  fill?: boolean;
+  /** Buttons */
+  actions?: ReactNode;
+  /** Heading level of the title (default h2) */
+  as?: 'h1' | 'h2' | 'h3';
+  /** Explanatory text */
+  children?: ReactNode;
+}
+
+export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
+  ({ title, icon, tone = 'neutral', busy, card, fill, actions, as: Heading = 'h2', className, children, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cx('empty-state', tone !== 'neutral' && `empty-state-${tone}`, busy && 'empty-state-busy', card && 'empty-state-card', fill && 'empty-state-fill', className)}
+      aria-busy={busy || undefined}
+      {...rest}
+    >
+      {icon && (
+        <span className="empty-state-icon" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <Heading className="empty-state-title">{title}</Heading>
+      {children && <p className="empty-state-text">{children}</p>}
+      {actions && <div className="empty-state-actions">{actions}</div>}
+    </div>
+  )
+);
+EmptyState.displayName = 'EmptyState';
+
 /* ---------------------------------------------------------------- Spinner */
 
 export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {

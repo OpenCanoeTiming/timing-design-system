@@ -28,7 +28,7 @@ src/
 │   ├── fonts.css     # @font-face Inter + JetBrains Mono (self-hosted)
 │   ├── colors.css    # light + dark + auto; semantic and result-mark colors
 │   ├── typography.css
-│   ├── spacing.css   # space, radius, shadow, focus ring, control/row heights, motion
+│   ├── spacing.css   # space, radius, shadow, focus ring, control/row heights (+ touch), motion
 │   └── index.css
 ├── css/              # Components, one file each (order in src/css/index.css)
 │   ├── base.css      # reset, document defaults, focus, text helpers
@@ -36,14 +36,14 @@ src/
 │   ├── buttons.css   forms.css   cards.css   tables.css
 │   ├── status.css    # status-dot / badge / alert + result marks (.mark-*)
 │   ├── header.css    tabs.css   modal.css   toast.css   menu.css
-│   ├── log.css       dropzone.css   progress.css   spinner.css
+│   ├── empty-state.css   log.css   dropzone.css   progress.css   spinner.css
 │   └── index.css
 ├── react/            # Thin wrappers over the CSS classes
 │   ├── Controls.tsx  # Button, FormField, Input, Textarea, Select, Checkbox, Radio, Switch
 │   ├── Status.tsx    # StatusDot, StatusItem, Badge, Alert, Mark
 │   ├── Layout.tsx    # Card*, Table*, Tabs, AppHeader, PageBanner
 │   ├── Overlays.tsx  # Modal, Toast, ToastContainer, Menu
-│   ├── Feedback.tsx  # Spinner, ProgressBar, DropZone, LogViewer, LogFilter
+│   ├── Feedback.tsx  # EmptyState, Spinner, ProgressBar, DropZone, LogViewer, LogFilter
 │   └── index.ts
 ├── fonts/
 └── playbooks/        # index.html (every component), specimen-admin.html, specimen-user.html

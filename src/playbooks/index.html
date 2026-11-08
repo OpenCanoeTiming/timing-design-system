@@ -44,7 +44,7 @@
 <nav class="pb-nav">
   <a href="#tokens">Tokens</a><a href="#buttons">Buttons</a><a href="#forms">Forms</a><a href="#status">Status</a><a href="#marks">Marks</a>
   <a href="#cards">Cards</a><a href="#tables">Tables</a><a href="#tabs">Tabs</a><a href="#header">Header</a><a href="#modal">Modal</a>
-  <a href="#toast">Toast</a><a href="#menu">Menu</a><a href="#log">Log</a><a href="#dropzone">Dropzone</a><a href="#progress">Progress</a><a href="#typography">Typography</a>
+  <a href="#toast">Toast</a><a href="#menu">Menu</a><a href="#empty">Empty state</a><a href="#log">Log</a><a href="#dropzone">Dropzone</a><a href="#progress">Progress</a><a href="#typography">Typography</a>
 </nav>
 
 <main>
@@ -99,7 +99,7 @@
 
 <section class="pb-section" id="forms">
   <h2>Forms</h2>
-  <p>Controls share one height token (<code>--control-h</code>) so they align in rows with buttons.</p>
+  <p>Controls share one height token (<code>--control-h</code>) so they align in rows with buttons. On touch screens (<code>pointer: coarse</code>) the tokens grow to 44/48/52 px and inputs use 16 px text so iOS does not zoom.</p>
   <div class="pb-max">
     <div class="form-row">
       <div class="form-group">
@@ -314,6 +314,7 @@
     <button class="btn" onclick="openModal('')">Open modal</button>
     <button class="btn" onclick="openModal('modal-lg')">Large</button>
     <button class="btn" onclick="openModal('modal-fullscreen')">Fullscreen</button>
+    <button class="btn" onclick="openModal('', true)">With message</button>
   </div>
   <div class="modal" id="demoModal" style="display:none" role="dialog" aria-modal="true" onclick="if(event.target===this)closeModal()">
     <div class="modal-content">
@@ -323,6 +324,7 @@
         <div class="form-group"><label class="form-label">API key <span class="required">*</span></label><input class="input input-mono" placeholder="from event creation"></div>
         <div class="form-group"><label class="form-label">Event ID</label><input class="input" placeholder="my-race-2026"></div>
       </div>
+      <div class="modal-message" id="demoModalMsg" hidden><div class="alert alert-error"><div class="alert-content"><div class="alert-title">Could not connect</div>live.example.com refused the API key.</div></div></div>
       <div class="modal-footer"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary">Connect</button></div>
     </div>
   </div>
@@ -351,6 +353,29 @@
         <div class="menu-separator"></div>
         <button class="menu-item menu-item-danger" role="menuitem"><span class="menu-item-label">Forget client</span></button>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-section" id="empty">
+  <h2>Empty state</h2>
+  <p>For a page or card with no content yet. Tone colours the icon only; <code>empty-state-busy</code> pulses it; <code>empty-state-card</code> puts it on a surface; <code>empty-state-fill</code> centres it in free space.</p>
+  <div class="grid grid-cols-3" style="margin-top: var(--space-4)">
+    <div class="empty-state empty-state-card empty-state-error">
+      <div class="empty-state-icon">⚡</div>
+      <h3 class="empty-state-title">Not connected</h3>
+      <p class="empty-state-text">Unable to reach the timing server. Check the connection settings.</p>
+      <div class="empty-state-actions"><button class="btn btn-primary">Settings</button><button class="btn">Retry</button></div>
+    </div>
+    <div class="empty-state empty-state-card empty-state-info empty-state-busy">
+      <div class="empty-state-icon">🔍</div>
+      <h3 class="empty-state-title">Finding server</h3>
+      <p class="empty-state-text">Scanning the network for c123-server…</p>
+    </div>
+    <div class="empty-state empty-state-card">
+      <div class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+      <h3 class="empty-state-title">No active races</h3>
+      <p class="empty-state-text">Wait for a race to start or check the schedule.</p>
     </div>
   </div>
 </section>
@@ -427,7 +452,7 @@
   btn.onclick = () => { i = (i + 1) % modes.length; apply(); };
   apply();
 
-  function openModal(cls) { const m = document.getElementById('demoModal'); m.className = 'modal ' + cls; m.style.display = 'flex'; }
+  function openModal(cls, msg) { const m = document.getElementById('demoModal'); m.className = 'modal ' + cls; document.getElementById('demoModalMsg').hidden = !msg; m.style.display = 'flex'; }
   function closeModal() { document.getElementById('demoModal').style.display = 'none'; }
 
   function toast(tone, title, msg) {
