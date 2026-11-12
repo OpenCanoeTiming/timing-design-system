@@ -1,6 +1,6 @@
 {
   "name": "@opencanoetiming/timing-design-system",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Timing Design System — CSS and React UI for canoe slalom timing tools",
   "author": "Open Canoe Timing Contributors",
   "license": "MIT",

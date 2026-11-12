@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/OpenCanoeTiming/timing-design-system/compare/v1.1.0...v1.2.0) (2026-11-12)
+
+
+### Features
+
+* admin follow-ups — log on narrow screens, utilities win, fieldset, solid danger ([96df759](https://github.com/OpenCanoeTiming/timing-design-system/commit/96df75957832f5cbf1d2cdfbbcbe44fc4ffdb60e))
+* admin follow-ups — log on narrow screens, utilities win, fieldset, solid danger ([0cb2d8d](https://github.com/OpenCanoeTiming/timing-design-system/commit/0cb2d8d9db30a2eccdac6a791a15838fbc175e1e))
+
 ## [1.1.0](https://github.com/OpenCanoeTiming/timing-design-system/compare/v1.0.0...v1.1.0) (2026-11-08)
 
 
