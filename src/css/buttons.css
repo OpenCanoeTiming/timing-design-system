@@ -63,6 +63,15 @@
 }
 .btn-danger:hover { background: var(--color-error-subtle); border-color: var(--color-error); }
 
+/* Solid danger: only for the confirm button of an irreversible action */
+.btn-danger-solid {
+  color: var(--color-text-on-error);
+  background: var(--color-error);
+  border-color: transparent;
+}
+.btn-danger-solid:hover { background: var(--color-error-hover); border-color: transparent; }
+.btn-danger-solid.is-loading::after { color: var(--color-text-on-error); }
+
 /* Sizes */
 
 .btn-sm {

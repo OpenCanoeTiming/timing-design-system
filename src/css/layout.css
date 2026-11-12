@@ -39,6 +39,12 @@
 .kv dt { color: var(--color-text-secondary); }
 .kv dd { color: var(--color-text-primary); margin: 0; min-width: 0; overflow-wrap: anywhere; }
 
+/* Stacked: label above value, pairs flow into columns. Wrap each dt/dd pair in a <div>. */
+.kv-stacked { grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); column-gap: var(--space-6); row-gap: var(--space-3); }
+.kv-stacked > div { min-width: 0; }
+.kv-stacked dt { font-size: var(--text-xs); }
+.kv-stacked dd { margin-top: 1px; }
+
 /* Helpers */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }

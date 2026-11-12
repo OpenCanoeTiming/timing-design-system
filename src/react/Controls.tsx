@@ -1,6 +1,7 @@
 import {
   forwardRef,
   type ButtonHTMLAttributes,
+  type FieldsetHTMLAttributes,
   type InputHTMLAttributes,
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
@@ -10,7 +11,8 @@ import { cx } from './util';
 
 /* ----------------------------------------------------------------- Button */
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+/** `danger-solid` only for the confirm button of an irreversible action */
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'danger-solid';
 export type ButtonSize = 'sm' | 'md';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -156,25 +158,54 @@ Select.displayName = 'Select';
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: ReactNode;
+  /** Muted line under the label */
+  description?: ReactNode;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ label, className, ...rest }, ref) => (
+function ChoiceText({ label, description }: { label?: ReactNode; description?: ReactNode }) {
+  if (!label && !description) return null;
+  if (!description) return <span>{label}</span>;
+  return (
+    <span>
+      <span className="choice-label">{label}</span>
+      <span className="choice-hint">{description}</span>
+    </span>
+  );
+}
+
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ label, description, className, ...rest }, ref) => (
   <label className={cx('checkbox', className)}>
     <input ref={ref} type="checkbox" {...rest} />
-    {label && <span>{label}</span>}
+    <ChoiceText label={label} description={description} />
   </label>
 ));
 Checkbox.displayName = 'Checkbox';
 
 export type RadioProps = CheckboxProps;
 
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(({ label, className, ...rest }, ref) => (
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(({ label, description, className, ...rest }, ref) => (
   <label className={cx('radio', className)}>
     <input ref={ref} type="radio" {...rest} />
-    {label && <span>{label}</span>}
+    <ChoiceText label={label} description={description} />
   </label>
 ));
 Radio.displayName = 'Radio';
+
+/* --------------------------------------------------------------- Fieldset */
+
+export interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  legend: ReactNode;
+  /** No border or padding — just the legend as a group heading */
+  plain?: boolean;
+}
+
+export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(({ legend, plain, className, children, ...rest }, ref) => (
+  <fieldset ref={ref} className={cx('fieldset', plain && 'fieldset-plain', className)} {...rest}>
+    <legend className="fieldset-legend">{legend}</legend>
+    {children}
+  </fieldset>
+));
+Fieldset.displayName = 'Fieldset';
 
 export const Switch = forwardRef<HTMLInputElement, CheckboxProps>(({ label, className, ...rest }, ref) => (
   <label className={cx('switch', className)}>

@@ -39,6 +39,7 @@ const FILES = [
   'src/css/dropzone.css',
   'src/css/progress.css',
   'src/css/spinner.css',
+  'src/css/utilities.css',
 ];
 
 function readCssFile(relativePath) {

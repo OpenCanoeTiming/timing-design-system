@@ -223,11 +223,18 @@ AppHeader.displayName = 'AppHeader';
 
 export interface PageBannerProps extends HTMLAttributes<HTMLDivElement> {
   tone?: 'warning' | 'info' | 'error';
+  /** Leading icon, coloured by tone */
+  icon?: ReactNode;
   action?: ReactNode;
 }
 
-export const PageBanner = forwardRef<HTMLDivElement, PageBannerProps>(({ tone = 'warning', action, className, children, ...rest }, ref) => (
+export const PageBanner = forwardRef<HTMLDivElement, PageBannerProps>(({ tone = 'warning', icon, action, className, children, ...rest }, ref) => (
   <div ref={ref} className={cx('page-banner', `page-banner-${tone}`, className)} {...rest}>
+    {icon && (
+      <span className="page-banner-icon" aria-hidden="true">
+        {icon}
+      </span>
+    )}
     <span>{children}</span>
     {action}
   </div>
