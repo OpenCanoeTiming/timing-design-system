@@ -84,6 +84,8 @@ Static pages can link the built file from GitHub Pages. Pin the major:
 
 The playbook shows every class in both themes.
 
+A `choice-hint` inside the `<label>` would become part of the option's accessible name. In plain HTML give the input `aria-labelledby` (the `choice-label`) and `aria-describedby` (the `choice-hint`); the React `Checkbox`/`Radio` do this when `description` is set.
+
 ## Tokens
 
 ```

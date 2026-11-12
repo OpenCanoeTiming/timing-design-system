@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  useId,
   type ButtonHTMLAttributes,
   type FieldsetHTMLAttributes,
   type InputHTMLAttributes,
@@ -162,33 +163,63 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   description?: ReactNode;
 }
 
-function ChoiceText({ label, description }: { label?: ReactNode; description?: ReactNode }) {
+/**
+ * Label text plus an optional hint. With a hint, the input is named by the
+ * label alone (aria-labelledby) and described by the hint (aria-describedby);
+ * otherwise the wrapping <label> would fold the hint into the accessible name.
+ */
+function useChoiceIds(description: ReactNode, labelledBy?: string, describedBy?: string) {
+  const id = useId();
+  if (!description) return { inputAria: {}, labelId: undefined, hintId: undefined };
+  const labelId = `${id}-label`;
+  const hintId = `${id}-hint`;
+  return {
+    labelId,
+    hintId,
+    inputAria: {
+      'aria-labelledby': labelledBy ?? labelId,
+      'aria-describedby': describedBy ? `${describedBy} ${hintId}` : hintId,
+    },
+  };
+}
+
+function ChoiceText({ label, description, labelId, hintId }: { label?: ReactNode; description?: ReactNode; labelId?: string; hintId?: string }) {
   if (!label && !description) return null;
   if (!description) return <span>{label}</span>;
   return (
     <span>
-      <span className="choice-label">{label}</span>
-      <span className="choice-hint">{description}</span>
+      <span className="choice-label" id={labelId}>
+        {label}
+      </span>
+      <span className="choice-hint" id={hintId}>
+        {description}
+      </span>
     </span>
   );
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ label, description, className, ...rest }, ref) => (
-  <label className={cx('checkbox', className)}>
-    <input ref={ref} type="checkbox" {...rest} />
-    <ChoiceText label={label} description={description} />
-  </label>
-));
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ label, description, className, ...rest }, ref) => {
+  const { inputAria, labelId, hintId } = useChoiceIds(description, rest['aria-labelledby'], rest['aria-describedby']);
+  return (
+    <label className={cx('checkbox', className)}>
+      <input ref={ref} type="checkbox" {...rest} {...inputAria} />
+      <ChoiceText label={label} description={description} labelId={labelId} hintId={hintId} />
+    </label>
+  );
+});
 Checkbox.displayName = 'Checkbox';
 
 export type RadioProps = CheckboxProps;
 
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(({ label, description, className, ...rest }, ref) => (
-  <label className={cx('radio', className)}>
-    <input ref={ref} type="radio" {...rest} />
-    <ChoiceText label={label} description={description} />
-  </label>
-));
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(({ label, description, className, ...rest }, ref) => {
+  const { inputAria, labelId, hintId } = useChoiceIds(description, rest['aria-labelledby'], rest['aria-describedby']);
+  return (
+    <label className={cx('radio', className)}>
+      <input ref={ref} type="radio" {...rest} {...inputAria} />
+      <ChoiceText label={label} description={description} labelId={labelId} hintId={hintId} />
+    </label>
+  );
+});
 Radio.displayName = 'Radio';
 
 /* --------------------------------------------------------------- Fieldset */
