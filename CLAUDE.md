@@ -31,12 +31,13 @@ src/
 │   ├── spacing.css   # space, radius, shadow, focus ring, control/row heights (+ touch), motion
 │   └── index.css
 ├── css/              # Components, one file each (order in src/css/index.css)
-│   ├── base.css      # reset, document defaults, focus, text helpers
+│   ├── base.css      # reset, document defaults, focus
 │   ├── layout.css    # container, page scaffold, kv, stat-row, flex/grid helpers
 │   ├── buttons.css   forms.css   cards.css   tables.css
 │   ├── status.css    # status-dot / badge / alert + result marks (.mark-*)
 │   ├── header.css    tabs.css   modal.css   toast.css   menu.css
 │   ├── empty-state.css   log.css   dropzone.css   progress.css   spinner.css
+│   ├── utilities.css # text/font helpers, loaded last so they win over components
 │   └── index.css
 ├── react/            # Thin wrappers over the CSS classes
 │   ├── Controls.tsx  # Button, FormField, Input, Textarea, Select, Checkbox, Radio, Switch

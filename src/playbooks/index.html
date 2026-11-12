@@ -77,12 +77,13 @@
 
 <section class="pb-section" id="buttons">
   <h2>Buttons</h2>
-  <p>Secondary is the default look. One primary per view. Danger is outlined so it never shouts.</p>
+  <p>Secondary is the default look. One primary per view. Danger is outlined so it never shouts; <code>btn-danger-solid</code> only confirms an irreversible action.</p>
   <div class="pb-row">
     <button class="btn btn-primary">Primary</button>
     <button class="btn btn-secondary">Secondary</button>
     <button class="btn btn-ghost">Ghost</button>
     <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-danger-solid">Close event</button>
     <button class="btn btn-primary" disabled>Disabled</button>
     <button class="btn btn-primary is-loading">Loading</button>
   </div>
@@ -127,6 +128,18 @@
         </div>
       </div>
     </div>
+    <div class="form-row form-row-1-2">
+      <div class="form-group"><label class="form-label" for="f6">Port</label><input class="input input-mono" id="f6" value="27123"></div>
+      <div class="form-group"><label class="form-label" for="f7">Host</label><input class="input input-mono" id="f7" value="192.168.1.40"><div class="form-hint text-warning">Not reachable from this machine</div></div>
+    </div>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Event status</legend>
+      <div style="display:grid; gap: var(--space-2)">
+        <label class="radio"><input type="radio" name="st" checked><span><span class="choice-label">Running</span><span class="choice-hint">Results are pushed live as boats finish.</span></span></label>
+        <label class="radio"><input type="radio" name="st"><span><span class="choice-label">Official</span><span class="choice-hint">Results are final; further changes need a new publish.</span></span></label>
+        <label class="checkbox"><input type="checkbox"><span><span class="choice-label">Notify subscribers</span><span class="choice-hint">Sends one message per class.</span></span></label>
+      </div>
+    </fieldset>
     <div class="form-group">
       <label class="form-label" for="f5">Notes</label>
       <textarea class="textarea" id="f5" placeholder="Anything the finish booth should know"></textarea>
@@ -228,6 +241,15 @@
       <div class="card-body text-muted">Default configuration</div>
     </div>
   </div>
+  <div class="pb-label">kv-stacked</div>
+  <div class="card" style="margin-top: var(--space-2)"><div class="card-body">
+    <dl class="kv kv-stacked">
+      <div><dt>C123 TCP</dt><dd><span class="status-item"><span class="status-dot status-dot-success"></span>10.0.0.5:27333</span></dd></div>
+      <div><dt>XML file</dt><dd class="mono">C:\Canoe123\Troja_CP_2026.xml</dd></div>
+      <div><dt>Last message</dt><dd>00:00.4 ago</dd></div>
+      <div><dt>Clients</dt><dd>3 online · 4 total</dd></div>
+    </dl>
+  </div></div>
 </section>
 
 <section class="pb-section" id="tables">
@@ -251,7 +273,7 @@
   </div>
   <div class="pb-label">compact + striped</div>
   <div class="card" style="margin-top: var(--space-2)">
-    <div class="card-body card-body-flush">
+    <div class="card-body card-body-flush table-responsive">
       <table class="table table-compact table-striped">
         <thead><tr><th>Name</th><th>Type</th><th>Status</th><th class="col-muted">Details</th></tr></thead>
         <tbody>
@@ -294,7 +316,7 @@
       <div class="header-actions"><button class="btn btn-sm">Settings</button></div>
     </header>
     <div class="page-banner page-banner-info"><span>A new version is available.</span><button class="btn btn-sm">Download</button></div>
-    <div class="page-banner page-banner-error"><span>Live upload failing — results are not reaching the web.</span><button class="btn btn-sm">Details</button></div>
+    <div class="page-banner page-banner-error"><span class="page-banner-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg></span><span>Live upload failing — results are not reaching the web.</span><button class="btn btn-sm">Details</button></div>
   </div>
   <div class="pb-label">compact + nav</div>
   <div style="margin-top: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden">
@@ -337,6 +359,7 @@
     <button class="btn" onclick="toast('warning','Heads up','Scoreboard LED missed 2 heartbeats.')">Warning</button>
     <button class="btn" onclick="toast('error','Upload failed','502 from live server, retrying.')">Error</button>
     <button class="btn" onclick="toast('info','Update','Version 2.4.0 available.')">Info</button>
+    <button class="btn" onclick="toast('success','','Copied to clipboard.')">Message only</button>
   </div>
   <div class="toast-container" id="toasts"></div>
 </section>
@@ -388,9 +411,10 @@
       <div class="log-filters"><button class="log-filter active">all <span class="log-filter-count">6</span></button><button class="log-filter">error <span class="log-filter-count">1</span></button><button class="log-filter">warn <span class="log-filter-count">1</span></button><button class="log-filter">debug</button></div>
       <div class="log-header-actions"><input class="input input-sm log-search" placeholder="Search…"><span class="log-live"><span class="status-dot status-dot-live"></span>tail</span></div>
     </div>
-    <div class="log-entries">
+    <div class="log-entries" tabindex="0">
       <div class="log-entry" data-level="info"><span class="log-time">14:02:08.122</span><span class="log-level log-level-info">INFO</span><span class="log-component">TCP</span><span class="log-message">Client 10.0.0.34 connected</span></div>
       <div class="log-entry" data-level="debug"><span class="log-time">14:02:08.410</span><span class="log-level log-level-debug">DEBUG</span><span class="log-component">UDP</span><span class="log-message">Running time bib 24 → 1:12.04</span></div>
+      <div class="log-entry" data-level="info"><span class="log-time">14:02:09.877</span><span class="log-level log-level-info">INFO</span><span class="log-component">LiveMiniPublisher</span><span class="log-message">Pushed 12 results for K1M 2nd run to live.canoe123.cz</span></div>
       <div class="log-entry" data-level="warn"><span class="log-time">14:02:11.004</span><span class="log-level log-level-warn">WARN</span><span class="log-component">XML</span><span class="log-message">2 entries differ from live data (bib 08, 12)</span></div>
       <div class="log-entry" data-level="error"><span class="log-time">14:02:12.301</span><span class="log-level log-level-error">ERROR</span><span class="log-component">Live</span><span class="log-message">POST /api/results → 502 Bad Gateway (retry 1/5)</span></div>
     </div>
@@ -459,7 +483,7 @@
     const c = document.getElementById('toasts');
     const t = document.createElement('div');
     t.className = 'toast toast-' + tone;
-    t.innerHTML = '<div class="toast-content"><div class="toast-title">' + title + '</div><div class="toast-message">' + msg + '</div></div><button class="toast-close" aria-label="Close">×</button>';
+    t.innerHTML = '<div class="toast-content">' + (title ? '<div class="toast-title">' + title + '</div>' : '') + '<div class="toast-message">' + msg + '</div></div><button class="toast-close" aria-label="Close">×</button>';
     t.querySelector('.toast-close').onclick = () => { t.classList.add('is-leaving'); setTimeout(() => t.remove(), 180); };
     c.appendChild(t);
     setTimeout(() => { if (t.isConnected) { t.classList.add('is-leaving'); setTimeout(() => t.remove(), 180); } }, 5000);

@@ -1,0 +1,17 @@
+/**
+ * Utilities — loaded last so a utility wins over a component rule of the same
+ * specificity (e.g. `form-hint text-warning`). Keep this list short: compose
+ * with components, not with utilities.
+ */
+
+.text-sm { font-size: var(--text-sm); }
+.text-xs { font-size: var(--text-xs); }
+.text-muted { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-success { color: var(--color-success-text); }
+.text-warning { color: var(--color-warning-text); }
+.text-error { color: var(--color-error-text); }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }

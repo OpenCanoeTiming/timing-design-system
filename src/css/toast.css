@@ -44,6 +44,8 @@
 .toast-title { font-weight: var(--font-semibold); }
 .toast-message { color: var(--color-text-secondary); }
 .toast-title + .toast-message { margin-top: 2px; }
+/* A toast with only a message: the message is the primary text */
+.toast-message:only-child { color: var(--color-text-primary); }
 
 .toast-close {
   flex: none;

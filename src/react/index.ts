@@ -13,6 +13,8 @@ export {
   Checkbox,
   Radio,
   Switch,
+  Fieldset,
+  type FieldsetProps,
   type ButtonProps,
   type ButtonVariant,
   type ButtonSize,

@@ -33,10 +33,11 @@
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg-surface);
 }
-.log-header-title { font-size: var(--text-sm); font-weight: var(--font-semibold); }
-.log-header-actions { display: flex; align-items: center; gap: var(--space-2); margin-left: auto; }
+.log-header-title { flex: none; font-size: var(--text-sm); font-weight: var(--font-semibold); }
+.log-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-left: auto; min-width: 0; }
 
-.log-filters { display: flex; gap: var(--space-1); }
+.log-filters { display: flex; flex-wrap: wrap; gap: var(--space-1); min-width: 0; }
+.log-filter, .log-live { flex: none; }
 .log-filter {
   display: inline-flex;
   align-items: center;
@@ -67,6 +68,7 @@
   font-size: var(--text-xs);
   line-height: 1.6;
 }
+.log-entries:focus-visible { box-shadow: var(--focus-ring-inset); border-radius: 0; }
 
 .log-entry {
   display: grid;
@@ -76,6 +78,13 @@
   padding: 1px var(--space-3);
 }
 .log-entry:hover { background: var(--color-neutral-subtle); }
+
+/* Narrow: time, level and component on one line, the message below at full width */
+@media (max-width: 40rem) {
+  .log-entry { grid-template-columns: max-content max-content minmax(0, 1fr); row-gap: 0; padding-top: 2px; padding-bottom: 2px; }
+  .log-component { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-message { grid-column: 1 / -1; }
+}
 
 .log-time,
 .log-timestamp { color: var(--color-text-muted); font-variant-numeric: tabular-nums; }

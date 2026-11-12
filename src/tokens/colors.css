@@ -59,6 +59,8 @@
   --color-error: #c81e1e;
   --color-error-subtle: rgba(200, 30, 30, 0.10);
   --color-error-text: #b01919;
+  --color-error-hover: #a51818;
+  --color-text-on-error: #ffffff;
 
   --color-info: #0a62d0;
   --color-info-subtle: rgba(10, 98, 208, 0.10);
@@ -120,6 +122,8 @@
   --color-error: #ff5c5c;
   --color-error-subtle: rgba(255, 92, 92, 0.14);
   --color-error-text: #ff8080;
+  --color-error-hover: #ff7a7a;
+  --color-text-on-error: #0b1220;
 
   --color-info: #4a97ff;
   --color-info-subtle: rgba(74, 151, 255, 0.14);
@@ -181,6 +185,8 @@
     --color-error: #ff5c5c;
     --color-error-subtle: rgba(255, 92, 92, 0.14);
     --color-error-text: #ff8080;
+    --color-error-hover: #ff7a7a;
+    --color-text-on-error: #0b1220;
 
     --color-info: #4a97ff;
     --color-info-subtle: rgba(74, 151, 255, 0.14);

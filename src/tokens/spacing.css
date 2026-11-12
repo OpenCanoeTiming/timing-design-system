@@ -37,8 +37,9 @@
   --shadow-md: 0 2px 6px rgba(23, 26, 33, 0.08), 0 1px 2px rgba(23, 26, 33, 0.06);
   --shadow-lg: 0 12px 32px rgba(23, 26, 33, 0.14), 0 2px 6px rgba(23, 26, 33, 0.08);
 
-  /* Focus ring — one ring everywhere */
+  /* Focus ring — one ring everywhere; the inset form for elements inside a clipping container */
   --focus-ring: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--color-border-focus);
+  --focus-ring-inset: inset 0 0 0 2px var(--color-border-focus);
 
   /* Motion — durations alone for `animation:`, duration+easing for `transition:` */
   --duration-fast: 120ms;

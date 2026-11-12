@@ -66,13 +66,13 @@ Static pages can link the built file from GitHub Pages. Pin the major:
 
 | Component | Classes | React |
 |---|---|---|
-| Buttons | `btn`, `btn-primary` / `-secondary` / `-ghost` / `-danger`, `btn-sm`, `btn-icon`, `is-loading` | `Button` |
-| Forms | `form-group`, `form-label`, `form-hint`, `form-error`, `input`, `textarea`, `select`, `checkbox`, `radio`, `switch`, `input-group`, `input-addon` | `FormField`, `Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `Switch` |
+| Buttons | `btn`, `btn-primary` / `-secondary` / `-ghost` / `-danger` / `-danger-solid`, `btn-sm`, `btn-icon`, `is-loading` | `Button` |
+| Forms | `form-group`, `form-row` (+ `-1-2`, `-2-1`), `fieldset`, `fieldset-legend`, `fieldset-plain`, `form-label`, `form-hint`, `form-error`, `input`, `textarea`, `select`, `checkbox`, `radio` (+ `choice-label`, `choice-hint`), `switch`, `input-group`, `input-addon` | `FormField`, `Fieldset`, `Input`, `Textarea`, `Select`, `Checkbox`/`Radio` (`description`), `Switch` |
 | Status | `status-dot-*`, `status-item`, `badge-*`, `badge-sm`, `badge-mono`, `alert-*`, `alert-tinted`, `mark-*` | `StatusDot`, `StatusItem`, `Badge`, `Alert`, `MarkedValue` |
 | Cards | `card`, `card-header`, `card-title`, `card-body`, `card-body-flush`, `card-footer`, `card-compact`, `card-interactive`, `card-selected`, `card-grid` | `Card`, `CardHeader`, `CardBody`, `CardFooter` |
 | Tables | `table`, `table-striped`, `table-hover`, `table-compact`, `table-responsive`, `col-*`, `is-selected`, `is-dimmed`, `table-empty` | `Table`, `TableRow`, `TableCell`, `TableHeaderCell`, `TableEmpty` |
 | Tabs | `tabs`, `tab-list`, `tab`, `tab-badge`, `tab-panels`, `tab-panel` | `Tabs` |
-| Header | `app-header`, `header-brand`, `header-title`, `header-context`, `header-status`, `header-status-item`, `header-port`, `header-actions`, `page-banner-*` | `AppHeader`, `PageBanner` |
+| Header | `app-header`, `header-brand`, `header-title`, `header-context`, `header-status`, `header-status-item`, `header-port`, `header-actions`, `page-banner-*`, `page-banner-icon` | `AppHeader`, `PageBanner` |
 | Modal | `modal`, `modal-content`, `modal-header`, `modal-title`, `modal-close`, `modal-body`, `modal-message`, `modal-footer`, `modal-lg`, `modal-fullscreen` | `Modal` (`title`, `message`, `footer` slots) |
 | Toast | `toast-container`, `toast-*`, `toast-title`, `toast-message`, `toast-close` | `Toast`, `ToastContainer` |
 | Menu | `menu`, `menu-content-*`, `menu-item`, `menu-item-danger`, `menu-separator`, `menu-label` | `Menu` |
@@ -80,7 +80,7 @@ Static pages can link the built file from GitHub Pages. Pin the major:
 | Log | `log-container`, `log-header`, `log-filter`, `log-entries`, `log-entry`, `log-time`, `log-level-*`, `log-component`, `log-message` | `LogViewer`, `LogFilter` |
 | Dropzone | `dropzone`, `dropzone-compact`, `drag-over`, `has-file`, `has-error`, `dropzone-title`, `dropzone-hint`, `dropzone-files` | `DropZone` |
 | Progress | `progress`, `progress-bar`, `progress-*`, `progress-row`, `progress-indeterminate`, `spinner`, `loading-overlay` | `ProgressBar`, `Spinner` |
-| Layout | `container`, `page-main`, `section-head`, `stat-row`, `kv`, `flex`, `grid`, `grid-cols-*`, `gap-*`, `hidden`, `truncate` | — |
+| Layout | `container`, `page-main`, `section-head`, `stat-row`, `kv`, `kv-stacked`, `flex`, `grid`, `grid-cols-*`, `gap-*`, `hidden`, `truncate` | — |
 
 The playbook shows every class in both themes.
 

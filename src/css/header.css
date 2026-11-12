@@ -112,10 +112,13 @@
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
   background: var(--_bg, var(--color-warning-subtle));
+  --_c: var(--color-warning);
   border-bottom: 1px solid var(--color-border);
 }
 .page-banner .btn { margin-left: auto; }
-.page-banner-warning { --_bg: var(--color-warning-subtle); }
-.page-banner-info { --_bg: var(--color-info-subtle); }
-.page-banner-error { --_bg: var(--color-error-subtle); }
+.page-banner-warning { --_bg: var(--color-warning-subtle); --_c: var(--color-warning); }
+.page-banner-info { --_bg: var(--color-info-subtle); --_c: var(--color-info); }
+.page-banner-error { --_bg: var(--color-error-subtle); --_c: var(--color-error); }
+.page-banner-icon { flex: none; display: inline-flex; width: 1rem; height: 1rem; color: var(--_c); }
+.page-banner-icon svg { width: 100%; height: 100%; }
 

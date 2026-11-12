@@ -57,22 +57,13 @@ a {
 }
 a:hover { text-decoration: underline; }
 
+small { font-size: var(--text-sm); }
+
 code, kbd, pre, samp, .mono {
   font-family: var(--font-mono);
   font-size: 0.9em;
 }
 
-small, .text-sm { font-size: var(--text-sm); }
-.text-xs { font-size: var(--text-xs); }
-.text-muted { color: var(--color-text-muted); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-success { color: var(--color-success-text); }
-.text-warning { color: var(--color-warning-text); }
-.text-error { color: var(--color-error-text); }
-.text-right { text-align: right; }
-.text-center { text-align: center; }
-.font-medium { font-weight: var(--font-medium); }
-.font-semibold { font-weight: var(--font-semibold); }
 
 hr {
   border: 0;
@@ -143,5 +134,4 @@ hr {
 /* Touch: fixed-size icon buttons grow to 44px (input text size is in forms.css). */
 @media (pointer: coarse) {
   .toast-close, .modal-close, .dropzone-file-remove { min-width: 2.75rem; min-height: 2.75rem; }
-  .checkbox input, .radio input { width: 1.25rem; height: 1.25rem; }
 }
