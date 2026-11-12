@@ -82,7 +82,7 @@
 }
 
 /* Icon-only */
-.btn-icon { width: var(--control-h); padding: 0; }
+.btn-icon { flex: none; width: var(--control-h); padding: 0; }
 .btn-icon.btn-sm { width: var(--control-h-sm); }
 
 /* Loading state: keep width, hide label, show spinner */

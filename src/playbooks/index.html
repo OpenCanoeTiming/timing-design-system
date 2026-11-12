@@ -135,9 +135,10 @@
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Event status</legend>
       <div style="display:grid; gap: var(--space-2)">
-        <label class="radio"><input type="radio" name="st" checked><span><span class="choice-label">Running</span><span class="choice-hint">Results are pushed live as boats finish.</span></span></label>
-        <label class="radio"><input type="radio" name="st"><span><span class="choice-label">Official</span><span class="choice-hint">Results are final; further changes need a new publish.</span></span></label>
-        <label class="checkbox"><input type="checkbox"><span><span class="choice-label">Notify subscribers</span><span class="choice-hint">Sends one message per class.</span></span></label>
+        <label class="radio"><input type="radio" name="st" checked aria-labelledby="st1-l" aria-describedby="st1-h"><span><span class="choice-label" id="st1-l">Running</span><span class="choice-hint" id="st1-h">Results are pushed live as boats finish.</span></span></label>
+        <label class="radio"><input type="radio" name="st" aria-labelledby="st2-l" aria-describedby="st2-h"><span><span class="choice-label" id="st2-l">Official</span><span class="choice-hint" id="st2-h">Results are final; further changes need a new publish.</span></span></label>
+        <label class="radio"><input type="radio" name="st" aria-labelledby="st3-l" aria-describedby="st3-h"><span><span class="choice-label" id="st3-l">Watch file</span><span class="choice-hint" id="st3-h">C:\Users\casomira\Documents\Canoe123\Zavody\2026\Troja_CP_2026_final_export.xml</span></span></label>
+        <label class="checkbox"><input type="checkbox" aria-labelledby="st4-l" aria-describedby="st4-h"><span><span class="choice-label" id="st4-l">Notify subscribers</span><span class="choice-hint" id="st4-h">Sends one message per class.</span></span></label>
       </div>
     </fieldset>
     <div class="form-group">
@@ -413,7 +414,7 @@
     </div>
     <div class="log-entries" tabindex="0">
       <div class="log-entry" data-level="info"><span class="log-time">14:02:08.122</span><span class="log-level log-level-info">INFO</span><span class="log-component">TCP</span><span class="log-message">Client 10.0.0.34 connected</span></div>
-      <div class="log-entry" data-level="debug"><span class="log-time">14:02:08.410</span><span class="log-level log-level-debug">DEBUG</span><span class="log-component">UDP</span><span class="log-message">Running time bib 24 → 1:12.04</span></div>
+      <div class="log-entry" data-level="debug"><span class="log-time">14:02:08.410</span><span class="log-level log-level-debug">DEBUG</span><span class="log-component">UdpDiscoveryService</span><span class="log-message">Running time bib 24 → 1:12.04</span></div>
       <div class="log-entry" data-level="info"><span class="log-time">14:02:09.877</span><span class="log-level log-level-info">INFO</span><span class="log-component">LiveMiniPublisher</span><span class="log-message">Pushed 12 results for K1M 2nd run to live.canoe123.cz</span></div>
       <div class="log-entry" data-level="warn"><span class="log-time">14:02:11.004</span><span class="log-level log-level-warn">WARN</span><span class="log-component">XML</span><span class="log-message">2 entries differ from live data (bib 08, 12)</span></div>
       <div class="log-entry" data-level="error"><span class="log-time">14:02:12.301</span><span class="log-level log-level-error">ERROR</span><span class="log-component">Live</span><span class="log-message">POST /api/results → 502 Bad Gateway (retry 1/5)</span></div>

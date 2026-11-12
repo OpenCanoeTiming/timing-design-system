@@ -24,6 +24,9 @@
 
 /* Header row with filters */
 .log-header {
+  /* the container is a height-capped flex column: without flex: none the
+     header shrinks below its wrapped content and overlaps the entries */
+  flex: none;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -81,7 +84,8 @@
 
 /* Narrow: time, level and component on one line, the message below at full width */
 @media (max-width: 40rem) {
-  .log-entry { grid-template-columns: max-content max-content minmax(0, 1fr); row-gap: 0; padding-top: 2px; padding-bottom: 2px; }
+  /* level keeps its fixed width so the component name starts at the same x on every line */
+  .log-entry { grid-template-columns: max-content 3.25rem minmax(0, 1fr); row-gap: 0; padding-top: 2px; padding-bottom: 2px; }
   .log-component { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .log-message { grid-column: 1 / -1; }
 }
