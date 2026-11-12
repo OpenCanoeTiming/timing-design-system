@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/OpenCanoeTiming/timing-design-system/compare/v1.2.0...v1.2.1) (2026-11-12)
+
+
+### Bug Fixes
+
+* log header no longer overlaps entries; choice hints wrap and stay out of the accessible name ([d9954ee](https://github.com/OpenCanoeTiming/timing-design-system/commit/d9954eef2f0de5dd634e4e47e6f94d1b7238b675))
+* log header no longer overlaps entries; choice hints wrap and stay out of the accessible name ([2c09416](https://github.com/OpenCanoeTiming/timing-design-system/commit/2c09416fe31cd6c9cc59bdae31af19b19c34c4f4))
+
 ## [1.2.0](https://github.com/OpenCanoeTiming/timing-design-system/compare/v1.1.0...v1.2.0) (2026-11-12)
 
 
